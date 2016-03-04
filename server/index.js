@@ -12,7 +12,6 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname, '../client')));
 //require('routes')(app);
 
-
 app.listen(port);
 
 console.log('Listening on port' + port);
