@@ -5,6 +5,8 @@ bower_components/
 .DS_Store
 npm-debug.log
 
+#API keys
+.env
 
 .DS_Store
 
