@@ -27,6 +27,8 @@
   },
   "devDependencies": {
     "del": "2.2.0",
+    "brfs": "1.4.3",
+    "browserify": "13.0.0",
     "gulp": "3.9.1",
     "gulp-cli": "1.2.1",
     "gulp-concat": "2.6.0",
@@ -34,12 +36,18 @@
     "gulp-uglify": "1.5.3",
     "jshint": "2.9.1",
     "karma": "0.13.21",
+    "karma-browserify": "5.0.2",
     "karma-chrome-launcher": "0.2.2",
+    "karma-jasmine-html-reporter": "0.2.0",
+    "karma-mocha": "0.2.2",
+    "karma-mocha-debug": "0.1.2",
     "karma-requirejs": "0.2.5",
     "karma-should": "1.0.0",
+    "mocha": "2.4.5",
     "requirejs": "2.1.22",
     "should": "8.2.2",
     "gulp-util": "3.0.7",
-    "jshint-stylish": "2.1.0"
+    "jshint-stylish": "2.1.0",
+    "watchify": "3.7.0"
   }
 }
