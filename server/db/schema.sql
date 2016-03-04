@@ -42,7 +42,7 @@ DROP TABLE IF EXISTS watchedItems;
 CREATE TABLE watchedItems (
   id INT NOT NULL AUTO_INCREMENT,
   deadline DATE,
-  ideaPrice INT(9),
+  idealPrice INT(9),
   settlePrice int(9),
   priceReached BOOL,
   emailed BOOL,
