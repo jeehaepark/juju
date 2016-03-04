@@ -1,0 +1,26 @@
+{
+  "name": "juju",
+  "description": "Track the price of items based on your own",
+  "main": "/server/index.js",
+  "authors": [
+    "Joe Ashby",
+    "Madison Dunitz",
+    "Jessica Park",
+    "James Youn"
+  ],
+  "license": "ISC",
+  "homepage": "https://mks-juju.herokuapp.com/",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "./client/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.5.0",
+    "angular-ui-router": "~0.2.18"
+  }
+}
