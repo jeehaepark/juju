@@ -5,6 +5,10 @@ bower_components/
 .DS_Store
 npm-debug.log
 
+# browserify bundle file
+dest/bundle.js
+
+
 #API keys
 .env
 
