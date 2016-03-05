@@ -23,7 +23,8 @@ var path = {
   ##############
  */
 var customOpts = {
-  entries: ['./server/index.js'],
+  // entries: ['./node_modules/', './client/script', './client/templates'],
+  entries: [''],
   debug: true
 };
 
@@ -35,6 +36,7 @@ b.on('update', bundle);
 b.on('log', gutil.log);
 
 function bundle(){
+  gutil.log('bundle.running');
   return b.bundle()
   // log errors if they happen
   .on('error', gutil.log.bind(gutil, 'Browserify Error'))
