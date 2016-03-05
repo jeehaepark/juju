@@ -2,7 +2,7 @@
 
 
 
-var app = angular.module('juju', ['ui.router'])
+var app = angular.module('juju', ['ui.router', 'facebook'])
 app.controller('AuthCtrl', function($scope) {
   $scope.hello = "helloworld"
 })

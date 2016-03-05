@@ -6,8 +6,10 @@
       <title></title>
       <meta name="description" content="">
       <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script>
       <script src="./dist/js/angularApp.js"></script>
       <script src="./script/app.js"></script>
+      <script src="./script/auth/facebookfirebase.js"></script>
     </head>
     <body >
       <div ng-app="juju">
@@ -19,6 +21,10 @@
           <div ui-view="header"></div>
           <div ui-view="body"></div>
           </div> 
+          <div ng-controller="facebookCtrl">
+            <button ng-click = "facebookLogin()">fb Login</button>
+            <h1> {{ test }} </h1>
+          </div>
           <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
           </fb:login-button>
       </div>
