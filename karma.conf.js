@@ -1,6 +1,6 @@
 // Karma configuration
-// Generated on Fri Mar 04 2016 11:00:25 GMT-0800 (PST)
-var brfs = require('brfs');
+// Generated on Fri Mar 04 2016 20:12:50 GMT-0800 (PST)
+
 module.exports = function(config) {
   config.set({
 
@@ -10,37 +10,35 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['browserify', 'mocha', 'mocha-debug', 'should' ],
+    frameworks: ['jasmine'],
 
 
     // list of files / patterns to load in the browser
     files: [
-
-      './specs/test.js'
+      'node_modules/angular/angular.min.js',
+      'node_modules/angular-mocks/angular-mocks.js',
+      'node_modules/angular-ui-router/release/angular-ui-router.js',
+      './client/**/*.js',
+      './specs/**/*.js'
     ],
 
 
     // list of files to exclude
     exclude: [
+      // bundle file
     ],
 
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-        './specs/test.js':['browserify']
-    },
-
-    browserify: {
-        debug: true,
-        transform: ['brfs']
     },
 
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['progress', 'nyan'],
 
 
     // web server port
