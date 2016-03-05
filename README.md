@@ -12,8 +12,10 @@ Seed database with mock data
 ## Testing
 
 to start karma from the command line
-    npm install -g karma-cli
-(may need to use sudo)
+    sudo npm install -g karma-cli
+    
+to run tests
+    karma start
 
 =======================================
 ##API Keys

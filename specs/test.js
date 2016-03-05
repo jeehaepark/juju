@@ -1,16 +1,22 @@
-var should = require('should');
-
-
-describe('karma tests with should', function(){
-  var user={
-    name: 'foo'
-  };
-  //smoke test that should pass
-  it('should have a name', function(){
-    user.should.have.property('name', 'foo');
+describe('Smoke Test', function(){
+  describe('independent tests', function() {
+    it('true should be true', function(){
+      expect(true).toBe(true);
+    });
   });
-  //smoke test that should fail
-  it('should have a candy', function(){
-    user.should.have.property('candy', 'yum!');
+
+  beforeEach(module('juju'));
+  var $controller;
+
+  beforeEach(inject(function (_$controller_) {
+    $controller = _$controller_;
+  }));
+
+  it('has hello in $scope', function(){
+    var $scope = {};
+    var controller = $controller('AuthCtrl', { $scope: $scope});
+    expect($scope.hello).toBe('helloworld');
   });
 });
+
+
