@@ -7,10 +7,10 @@ app.config(function ($stateProvider, $urlRouterProvider){
       url: '/yourItems',
       views: {
         "body" : {
-          templateUrl:'../templates/item.html'
+          templateUrl:'./item/item.html'
         },
         "header" : {
-          templateUrl: '../templates/header.html'
+          templateUrl: './layout/header.html'
         }
       }
     })
@@ -18,15 +18,18 @@ app.config(function ($stateProvider, $urlRouterProvider){
       url: '/additems',
       views : {
         'body' : {
-          templateUrl:'../templates/additem.html'
+          templateUrl:'./item/additem.html'
         }
       }
     })
     .state('login', {
       url: '/login',
       views: {
+        'header' : {
+          templateUrl: './layout/header.html'
+        },
         'body' : {
-          templateUrl:'../templates/login.html'
+          templateUrl:'./auth/login.html'
         }
       },
       controller: 'fbAuthCtrl',
