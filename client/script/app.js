@@ -1,12 +1,4 @@
-//angular.module('juju', [])
-
-
-
 var app = angular.module('juju', ['ui.router', 'facebook'])
-app.controller('AuthCtrl', function($scope) {
-  $scope.hello = "helloworld"
-})
-
 app.config(function ($stateProvider, $urlRouterProvider){
   $urlRouterProvider.otherwise('/default');
 
@@ -29,5 +21,15 @@ app.config(function ($stateProvider, $urlRouterProvider){
           templateUrl:'../templates/additem.html'
         }
       }
+    })
+    .state('login', {
+      url: '/login',
+      views: {
+        'body' : {
+          templateUrl:'../templates/login.html'
+        }
+      },
+      controller: 'fbAuthCtrl',
+      // add auth options
     })
 });
