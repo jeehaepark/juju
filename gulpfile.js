@@ -1,15 +1,15 @@
 var gulp = require('gulp');
-var browserify = require('browserify');
-var jshint = require('gulp-jshint');
+// var browserify = require('browserify');
+// var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-var gutil = require('gulp-util');
-var def = require('del');
-var watchify = require('watchify');
-var source = require('vinyl-source-stream');
-var buffer = require('vinyl-buffer');
+// var uglify = require('gulp-uglify');
+// var gutil = require('gulp-util');
+// var def = require('del');
+// var watchify = require('watchify');
+// var source = require('vinyl-source-stream');
+// var buffer = require('vinyl-buffer');
 var maps = require('gulp-sourcemaps');
-var assign = require('lodash');
+// var assign = require('lodash');
 
 var path = {
 	scripts: ['server/**/*.js', 'client/**/*.js'],
