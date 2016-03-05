@@ -4,7 +4,8 @@
   "description": "Track the price of items based on your own",
   "main": "/server/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "gulp angular"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,8 @@
     "body-parser": "1.15.0",
     "dotenv": "2.0.0",
     "express": "4.13.4",
+    "gulp": "3.9.1",
+    "gulp-sourcemaps": "1.6.0",
     "morgan": "1.7.0",
     "node-env-file": "0.1.8",
     "require": "2.4.20"
@@ -31,11 +34,9 @@
     "brfs": "1.4.3",
     "browserify": "13.0.0",
     "del": "2.2.0",
-    "gulp": "3.9.1",
     "gulp-cli": "1.2.1",
     "gulp-concat": "2.6.0",
     "gulp-jshint": "2.0.0",
-    "gulp-sourcemaps": "1.6.0",
     "gulp-uglify": "1.5.3",
     "gulp-util": "3.0.7",
     "jshint": "2.9.1",
