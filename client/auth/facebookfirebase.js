@@ -1,6 +1,6 @@
 angular.module('facebook', [])
 
-.controller('fbAuthCtrl', function ($scope ){
+.controller('fbAuthCtrl', function ($scope){
   $scope.test = "hello";
   $scope.facebookLogin = function () {
     var ref = new Firebase("https://jtimes3.firebaseio.com");
