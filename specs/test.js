@@ -14,8 +14,8 @@ describe('Smoke Test', function(){
 
   it('has hello in $scope', function(){
     var $scope = {};
-    var controller = $controller('AuthCtrl', { $scope: $scope});
-    expect($scope.hello).toBe('helloworld');
+    var controller = $controller('fbAuthCtrl', { $scope: $scope});
+    expect($scope.test).toBe('hello');
   });
 });
 

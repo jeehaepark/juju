@@ -1,26 +1,21 @@
 <!DOCTYPE html>
- 	<html class="no-js"> 
-    <head>
-    	<meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <title></title>
-      <meta name="description" content="">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <script src="./dist/js/angularApp.js"></script>
-      <script src="./script/app.js"></script>
-    </head>
-    <body >
-      <div ng-app="juju">
-          <a ui-sref='items'>items</a>
-          <a ui-sref="additems">additems</a>
-          <div ng-controller ="AuthCtrl">
-            <p>Hello world! This is Juju.</p>
-            <h1> {{ hello }} </h1>
-          <div ui-view="header"></div>
-          <div ui-view="body"></div>
-          </div> 
-          <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-          </fb:login-button>
-      </div>
-    </body>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script>
+    <script src="./dist/js/angularApp.js"></script>
+    <script src="./app.js"></script>
+    <script src="./auth/facebookfirebase.js"></script>
+  </head>
+  <body >
+    <div ng-app="juju">
+      <p>Hello world! This is Juju.</p>
+      <div ui-view="header"></div>
+      <div ui-view="body"></div>
+    </div>
+  </body>
 </html>
