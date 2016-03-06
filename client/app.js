@@ -1,6 +1,6 @@
-var app = angular.module('juju', ['ui.router', 'facebook'])
+var app = angular.module('juju', ['ui.router', 'facebook', 'authService'])
 app.config(function ($stateProvider, $urlRouterProvider){
-  $urlRouterProvider.otherwise('/default');
+  $urlRouterProvider.otherwise('/login');
 
   $stateProvider
     .state('items', {
@@ -12,7 +12,8 @@ app.config(function ($stateProvider, $urlRouterProvider){
         "header" : {
           templateUrl: './layout/header.html'
         }
-      }
+      },
+      authenticate: true
     })
     .state('additems', {
       url: '/additems',
@@ -20,7 +21,8 @@ app.config(function ($stateProvider, $urlRouterProvider){
         'body' : {
           templateUrl:'./item/additem.html'
         }
-      }
+      },
+      authenticate: true
     })
     .state('login', {
       url: '/login',
@@ -32,7 +34,16 @@ app.config(function ($stateProvider, $urlRouterProvider){
           templateUrl:'./auth/login.html'
         }
       },
-      controller: 'fbAuthCtrl',
+      controller: 'fbAuthCtrl'
       // add auth options
     })
+})
+.run(function($rootScope, $state, Auth){
+  $rootScope.$on('$stateChangeStart', function (event, toState, toParams){
+    console.log(Auth.isloggedIn())
+    if(!Auth.isloggedIn()  && toState.authenticate){
+      event.preventDefault();
+      $state.go('login')
+    }
+  })
 });
