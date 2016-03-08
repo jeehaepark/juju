@@ -12,6 +12,7 @@ var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/ju
 //   client.end(); });
 
 // CREATE A SINGLE USER
+//curl --data "email=juju@test.com2&phoneNumber=415-111-111&password=jujupw&userName=AdminJuJu" http://127.0.0.1:3000/api/v1/users
 router.post('/api/v1/users', function(req, res) {
 
     var results = [];
