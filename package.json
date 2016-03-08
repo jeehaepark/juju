@@ -27,6 +27,7 @@
     "angular-environment": "1.0.3",
     "angular-ui-router": "0.2.18",
     "body-parser": "1.15.0",
+    "cheerio": "0.20.0",
     "dotenv": "2.0.0",
     "express": "4.13.4",
     "gulp": "3.9.1",
@@ -35,6 +36,7 @@
     "morgan": "1.7.0",
     "node-env-file": "0.1.8",
     "pg": "4.5.1",
+    "request": "2.69.0",
     "require": "2.4.20"
   },
   "devDependencies": {
