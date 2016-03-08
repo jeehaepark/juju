@@ -12,10 +12,9 @@ describe('Hello World Server', function() {
       });
     });
 
-    it('returns Hello World', function(done) {
+    xit('returns Hello World', function(done) {
       request.get(base_url, function(error, response, body) {
         expect(body).toBe('Hello World');
-        helloWorld.closeServer();
         done();
       });
     });
