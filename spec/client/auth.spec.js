@@ -1,4 +1,4 @@
-describe('Smoke Test', function(){
+describe('AuthFactory', function(){
   var $scope;
   var $rootScope;
   var Auth;
