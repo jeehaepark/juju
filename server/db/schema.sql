@@ -3,8 +3,8 @@ CREATE TABLE users (
   id SERIAL PRIMARY KEY, 
   email VARCHAR(50) UNIQUE,
   phoneNumber VARCHAR(13),
-  password VARCHAR(250),
-  userName VARCHAR(250) UNIQUE
+  FBuID VARCHAR(250) UNIQUE,
+  userName VARCHAR(250)
 );
 
 
