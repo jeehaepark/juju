@@ -10,7 +10,10 @@ angular.module('authService', [])
       return !!loggedIn;  
     },
     logOut : function () {
-      return $window.localStorage.removeItem('firebase:session::jtimes3');
+      $window.localStorage.removeItem('firebase:host:jtimes3.firebaseio.com');
+      $window.localStorage.removeItem('firebase:session::jtimes3');
+      loggedIn=$window.localStorage.getItem('firebase:session::jtimes3');
+      console.log("loggedIn", !!loggedIn);
     }
   }
 });

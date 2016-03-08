@@ -1,6 +1,6 @@
 angular.module('facebook', [])
 
-.controller('fbAuthCtrl', function ($scope){
+.controller('fbAuthCtrl', function ($scope, Auth){
   $scope.test = "hello";
   $scope.facebookLogin = function () {
     var ref = new Firebase("https://jtimes3.firebaseio.com");
@@ -11,6 +11,13 @@ angular.module('facebook', [])
         console.log("Authenticated successfully with payload:", authData);
       }
     });
+  }
+  $scope.facebookLogOut=function(){
+      console.log("in facebookLogOut()")
+      //Auth.logOutSession();
+      Auth.logOut();
+      
+    
   }
 })
 
