@@ -18,7 +18,10 @@ router.post('/api/v1/users', function(req, res) {
     var results = [];
 
     // Grab data from http request
-    var data = {email: req.body.email, phoneNumber: req.body.phoneNumber, FBuID:req.body.FBuID, userName:req.body.userName};
+    var data = {email: req.body.email, 
+                phoneNumber: req.body.phoneNumber, 
+                FBuID:req.body.FBuID, 
+                userName:req.body.userName};
 
     // Get a Postgres client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
