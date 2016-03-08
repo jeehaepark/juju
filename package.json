@@ -4,9 +4,10 @@
   "description": "Track the price of items based on your own",
   "main": "/server/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jasmine",
     "postinstall": "gulp angular",
-    "start": "supervisor ./bin/www"
+    "start:server": "node server/index",
+    "dev:server": "nodemon server/index"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,9 @@
     "url": "https://github.com/Jtimes3/juju/issues"
   },
   "homepage": "https://github.com/Jtimes3/juju#readme",
+  "engine": {
+    "node": "5.6.0"
+  },
   "dependencies": {
     "angular": "1.5.0",
     "angular-environment": "1.0.3",
