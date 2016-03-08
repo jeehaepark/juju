@@ -3,12 +3,12 @@
 =====
 ## DB
 
-Create Database
+Create Database (from command line)
     createdb juju
+Load Schema (from command line)
+    psql juju < server/db/schema.sql
 Start Database Server (locally)
     node server/db/databases.js
-Load Schema
-    psql < server/db/schema.sql
 Load MockDataSet
 
 ============================================
