@@ -1,4 +1,4 @@
-var app = angular.module('juju', ['ui.router', 'facebook', 'authService'])
+var app = angular.module('juju', ['ui.router', 'facebook', 'authService', 'juju.addItem'])
 app.config(function ($stateProvider, $urlRouterProvider){
   $urlRouterProvider.otherwise('/login');
 
@@ -20,8 +20,12 @@ app.config(function ($stateProvider, $urlRouterProvider){
       views : {
         'body' : {
           templateUrl:'./item/additem.html'
+        },
+        "header" : {
+          templateUrl: './layout/header.html'
         }
       },
+      controller: 'addItemCtrl',
       authenticate: true
     })
     .state('login', {
