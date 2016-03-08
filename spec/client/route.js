@@ -3,14 +3,11 @@ describe('routes', function(){
 
   var state;
   describe('login route', function(){
-    beforeEach(inject(function($state){
-      state = $state.get('login');
-    }));
-
-    it('has the correct URL', function(){
+    it('has the correct URL', inject(function($state){
       // state object has many more properties we can test
+      state = $state.get('login');
       expect(state.url).toEqual('/login');
-    });
+    }));
 
     it('renders the correct template', function(){
       expect(state.views.header.templateUrl).toEqual('./layout/header.html');
