@@ -5,12 +5,13 @@ var path = require('path');
 
 var app = express();
 var port = process.env.PORT || 3000;
+var router = require('./models/database');
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname, '../client')));
-//require('routes')(app);
+app.use(router);
 
 app.listen(port);
 
