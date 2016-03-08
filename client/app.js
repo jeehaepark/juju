@@ -1,4 +1,4 @@
-var app = angular.module('juju', ['ui.router', 'facebook', 'authService', 'juju.addItem'])
+var app = angular.module('juju', ['ui.router', 'facebook', 'authService', 'juju.addItem','addItemFactory'])
 app.config(function ($stateProvider, $urlRouterProvider){
   $urlRouterProvider.otherwise('/login');
 
