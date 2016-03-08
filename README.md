@@ -3,11 +3,14 @@
 =====
 ## DB
 
-Create Schema
-    mysql -u root < serverdb/schema.sql
+Create Database (from command line)
+    createdb juju
+Load Schema (from command line)
+    psql juju < server/db/schema.sql
+Start Database Server (locally)
+    node server/db/databases.js
+Load MockDataSet
 
-Seed database with mock data
-    mysql -u root < serverdb/mockData.sql
 ============================================
 ## Testing
 
@@ -25,3 +28,5 @@ to run tests
 require('dotenv').config()
 -if you add an api key, add the name of the key variable (but not the key itself) to the dotEnvTemplate file so everyone can see which APIs we are playing with
 -add the api key/secret to the slack channel
+ 
+
