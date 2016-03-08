@@ -18,7 +18,7 @@ router.post('/api/v1/users', function(req, res) {
     var results = [];
 
     // Grab data from http request
-    var data = {email: req.body.email, phoneNumber: req.body.phoneNumber, password:req.body.password, userName:req.body.userName};
+    var data = {email: req.body.email, phoneNumber: req.body.phoneNumber, FBuID:req.body.FBuID, userName:req.body.userName};
 
     // Get a Postgres client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
@@ -30,7 +30,9 @@ router.post('/api/v1/users', function(req, res) {
         }
 
         // SQL Query > Insert Data
-        client.query('INSERT INTO users(email, phoneNumber, password, userName) values($1, $2, $3, $4)', [data.email, data.phoneNumber, data.password, data.userName]);
+
+        client.query("INSERT INTO users(email, phoneNumber, FBuID, userName) values($1, $2, $3, $4)", [data.email, data.phoneNumber, data.FBuID, data.userName]);
+//(routing)set up route to pass user info
 
         // SQL Query > Select Data
         var query = client.query('SELECT * FROM users ORDER BY id ASC');

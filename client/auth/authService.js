@@ -10,10 +10,25 @@ angular.module('authService', [])
       return !!loggedIn;  
     },
     logOut : function () {
+
       $window.localStorage.removeItem('firebase:host:jtimes3.firebaseio.com');
       $window.localStorage.removeItem('firebase:session::jtimes3');
       loggedIn=$window.localStorage.getItem('firebase:session::jtimes3');
       console.log("loggedIn", !!loggedIn);
+      return $window.localStorage.removeItem('firebase:session::jtimes3');
+    },
+    addUserToDB : function(authData){
+      data = {
+        FBuID : authData.facebook.id,
+        userName : authData.facebook.displayName
+      };
+      //edge case, what if someone changes their display name?
+      
+      return $http({
+        method: 'POST',
+        url: 'api/v1/users',
+        data: data
+      })
     }
   }
 });

@@ -9,6 +9,10 @@ angular.module('facebook', [])
         console.log("Login Failed!", error);
       } else {
         console.log("Authenticated successfully with payload:", authData);
+        console.log('FBuID', authData.facebook.id)
+        console.log("UserName", authData.facebook.displayName)
+        Auth.addUserToDB(authData);
+
       }
     });
   }
