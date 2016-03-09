@@ -12,7 +12,7 @@ var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/ju
 //   client.end(); });
 
 // CREATE A SINGLE USER
-//curl --data "email=juju@test.com2&phoneNumber=415-111-111&password=jujupw&userName=AdminJuJu" http://127.0.0.1:3000/api/v1/users
+//curl --data "email=juju@test.com2&phoneNumber=415-111-111&FBuID=jujupw&userName=AdminJuJu" http://127.0.0.1:3000/api/v1/users
 router.post('/api/v1/users', function(req, res) {
 
     var results = [];
@@ -34,7 +34,7 @@ router.post('/api/v1/users', function(req, res) {
 
         // SQL Query > Insert Data
 
-        client.query("INSERT INTO users(email, phoneNumber, FBuID, userName) values($1, $2, $3, $4)", [data.email, data.phoneNumber, data.FBuID, data.userName]);
+        client.query('INSERT INTO users(email, phoneNumber, FBuID, userName) values($1, $2, $3, $4)', [data.email, data.phoneNumber, data.FBuID, data.userName]);
 //(routing)set up route to pass user info
 
         // SQL Query > Select Data
@@ -82,13 +82,11 @@ router.get('/api/v1/users', function(req, res) {
             done();
             return res.json(results);
         });
-
     });
-
 });
 
 //UPDATE A SINGLE USER
-//curl -X PUT --data "email=test@test.com&phoneNumber=510-111-1111&password=jujupw&userName=JuJu" http://127.0.0.1:3000/api/v1/users/1
+//curl -X PUT --data "email=test@test.com&phoneNumber=510-111-1111&FBuID=jujupw&userName=JuJu" http://127.0.0.1:3000/api/v1/users/1
 router.put('/api/v1/users/:user_id', function(req, res) {
 
     var results = [];
@@ -97,7 +95,7 @@ router.put('/api/v1/users/:user_id', function(req, res) {
     var id = req.params.user_id;
 
     // Grab data from http request
-    var data = {email: req.body.email, phoneNumber: req.body.phoneNumber, password:req.body.password, userName:req.body.userName};
+    var data = {email: req.body.email, phoneNumber: req.body.phoneNumber, FBuID:req.body.FBuID, userName:req.body.userName};
 
     // Get a Postgres client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
@@ -109,7 +107,7 @@ router.put('/api/v1/users/:user_id', function(req, res) {
         }
 
         // SQL Query > Update Data
-        client.query('UPDATE users SET email=($1), phoneNumber=($2), password=($3), userName=($4) WHERE id=($5)', [data.email, data.phoneNumber, data.password, data.userName, id]);
+        client.query('UPDATE users SET email=($1), phoneNumber=($2), FBuID=($3), userName=($4) WHERE id=($5)', [data.email, data.phoneNumber, data.FBuID, data.userName, id]);
 
         // SQL Query > Select Data
         var query = client.query('SELECT * FROM users ORDER BY id ASC');
