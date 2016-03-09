@@ -1,6 +1,6 @@
 USE juju;
 
-INSERT INTO users (email,phoneNumber,password,userName) VALUES ('james@gmail.com', '949-466-4483', 'poop', 'hyoun44');
+INSERT INTO users (email,phoneNumber,FBuID,userName) VALUES ('james@gmail.com', '949-466-4483', 'poop', 'hyoun44');
 
 INSERT INTO items (name,itemUrl,itemImageUrl,currentPrice) VALUES ('photo', 'www.photo.com', 'www.photo.com', 9000);
 
