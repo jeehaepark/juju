@@ -1,4 +1,4 @@
-angular.module('authService', [])
+angular.module('authFactory', [])
 
 .factory('Auth', function ($window, $http){
  var loggedIn;
