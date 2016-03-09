@@ -1,6 +1,6 @@
 angular.module('authService', [])
 
-.factory('Auth', function ($window){
+.factory('Auth', function ($window, $http){
  var loggedIn;
 
   return {
@@ -23,7 +23,7 @@ angular.module('authService', [])
         userName : authData.facebook.displayName
       };
       //edge case, what if someone changes their display name?
-      
+      console.log('sending post from client route');
       return $http({
         method: 'POST',
         url: 'api/v1/users',
