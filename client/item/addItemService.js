@@ -18,6 +18,17 @@ angular.module('addItemFactory', [])
       url: 'api/v1/addItem',
       data: data
     })
+  },
+
+  addItemFuncs.scrapePriceInfo = function(itemInfo){
+    data = {
+      url : itemInfo.URL
+    };
+    return $http({
+      method : 'POST',
+      url : '/scrape',
+      data : data
+    })
   }
 
 
