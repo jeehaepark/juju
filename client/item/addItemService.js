@@ -10,7 +10,7 @@ angular.module('addItemFactory', [])
       itemImageUrl : itemInfo.imageUrl,
       currentPrice : itemInfo.currentPrice,
       idealPrice : itemInfo.idealPrice,
-      createdDate : itemInfo.createdDate
+      createdDate : itemInfo.createdDate.toDateString()
     };
 
     return $http({
@@ -28,6 +28,17 @@ angular.module('addItemFactory', [])
       method : 'POST',
       url : '/scrape',
       data : data
+    })
+  },
+
+  addItemFuncs.scrapePicture = function (url){
+    data = {
+      url : url
+    };
+    return $http({
+      method : 'POST',
+      url : '/scrape',
+      data: data
     })
   }
 

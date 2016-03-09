@@ -1,6 +1,6 @@
 <div ng-controller='addItemCtrl'> 
   <h2>add item</h2>
-  <form name='addItemFormx' ng-submit='addItem()'>
+  <form name='addItemForm' ng-submit='addItem()'>
     Item to Watch: <br>
     <input type="text" name='itemNickname' placeholder='itemNickname' ng-model='item.nickname'><br>
     Item URL: <br>
@@ -9,5 +9,6 @@
     <input type="text" name=idealPrice placeholder="$44.50" ng-model='item.idealPrice'> 
     <button type='submit' class='button' >Add Item!</button>
   </form>
-  <h1>{{ test }}</h1>
+  <h1>{{ test}}</h1>
+  <img ng-src= "{{ item.imageUrl }}" >
 </div>
