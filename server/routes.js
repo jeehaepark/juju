@@ -6,12 +6,17 @@ module.exports = function (app) {
 		res.send('hello');
 	});
   app.post('/scrape',scrapeTools.scrape);
-  //   res.send('hello')
-  // });
- //  app.get('/api/v1/users', function (req, res){
- //  	res.json(results);
- //  })
+
+
+  app.get('/api/v1/users', function (req, res){
+  	res.json(results);
+  })
+
+  app.post('api/v1/addItem', function(req, res){
+    console.log('made it bitches', req.body)
+  });
 	// app.get('*', function (req, res) {
 	// 	res.redirct('/');
 	// });
+
 };

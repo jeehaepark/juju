@@ -10,5 +10,5 @@ INSERT INTO itemHistories (price,checkdate,itemID) VALUES (10000, '2016-03-10', 
 
 
 INSERT INTO watchedItems (deadline,idealPrice,settlePrice,priceReached,emailed,itemID,userID) VALUES ('2016-04-01', 7000, 8000, false, false, 1, 1);
-INSERT INTO watchedItems (deadline,idealPrice,settlePrice,priceReached,emailed,itemID,userID) VALUES ('2016-04-01-', 8000, 8500, true, true, 2, 1);
+INSERT INTO watchedItems (deadline,idealPrice,settlePrice,priceReached,emailed,itemID,userID) VALUES ('2016-04-01', 8000, 8500, true, true, 2, 1);
 

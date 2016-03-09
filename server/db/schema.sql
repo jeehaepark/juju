@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS items CASCADE;
 CREATE TABLE items (
   id SERIAL PRIMARY KEY,
   name VARCHAR(100),
-  itemUrl VARCHAR(250),
+  itemUrl VARCHAR(250) UNIQUE,
   itemImageUrl VARCHAR(250),
   currentPrice INTEGER
 );

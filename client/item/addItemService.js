@@ -10,12 +10,34 @@ angular.module('addItemFactory', [])
       itemImageUrl : itemInfo.imageUrl,
       currentPrice : itemInfo.currentPrice,
       idealPrice : itemInfo.idealPrice,
-      createdDate : itemInfo.createdDate
+      createdDate : itemInfo.createdDate.toDateString()
     };
 
     return $http({
       method: 'POST',
       url: 'api/v1/addItem',
+      data: data
+    })
+  },
+
+  addItemFuncs.scrapePriceInfo = function(itemInfo){
+    data = {
+      url : itemInfo.URL
+    };
+    return $http({
+      method : 'POST',
+      url : '/scrape',
+      data : data
+    })
+  },
+
+  addItemFuncs.scrapePicture = function (url){
+    data = {
+      url : url
+    };
+    return $http({
+      method : 'POST',
+      url : '/scrape',
       data: data
     })
   }
