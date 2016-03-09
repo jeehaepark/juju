@@ -66,11 +66,12 @@ gulp.task('default',function() {
 	gutil.log('I have configured a gulpfile');
 });
 
-gulp.task('angular',function() {
-	return gulp.src( ['./node_modules/angular/angular.min.js',
-		'./node_modules/angular-ui-router/release/angular-ui-router.min.js'])
-    .pipe(maps.init())
-    .pipe(concat('angularApp.js'))
-    .pipe(maps.write('./'))
-    .pipe(gulp.dest('./client/dist/js/'));
-});
+// keep as reference for bundling
+// gulp.task('bundle',function() {
+// 	return gulp.src( ['./node_modules/**/*.js'
+//   ])
+//     .pipe(maps.init())
+//     .pipe(concat('bundle.js'))
+//     .pipe(maps.write('./'))
+//     .pipe(gulp.dest('./client/dist/js/'));
+// });

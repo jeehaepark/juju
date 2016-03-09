@@ -5,7 +5,6 @@
   "main": "/server/index.js",
   "scripts": {
     "test": "jasmine",
-    "postinstall": "gulp angular",
     "start:server": "node server/index",
     "dev:server": "nodemon server/index"
   },
