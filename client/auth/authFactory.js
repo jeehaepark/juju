@@ -28,7 +28,7 @@ angular.module('authFactory', [])
       console.log('sending post from client route');
 
       return $http({
-        method: 'POST',
+        method: 'GET',
         url: 'api/users',
         data: data
       })

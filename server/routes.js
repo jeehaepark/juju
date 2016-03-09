@@ -1,7 +1,7 @@
 var scrapeTools = require('./scraping.js')
 var itemHistory=require('./models/itemHistories.js')
 var watchItem=require('./models/watchedItems.js')
-var addItem=require('./models/item.js')
+var addItem=require('./models/items.js')
 var app = require('./index.js')
 var mock = require('./mockData.js');
 
@@ -19,7 +19,7 @@ module.exports = function (app) {
   // })
 
 
-  app.post('api/v1/addItem', 
+  //app.post('api/v1/addItem', 
     //item post request
       //set item history flag to true if response is error due to item already existing
       //upon response send get request for item_id
@@ -28,7 +28,7 @@ module.exports = function (app) {
         //if item history flag is false (doesnt yet exist)
           //item history post request
 
-    )
+   // )
 
 
   // app.post('api/v1/addItem', function(req, res){

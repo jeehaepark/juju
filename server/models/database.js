@@ -11,9 +11,7 @@ var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/ju
 //   console.log('hello bitches')
 //   client.end(); });
 
-// CREATE A SINGLE USER
-//curl --data "email=juju@test.com2&phoneNumber=415-111-111&FBuID=jujupw&userName=AdminJuJu" http://127.0.0.1:3000/api/users
-router.post('/api/users', function(req, res) {
+router.get('/api/users', function(req, res) {
   var results = [];
 
   // Grab data from http request
@@ -24,16 +22,62 @@ router.post('/api/users', function(req, res) {
 
   // Get a Postgres client from the connection pool
   pg.connect(connectionString, function(err, client, done) {
+    
     // Handle connection errors
     if(err) {
       done();
-      console.log(err);
+      return res.status(500).json({ success: false, data: err});
+    }
+
+    // SQL Query > check if this user exists in the table and grab their user_id if they do
+    var query = client.query({text :'SELECT userName FROM users WHERE FBuID = $1', values : [4342432532] }, function(err, result){
+      console.log('err', err, 'result',  result.rows[0])
+    });
+
+    //(routing)set up route to pass user info
+
+    // SQL Query > Select Data
+
+    // Stream results back one row at a time
+    query.on('row', function(row) {
+      console.log("meow", row)
+      results.push(row);
+    });
+
+    // After all data is returned, close connection and return results
+    query.on('end', function() {
+      done();
+      console.log("mewo", results)
+      return res.json(results);
+    });
+  });
+});
+
+// CREATE A SINGLE USER
+//curl --data "email=juju@test.com2&phoneNumber=415-111-111&FBuID=jujupw&userName=AdminJuJu" http://127.0.0.1:3000/api/users
+router.post('/api/users', function(req, res) {
+  var results = [];
+  console.log('made it to line 18')
+
+  // Grab data from http request
+  var data = {email: req.body.email,
+    phoneNumber: req.body.phoneNumber,
+    FBuID:req.body.FBuID,
+    userName:req.body.userName};
+
+  // Get a Postgres client from the connection pool
+  pg.connect(connectionString, function(err, client, done) {
+    
+    // Handle connection errors
+    if(err) {
+      done();
       return res.status(500).json({ success: false, data: err});
     }
 
     // SQL Query > Insert Data
-
+    console.log('made it past the err handling')
     client.query('INSERT INTO users(email, phoneNumber, FBuID, userName) values($1, $2, $3, $4)', [data.email, data.phoneNumber, data.FBuID, data.userName]);
+    console.log('made it past the query');
     //(routing)set up route to pass user info
 
     // SQL Query > Select Data
@@ -41,6 +85,7 @@ router.post('/api/users', function(req, res) {
 
     // Stream results back one row at a time
     query.on('row', function(row) {
+      console.log(row)
       results.push(row);
     });
 
