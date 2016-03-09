@@ -11,6 +11,7 @@ angular.module('juju.addItem', [])
         AddMe.scrapePicture(newValue).then(function successCallback(response){
           console.log('respoonse', response)
           $scope.item.imageUrl= response.data.picture;
+          $scope.item.currentPrice = response.data.price;
           console.log('omageurl', $scope.item.imageUrl)
         }, function errorCallback(response){
           console.log(response)
@@ -18,15 +19,20 @@ angular.module('juju.addItem', [])
       }
     })
     $scope.addItem = function(){
-      AddMe.scrapePriceInfo($scope.item).then(function successCallback(response){
-        console.log(response)
-        $scope.item.imageUrl=response.data.picture;
-        $scope.item.currentPrice=response.data.price;
-        console.log($scope.item)
-        AddMe.addItemToDB($scope.item);
-      }, function errorCallback(response){
-        console.log(response)
 
-      });      
+      if($scope.item.currentPrice || $scope.item.imageUrl){
+        AddMe.scrapePriceInfo($scope.item).then(function successCallback(response){
+          console.log(response)
+          $scope.item.imageUrl=response.data.picture;
+          $scope.item.currentPrice=response.data.price;
+          console.log($scope.item)
+          AddMe.addItemToDB($scope.item);
+        }, function errorCallback(response){
+          console.log(response)
+
+        });
+      }else {
+        AddMe.addItemToDB($scope.item);
+      }      
     }
   })
