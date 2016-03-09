@@ -1,3 +1,4 @@
+var router = express.Router();
 // CREATE A SINGLE USER
 //curl --data 'email=juju@test.com2&phoneNumber=415-111-111&password=jujupw&userName=AdminJuJu' http://127.0.0.1:3000/api/v1/items
 router.post('/api/v1/items', function(req, res) {
@@ -109,3 +110,5 @@ router.put('/api/v1/items/:item_id', function(req, res) {
     });
 
 });
+
+module.exports = router;
