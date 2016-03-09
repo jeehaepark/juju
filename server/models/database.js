@@ -12,8 +12,8 @@ var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/ju
 //   client.end(); });
 
 // CREATE A SINGLE USER
-//curl --data "email=juju@test.com2&phoneNumber=415-111-111&FBuID=jujupw&userName=AdminJuJu" http://127.0.0.1:3000/api/v1/users
-router.post('/api/v1/users', function(req, res) {
+//curl --data "email=juju@test.com2&phoneNumber=415-111-111&FBuID=jujupw&userName=AdminJuJu" http://127.0.0.1:3000/api/users
+router.post('/api/users', function(req, res) {
   var results = [];
 
   // Grab data from http request
@@ -53,7 +53,7 @@ router.post('/api/v1/users', function(req, res) {
 });
 
 //READ GET ALL USERS
-router.get('/api/v1/users', function(req, res) {
+router.get('/api/users', function(req, res) {
 
   var results = [];
 
@@ -83,8 +83,8 @@ router.get('/api/v1/users', function(req, res) {
 });
 
 //UPDATE A SINGLE USER
-//curl -X PUT --data "email=test@test.com&phoneNumber=510-111-1111&FBuID=jujupw&userName=JuJu" http://127.0.0.1:3000/api/v1/users/1
-router.put('/api/v1/users/:user_id', function(req, res) {
+//curl -X PUT --data "email=test@test.com&phoneNumber=510-111-1111&FBuID=jujupw&userName=JuJu" http://127.0.0.1:3000/api/users/1
+router.put('/api/users/:user_id', function(req, res) {
 
   var results = [];
 

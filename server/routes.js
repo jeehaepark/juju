@@ -8,7 +8,7 @@ module.exports = function (app) {
   app.post('/scrape',scrapeTools.scrape);
 
 
-  // app.get('/api/v1/users', function (req, res){
+  // app.get('/api/users', function (req, res){
   // 	res.json(results);
   // })
 

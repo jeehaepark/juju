@@ -26,7 +26,7 @@ angular.module('authService', [])
       console.log('sending post from client route');
       return $http({
         method: 'POST',
-        url: 'api/v1/users',
+        url: 'api/users',
         data: data
       })
     }

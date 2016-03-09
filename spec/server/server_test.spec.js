@@ -28,14 +28,14 @@ describe('main page', function() {
 
   describe('GET /users', function() {
     xit('load GET /users', function(done) {
-      request.get('http://localhost:3000/api/v1/users', function(error, response, body) {
+      request.get('http://localhost:3000/api/users', function(error, response, body) {
         expect(response.statusCode).toBe(200);
         done();
       });
     });
 
     it('should not return status code 200', function(done) {
-      request.get('http://localhost:3000/api/v1/users', function(error, response, body) {
+      request.get('http://localhost:3000/api/users', function(error, response, body) {
         //expect(body.success).not.toBe(false);
         expect(body).toBe('hello');
         done();
