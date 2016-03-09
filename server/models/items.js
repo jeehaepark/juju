@@ -1,6 +1,10 @@
+var express = require('express');
 var router = express.Router();
-// CREATE A SINGLE USER
-//curl --data 'email=juju@test.com2&phoneNumber=415-111-111&password=jujupw&userName=AdminJuJu' http://127.0.0.1:3000/api/v1/items
+var pg = require('pg');
+var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/juju';
+
+// CREATE A SINGLE ITEM
+//curl --data 'name=photo&itemUrl=www.photo.com&itemImageUrl=www.photo.com&currentPrice=9000' http://127.0.0.1:3000/api/v1/items
 router.post('/api/v1/items', function(req, res) {
 
     var results = [];
@@ -38,7 +42,7 @@ router.post('/api/v1/items', function(req, res) {
     });
 });
 
-//READ GET ALL USERS
+//READ GET ALL ITEMS
 router.get('/api/v1/items', function(req, res) {
 
     var results = [];
@@ -70,8 +74,8 @@ router.get('/api/v1/items', function(req, res) {
 
 });
 
-//UPDATE A SINGLE USER
-//curl -X PUT --data 'email=test@test.com&phoneNumber=510-111-1111&password=jujupw&userName=JuJu' http://127.0.0.1:3000/api/v1/users/1
+//UPDATE A SINGLE ITEM
+//curl -X PUT --data 'name=test@test.com&itemUrl=510-111-1111&itemImageUrl=jujupw&currentPrice=JuJu' http://127.0.0.1:3000/api/v1/items/1
 router.put('/api/v1/items/:item_id', function(req, res) {
 
     var results = [];
