@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var path = require('path');
-
+var cron = require('./cronJobs.js')
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -11,6 +11,9 @@ var router = require('./models/database');
 var items = require('./models/items');
 var histories = require('./models/itemHistories');
 var watched = require('./models/watchedItems');
+
+cron.test();
+cron.min();
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
