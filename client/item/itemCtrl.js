@@ -1,5 +1,5 @@
 angular.module('juju.addItem', [])
-.controller('addItemCtrl', function($scope, AddItem){
+.controller('itemCtrl', function($scope, AddItem){
   $scope.item = {};
   $scope.item.createdDate = new Date();
   $scope.item.currentPrice;
