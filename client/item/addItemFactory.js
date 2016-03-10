@@ -1,6 +1,6 @@
 angular.module('addItemFactory', [])
 
-.factory('AddMe', function(Auth,$http){
+.factory('AddItem', function(Auth,$http){
   var addItemFuncs ={};
   //pull in user info from the auth factory
   addItemFuncs.addItemToDB =function (itemInfo){
@@ -41,7 +41,6 @@ angular.module('addItemFactory', [])
       data: data
     })
   }
-
 
   return addItemFuncs
 });

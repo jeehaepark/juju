@@ -1,5 +1,5 @@
 angular.module('juju.addItem', [])
-  .controller('addItemCtrl', function($scope, AddMe){ 
+  .controller('addItemCtrl', function($scope, AddItem){ 
     $scope.item={};
     $scope.test='poop';
     $scope.item.createdDate=new Date();
@@ -8,7 +8,7 @@ angular.module('juju.addItem', [])
     $scope.$watch('item.URL', function(newValue, oldValue){
       if(newValue){
         console.log('poop poop poop', oldValue, newValue)
-        AddMe.scrapePicture(newValue).then(function successCallback(response){
+        AddItem.scrapePicture(newValue).then(function successCallback(response){
           console.log('respoonse', response)
           $scope.item.imageUrl= response.data.picture;
           $scope.item.currentPrice = response.data.price;
@@ -21,18 +21,18 @@ angular.module('juju.addItem', [])
     $scope.addItem = function(){
 
       if($scope.item.currentPrice || $scope.item.imageUrl){
-        AddMe.scrapePriceInfo($scope.item).then(function successCallback(response){
+        AddItem.scrapePriceInfo($scope.item).then(function successCallback(response){
           console.log(response)
           $scope.item.imageUrl=response.data.picture;
           $scope.item.currentPrice=response.data.price;
           console.log($scope.item)
-          AddMe.addItemToDB($scope.item);
+          AddItem.addItemToDB($scope.item);
         }, function errorCallback(response){
           console.log(response)
 
         });
       }else {
-        AddMe.addItemToDB($scope.item);
+        AddItem.addItemToDB($scope.item);
       }      
     }
   })
