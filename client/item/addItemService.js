@@ -15,7 +15,7 @@ angular.module('addItemFactory', [])
 
     return $http({
       method: 'POST',
-      url: 'api/v1/addItem',
+      url: 'api/additems',
       data: data
     })
   },
