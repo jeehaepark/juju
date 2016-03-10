@@ -28,10 +28,12 @@ angular.module('authFactory', [])
       console.log('sending post from client route');
 
       return $http({
-        method: 'GET',
+        method: 'POST',
         url: 'api/users',
         data: data
+      }).then(function successCallback(response) {
+        console.log(response)
       })
     }
-  }
+  };
 });
