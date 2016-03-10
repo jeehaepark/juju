@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var pg = require('pg');
-var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/juju';
+var connectionString = process.env.DATABASE_URL || 'postgres://postgres:password@localhost/juju';
 
 // CREATE A SINGLE USER
 //curl --data "deadline=2016-04-01&idealPrice=7000&settlePrice=8000&priceReached=false&emailed=false&itemID=1&userID=1" http://127.0.0.1:3000/api/v1/watcheditems
