@@ -2,6 +2,7 @@ angular.module('authFactory', [])
 
 .factory('Auth', function ($window, $http){
   var loggedIn;
+  var userId;
 
   return {
     isloggedIn : function () {
@@ -32,7 +33,8 @@ angular.module('authFactory', [])
         url: 'api/users',
         data: data
       }).then(function successCallback(response) {
-        console.log(response)
+        userId=response.data[0].id;
+        return userId;
       })
     }
   };
