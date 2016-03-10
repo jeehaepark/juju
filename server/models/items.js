@@ -6,43 +6,58 @@ var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/ju
 // CREATE A SINGLE ITEM
 //curl --data 'name=photo&itemUrl=www.photo.com&itemImageUrl=www.photo.com&currentPrice=9000' http://127.0.0.1:3000/api/v1/items
 
-router.post('/api/additems', function(req, res) {
+router.post('/api/items', function(req, res) {
+  var results = [];
+  console.log('req', req.body)
+  // Grab data from http request
+    var data = {
+        name: req.body.name, 
+        itemUrl: req.body.itemUrl, 
+        itemImageUrl:req.body.itemImageUrl, 
+        currentPrice:req.body.currentPrice
+    };
+  
+  // Get a Postgres client from the connection pool
+  pg.connect(connectionString, function(err, client, done) {
+    
+    // Handle connection errors
+    if(err) {
+      done();
+      return res.status(500).json({ success: false, data: err});
+    }
 
-    var results = [];
-
-    // Grab data from http request
-    var data = {name: req.body.itemNickName, itemUrl: req.body.itemUrl, itemImageUrl: req.body.itemImageUrl, currentPrice: req.body.currentPrice,
-        idealPrice: req.body.idealPrice,
-        createdDate: req.body.createdDate};
-
-    // Get a Postgres client from the connection pool
-    pg.connect(connectionString, function(err, client, done) {
-        // Handle connection errors
-        if(err) {
-          done();
-          console.log(err);
-          return res.status(500).json({ success: false, data: err});
+    // SQL Query > check if this user exists in the table and grab their user_id if they do
+    var query = client.query({
+      text :'INSERT INTO items(name, itemUrl, itemImageUrl, currentPrice) ON CONFLICT (itemUrl) DO NOTHING', 
+      values : [data.email, data.phoneNumber, data.FBuID, data.userName] }, function(err, result){
+        if(err){
+          console.log(err)
         }
+        else{
+          console.log('inside the select statement')
+          client.query({
+          text : "SELECT id FROM users WHERE FBuID = $1",
+          values : [data.FBuID]}, function(err, result){
+            res.send(result.rows);
+            
+          })}
+          return result;
+          console.log('results', results)
 
-        // SQL Query > Insert Data
-        client.query('INSERT INTO items(name, itemUrl, itemImageUrl, currentPrice) values($1, $2, $3, $4)', [data.name, data.itemUrl, data.itemImageUrl, data.currentPrice]);
-
-        // SQL Query > Select Data
-        var query = client.query('SELECT * FROM items ORDER BY id ASC');
-
-        // Stream results back one row at a time
-        query.on('row', function(row) {
-            results.push(row);
         });
 
-        // After all data is returned, close connection and return results
-        query.on('end', function() {
-            done();
-            return res.json(results);
-        });
-
-
+    // Stream results back one row at a time
+    query.on('row', function(row) {
+      results.push(row);
+      console.log('res in query on', res)
     });
+
+    // After all data is returned, close connection and return results
+    query.on('end', function() {
+      done();
+      return res;
+    });
+  });
 });
 
 //READ GET ALL ITEMS
