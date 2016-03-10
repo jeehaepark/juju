@@ -5,12 +5,13 @@ var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/ju
 
 // CREATE A SINGLE ITEM
 //curl --data 'name=photo&itemUrl=www.photo.com&itemImageUrl=www.photo.com&currentPrice=9000' http://127.0.0.1:3000/api/v1/items
-router.post('/api/v1/items', function(req, res) {
+
+router.post('/api/additems', function(req, res) {
 
     var results = [];
 
     // Grab data from http request
-    var data = {name: req.body.name, itemUrl: req.body.itemUrl, itemImageUrl:req.body.itemImageUrl, currentPrice:req.body.currentPrice};
+    var data = {name: req.body.itemNickName, itemUrl: req.body.itemUrl, itemImageUrl:req.body.itemImageUrl, currentPrice:req.body.currentPrice};
 
     // Get a Postgres client from the connection pool
     pg.connect(connectionString, function(err, client, done) {

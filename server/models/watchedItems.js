@@ -3,14 +3,6 @@ var router = express.Router();
 var pg = require('pg');
 var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/juju';
 
-// var client = new pg.Client(connectionString);
-// client.connect();
-// var query = client.query('CREATE TABLE items(id SERIAL PRIMARY KEY, text VARCHAR(40) not null, complete BOOLEAN)');
-// query.on('end', function() { 
-  
-//   console.log('hello bitches')
-//   client.end(); });
-
 // CREATE A SINGLE USER
 //curl --data "deadline=2016-04-01&idealPrice=7000&settlePrice=8000&priceReached=false&emailed=false&itemID=1&userID=1" http://127.0.0.1:3000/api/v1/watcheditems
 router.post('/api/v1/watcheditems', function(req, res) {

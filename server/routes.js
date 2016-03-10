@@ -7,7 +7,6 @@ module.exports = function (app) {
 	});
   app.post('/scrape',scrapeTools.scrape);
 
-
   // app.get('/api/users', function (req, res){
   // 	res.json(results);
   // })
