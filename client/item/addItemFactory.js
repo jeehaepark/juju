@@ -43,4 +43,20 @@ angular.module('addItemFactory', [])
   }
 
   return addItemFuncs
-});
+})
+.factory('displayItemsFactory', function ($http){
+  displayItemsFactoryFuncts = {};
+
+  displayItemsFactoryFuncts.getItemData = function(user){
+    var data = {
+      user: user
+    }
+    return $http({
+      method : 'GET',
+      url : '/api/v1/watchedItems/dummy',
+      data: user
+    })
+  }
+  return displayItemsFactoryFuncts;
+})
+
