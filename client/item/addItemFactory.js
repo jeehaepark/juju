@@ -2,7 +2,6 @@ angular.module('addItemFactory', [])
 
 .factory('AddItem', function(Auth,$http){
   var addItemFuncs ={};
-
   //pull in user info from the auth factory
   addItemFuncs.addItemToDB =function (itemInfo){
     data={
