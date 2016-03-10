@@ -1,22 +1,24 @@
 describe('Add item factory', function(){
-  // var $scope;
-  // var $rootScope;
   var AddItem;
 
   beforeEach(module('juju'));
   beforeEach(inject(function ($injector) {
-    // $controller = $injector.get('$controller');
-    // $rootScope = $injector.get('$rootScope');
-    // $scope = $rootScope.$new();
     AddItem = $injector.get('AddItem');
   }));
 
   describe('addItemFactory', function(){
-    it('is definedt ', function(){
+    it('is defined', function(){
       expect(AddItem).toBeDefined();
     });
+
     it('returns an object', function(){
-      expect(typeof AddItem.addItemsFuncs).toBe('object');
+      expect(typeof AddItem).toBe('object');
+    });
+
+    // testing for only one method for now.  A passing test
+    // should imply the rest of the methods are accessible
+    it('has scrapePriceInfo method', function(){
+      expect(typeof AddItem.scrapePriceInfo).toBe('function');
     });
   });
 });
