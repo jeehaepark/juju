@@ -9,19 +9,13 @@ angular.module('facebook', [])
         console.log("Login Failed!", error);
       } else {
         console.log("Authenticated successfully with payload:", authData);
-        console.log('FBuID', authData.facebook.id)
-        console.log("UserName", authData.facebook.displayName)
         Auth.addUserToDB(authData);
-
       }
     });
   }
   $scope.facebookLogOut=function(){
-      console.log("in facebookLogOut()")
-      //Auth.logOutSession();
-      Auth.logOut();
-      
-    
+    console.log("in facebookLogOut()")
+    Auth.logOut();
   }
 })
 

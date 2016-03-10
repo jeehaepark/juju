@@ -1,4 +1,4 @@
-describe('AuthFactory', function(){
+describe('Authentication operations', function(){
   var $scope;
   var $rootScope;
   var Auth;
@@ -28,7 +28,7 @@ describe('AuthFactory', function(){
     });
   });
 
-  describe('authService', function(){
+  describe('authFactory', function(){
     it('returns an object', function(){
       expect(Auth).toBeDefined();
       expect(typeof Auth).toBe('object');

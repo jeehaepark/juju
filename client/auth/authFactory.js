@@ -1,7 +1,7 @@
-angular.module('authService', [])
+angular.module('authFactory', [])
 
 .factory('Auth', function ($window, $http){
- var loggedIn;
+  var loggedIn;
 
   return {
     isloggedIn : function () {
@@ -9,6 +9,7 @@ angular.module('authService', [])
       // return a boolean value of whether or not logged in is defined 
       return !!loggedIn;  
     },
+
     logOut : function () {
 
       $window.localStorage.removeItem('firebase:host:jtimes3.firebaseio.com');
@@ -17,6 +18,7 @@ angular.module('authService', [])
       console.log("loggedIn", !!loggedIn);
       return $window.localStorage.removeItem('firebase:session::jtimes3');
     },
+
     addUserToDB : function(authData){
       data = {
         FBuID : authData.facebook.id,
