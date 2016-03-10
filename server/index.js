@@ -12,8 +12,8 @@ var items = require('./models/items');
 var histories = require('./models/itemHistories');
 var watched = require('./models/watchedItems');
 
-cron.test();
-cron.min();
+//cron.test();
+//cron.min();
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
