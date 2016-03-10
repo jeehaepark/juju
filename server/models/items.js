@@ -11,7 +11,9 @@ router.post('/api/additems', function(req, res) {
     var results = [];
 
     // Grab data from http request
-    var data = {name: req.body.itemNickName, itemUrl: req.body.itemUrl, itemImageUrl:req.body.itemImageUrl, currentPrice:req.body.currentPrice};
+    var data = {name: req.body.itemNickName, itemUrl: req.body.itemUrl, itemImageUrl: req.body.itemImageUrl, currentPrice: req.body.currentPrice,
+        idealPrice: req.body.idealPrice,
+        createdDate: req.body.createdDate};
 
     // Get a Postgres client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
