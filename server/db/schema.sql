@@ -15,7 +15,7 @@ CREATE TABLE items (
   name VARCHAR(100),
   itemUrl VARCHAR(250) UNIQUE,
   itemImageUrl VARCHAR(250),
-  currentPrice INTEGER
+  currentPrice MONEY
 );
 
 
@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS itemHistories CASCADE;
 
 CREATE TABLE itemHistories (
   id SERIAL PRIMARY KEY,
-  price INTEGER,
+  price MONEY,
   checkDate DATE,
   itemID INTEGER,
   FOREIGN KEY (itemID) REFERENCES items(id)
@@ -34,8 +34,8 @@ DROP TABLE IF EXISTS watchedItems CASCADE;
 CREATE TABLE watchedItems (
   id SERIAL PRIMARY KEY,
   deadline DATE,
-  idealPrice INTEGER,
-  settlePrice INTEGER,
+  idealPrice MONEY,
+  settlePrice MONEY,
   priceReached BOOLEAN,
   emailed BOOLEAN,
   itemID INTEGER,
