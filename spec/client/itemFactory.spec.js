@@ -12,8 +12,10 @@ describe('Add item factory', function(){
   }));
 
   describe('addItemFactory', function(){
-    it('returns an object', function(){
+    it('is definedt ', function(){
       expect(AddItem).toBeDefined();
+    });
+    it('returns an object', function(){
       expect(typeof AddItem.addItemsFuncs).toBe('object');
     });
   });
