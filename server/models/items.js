@@ -32,8 +32,7 @@ router.post('/api/additems', function(req, res) {
 
     // SQL Query 
     var query = client.query({
-      text : "SELECT id FROM items WHERE itemUrl = $1",
-      values : [data.itemUrl]}, 
+      text : 'SELECT id FROM items WHERE itemUrl like \'%'+ data.itemUrl + '%\''}, 
       function(err, result){
         if(err){
           console.log('err', err);
@@ -52,33 +51,34 @@ router.post('/api/additems', function(req, res) {
                   data.itemId=result.rows[0].id;
                   console.log('added item to the database, saving itemId', data);
                 }
+                data.itemExists=true;
               })
           }else{
               data.itemId=result.rows[0].id;
               data.itemExists=true;
-              console.log('data', data);
+
+              client.query({
+                text: 'INSERT INTO itemHistories(price, checkDate, itemID) values ($1, $2, $3)',
+                values : [data.currentPrice, data.createdDate, data.itemId]
+              }, function(err, result){
+                if(err){
+                  console.log(err);
+                } else {
+                client.query({
+                  text: 'INSERT INTO watchedItems(idealPrice, priceReached, emailed, itemID, userID) values ($1, $2, $3, $4, $5)',
+                  values: [data.idealPrice, false, false, data.itemId, data.userId]}, 
+                  function(err, result){
+                    if (err){
+                      console.log(err);
+                    }else{
+                      console.log('OMG I THINK WE DID IT!!!!');
+                    }
+                  })        
+                }
+              })
           } 
         }
-        if(!data.itemExists){
-          client.query({
-            text: 'INSERT INTO itemHistories(price, checkDate, itemID) values ($1, $2, $3)',
-            values : [data.currentPrice, data.createdDate, data.itemId]
-          }, function(err, result){
-            if(err){
-              console.log(err);
-            }
-          })
-        }
-        client.query({
-          text: 'INSERT INTO watchedItems(idealPrice, priceReached, emailed, itemID, userID) values ($1, $2, $3, $4, $5)',
-          values: [data.idealPrice, false, false, data.itemId, data.userId]}, 
-          function(err, result){
-            if (err){
-              console.log(err);
-            }else{
-              console.log('OMG I THINK WE DID IT!!!!');
-            }
-          })    
+  
         
         });
 
