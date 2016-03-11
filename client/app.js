@@ -15,7 +15,7 @@ app.config(function ($stateProvider, $urlRouterProvider){
     url: '/yourItems',
     views: {
       "body" : {
-        templateUrl:'./item/item.html',
+        templateUrl:'./items/views/item.html',
         controller: 'displayItemsController'
       },
       "header" : {
@@ -28,7 +28,7 @@ app.config(function ($stateProvider, $urlRouterProvider){
     url: '/additems',
     views : {
       'body' : {
-        templateUrl:'./item/additem.html'
+        templateUrl:'./items/views/additem.html'
       },
       "header" : {
         templateUrl: './layout/header.html'
