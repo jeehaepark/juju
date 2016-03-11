@@ -1,7 +1,8 @@
-angular.module('addItemFactory', [])
+angular.module('addItemFactory', ['authFactory'])
 
-.factory('AddItem', function(Auth,$http){
+.factory('AddItem', function(Auth, $http){
   var addItemFuncs ={};
+  var userId = Auth.userId
   //pull in user info from the auth factory
   addItemFuncs.addItemToDB =function (itemInfo){
     data={
@@ -10,12 +11,15 @@ angular.module('addItemFactory', [])
       itemImageUrl : itemInfo.imageUrl,
       currentPrice : itemInfo.currentPrice,
       idealPrice : itemInfo.idealPrice,
-      createdDate : itemInfo.createdDate.toDateString()
+      createdDate : itemInfo.createdDate.toDateString(),
+      userId : userId
     };
+    console.log('userId', userId)
+
 
     return $http({
       method: 'POST',
-      url: 'api/additems',
+      url: '/api/additems',
       data: data
     })
   },

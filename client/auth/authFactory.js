@@ -2,26 +2,31 @@ angular.module('authFactory', [])
 
 .factory('Auth', function ($window, $http){
   var loggedIn;
-  var userId;
 
-  return {
-    isloggedIn : function () {
+
+  var authFuncs={};
+
+  authFuncs.isloggedIn = function () {
+
+
       loggedIn = $window.localStorage.getItem('firebase:session::jtimes3');
 
       // returns a boolean value of whether or not logged in is defined
       return !!loggedIn;
-    },
+  };
 
-    logOut : function () {
-      $window.localStorage.removeItem('firebase:host:jtimes3.firebaseio.com');
-      $window.localStorage.removeItem('firebase:session::jtimes3');
-      loggedIn=$window.localStorage.getItem('firebase:session::jtimes3');
+  authFuncs.logOut = function () {
+    $window.localStorage.removeItem('firebase:host:jtimes3.firebaseio.com');
+    $window.localStorage.removeItem('firebase:session::jtimes3');
+    loggedIn=$window.localStorage.getItem('firebase:session::jtimes3');
 
       return $window.localStorage.removeItem('firebase:session::jtimes3');
-    },
+  };
 
-    addUserToDB : function(authData){
-      data = {
+  authFuncs.userId = 'test';
+
+  authFuncs.addUserToDB =function (authData){
+       data = {
         FBuID : authData.facebook.id,
         userName : authData.facebook.displayName
       };
@@ -33,9 +38,13 @@ angular.module('authFactory', [])
         url: 'api/users',
         data: data
       }).then(function successCallback(response) {
-        userId=response.data[0].id;
-        return userId;
+        authFuncs.userId=response.data[0].id;
+        console.log(authFuncs.userId)
       })
-    }
-  };
+    };
+
+
+  return authFuncs
+
+
 });
