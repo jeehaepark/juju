@@ -44,7 +44,7 @@ app.config(function ($stateProvider, $urlRouterProvider){
         templateUrl: './layout/header.html'
       },
       'body' : {
-        templateUrl:'./auth/login.html'
+        templateUrl:'./auth/views/login.html'
       }
     },
     controller: 'fbAuthCtrl'

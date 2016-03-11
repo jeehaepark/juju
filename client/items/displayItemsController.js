@@ -2,7 +2,7 @@ angular.module('displayItemsController', [])
 
 .controller('displayItemsController', function ($scope,displayItemsFactory){
 
-  displayItemsFactory.getItemData().then(
+  displayItemsFactory.getItemData(1).then(
     function successCallback(response){
     console.log(response)
     $scope.itemData = response.data;

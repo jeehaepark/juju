@@ -56,9 +56,9 @@ angular.module('itemFactory', ['authFactory'])
       user: user
     }
     return $http({
-      method : 'GET',
-      url : '/api/v1/watchedItems/dummy',
-      data: user
+      method : 'POST',
+      url : '/api/v1/watchedItems/user',
+      data: {userId:user}
     })
   }
   return displayItemsFactoryFuncts;
