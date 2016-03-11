@@ -6,7 +6,7 @@ var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/ju
 // CREATE A SINGLE ITEM
 //curl --data 'name=photo&itemUrl=www.photo.com&itemImageUrl=www.photo.com&currentPrice=9000' http://127.0.0.1:3000/api/v1/items
 
-router.post('/api/items', function(req, res) {
+router.post('/api/additems', function(req, res) {
   var results = [];
   console.log('req', req.body)
   // Grab data from http request
@@ -14,7 +14,8 @@ router.post('/api/items', function(req, res) {
         name: req.body.name, 
         itemUrl: req.body.itemUrl, 
         itemImageUrl:req.body.itemImageUrl, 
-        currentPrice:req.body.currentPrice
+        currentPrice:req.body.currentPrice,
+        userId : req.body.userId
     };
   
   // Get a Postgres client from the connection pool
@@ -28,17 +29,17 @@ router.post('/api/items', function(req, res) {
 
     // SQL Query > check if this user exists in the table and grab their user_id if they do
     var query = client.query({
-      text :'INSERT INTO items(name, itemUrl, itemImageUrl, currentPrice) ON CONFLICT (itemUrl) DO NOTHING', 
-      values : [data.email, data.phoneNumber, data.FBuID, data.userName] }, function(err, result){
+      text :'INSERT INTO items(name, itemUrl, itemImageUrl, currentPrice) values($1, $2, $3, $4) ON CONFLICT (itemUrl) DO NOTHING', 
+      values : [data.name, data.itemUrl, data.itemImageUrl, data.currentPrice] }, function(err, result){
         if(err){
-          console.log(err)
+          console.log('err', err)
         }
         else{
           console.log('inside the select statement')
           client.query({
-          text : "SELECT id FROM users WHERE FBuID = $1",
-          values : [data.FBuID]}, function(err, result){
-            res.send(result.rows);
+          text : "SELECT id FROM items WHERE itemUrl = $1",
+          values : [data.itemUrl]}, function(err, result){
+            console.log(result)
             
           })}
           return result;

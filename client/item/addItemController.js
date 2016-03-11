@@ -1,10 +1,11 @@
-angular.module('juju.addItem', [])
-  .controller('addItemCtrl', function($scope, AddItem){ 
+angular.module('juju.addItem', ['authFactory'])
+  .controller('addItemCtrl', function($scope, AddItem, Auth){ 
     $scope.item={};
     $scope.test='poop';
     $scope.item.createdDate=new Date();
     $scope.item.currentPrice;
     $scope.item.imageUrl;
+    $scope.item.userId=Auth.userId;
     $scope.$watch('item.URL', function(newValue, oldValue){
       if(newValue){
         console.log('poop poop poop', oldValue, newValue)
@@ -13,6 +14,7 @@ angular.module('juju.addItem', [])
           $scope.item.imageUrl= response.data.picture;
           $scope.item.currentPrice = response.data.price;
           console.log('omageurl', $scope.item.imageUrl)
+          console.log('userId in controller', $scope.item.userId)
         }, function errorCallback(response){
           console.log(response)
         })
