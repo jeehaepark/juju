@@ -18,7 +18,7 @@ Load MockDataSet
 ### Front End
 to start karma from the command line
     sudo npm install -g karma-cli
-    
+
 to run tests
     npm run tc
 
@@ -26,11 +26,17 @@ to run tests
 install
     npm install -g jasmine
 
-run
+# Usage
+stop server
+
+run all tests
     npm test
 
+run a specific test
+    jasmine spec/server/path/to/your/test.js
+
 =======================================
-##API Keys
+## API Keys
 -put them in the .env file
 
 -this line goes in any file you are trying to require an api key in
