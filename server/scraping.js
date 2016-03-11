@@ -1,12 +1,11 @@
-var fs = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
 
 //scrapes item data from amazon
 var scrape = function (req,response){
-  
+
   var url = req.body.url ;
-  
+
   request(url,  function(error, res , html){
 
     if(error){
@@ -15,10 +14,10 @@ var scrape = function (req,response){
     }
     //convert into html into a cheerio object
     var $ = cheerio.load(html);
-      
-    var productTitle = $("#productTitle").text();
+
+    var productTitle = $('#productTitle').text();
     var priceDiv = $('#price');
-    var productPrice; 
+    var productPrice;
 
     //check if item is onsale
     if(priceDiv.find('#priceblock_dealprice').length) {
@@ -28,15 +27,14 @@ var scrape = function (req,response){
     } else {
       productPrice = $('#priceblock_ourprice').text();
     }
-      
-    var image = $('#imgTagWrapperId').children('img').attr('src')
+
+    var image = $('#imgTagWrapperId').children('img').attr('src');
 
     var productObj = {Name : productTitle, price: productPrice, picture: image };
-    
+
     //sends scraped data to sender
     response.send(productObj);
-  })
-  
-}
+  });
+};
 
-module.exports = {scrape: scrape}
+module.exports = {scrape: scrape};

@@ -5,7 +5,7 @@ var app = angular.module('juju', [
   'juju.item',
   'itemFactory',
   'displayItemsController'
-])
+]);
 
 app.config(function ($stateProvider, $urlRouterProvider){
   $urlRouterProvider.otherwise('/login');
@@ -14,11 +14,11 @@ app.config(function ($stateProvider, $urlRouterProvider){
   .state('items', {
     url: '/yourItems',
     views: {
-      "body" : {
+      'body' : {
         templateUrl:'./items/views/item.html',
         controller: 'displayItemsController'
       },
-      "header" : {
+      'header' : {
         templateUrl: './layout/header.html'
       }
     },
@@ -30,7 +30,7 @@ app.config(function ($stateProvider, $urlRouterProvider){
       'body' : {
         templateUrl:'./items/views/additem.html'
       },
-      "header" : {
+      'header' : {
         templateUrl: './layout/header.html'
       }
     },
@@ -48,14 +48,14 @@ app.config(function ($stateProvider, $urlRouterProvider){
       }
     },
     controller: 'fbAuthCtrl'
-  })
+  });
 })
 .run(function($rootScope, $state, Auth){
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams){
-    console.log(Auth.isloggedIn())
+    console.log(Auth.isloggedIn());
     if(!Auth.isloggedIn()  && toState.authenticate){
       event.preventDefault();
-      $state.go('login')
+      $state.go('login');
     }
-  })
+  });
 });
