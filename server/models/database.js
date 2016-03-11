@@ -19,34 +19,32 @@ router.post('/api/users', function(req, res) {
     phoneNumber: req.body.phoneNumber,
     FBuID:req.body.FBuID,
     userName:req.body.userName};
-console.log('data', data.FBuID)
+    console.log('data', data.FBuID)
   // Get a Postgres client from the connection pool
   pg.connect(connectionString, function(err, client, done) {
-    
+
     // Handle connection errors
     if(err) {
       done();
       return res.status(500).json({ success: false, data: err});
-    }
+    };
 
     // SQL Query > check if this user exists in the table and grab their user_id if they do
     var query = client.query({
-      text :'INSERT INTO users(email, phoneNumber, FBuID, userName) values($1, $2, $3, $4) ON CONFLICT (FBuID) DO NOTHING', 
+      text :'INSERT INTO users(email, phoneNumber, FBuID, userName) values($1, $2, $3, $4) ON CONFLICT (FBuID) DO NOTHING',
       values : [data.email, data.phoneNumber, data.FBuID, data.userName] }, function(err, result){
         if(err){
-          console.log(err)
+          console.log(err);
         }
         else{
-          console.log('inside the select statement')
+          console.log('inside the select statement');
           client.query({
           text : "SELECT id FROM users WHERE FBuID = $1",
           values : [data.FBuID]}, function(err, result){
             res.send(result.rows);
-            
-          })}
+          })};
+          console.log('results', results);
           return result;
-          console.log('results', results)
-
         });
 
     // Stream results back one row at a time
@@ -117,7 +115,7 @@ router.put('/api/users/:user_id', function(req, res) {
       done();
       console.log(err);
       return res.status(500).send(json({ success: false, data: err}));
-    }
+    };
 
     // SQL Query > Update Data
     client.query('UPDATE users SET email=($1), phoneNumber=($2), FBuID=($3), userName=($4) WHERE id=($5)', [data.email, data.phoneNumber, data.FBuID, data.userName, id]);

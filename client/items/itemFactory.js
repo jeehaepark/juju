@@ -2,7 +2,7 @@ angular.module('itemFactory', ['authFactory'])
 
 .factory('Item', function(Auth, $http){
   var addItemFuncs ={};
-  var userId = Auth.userId
+  var userId = Auth.userId;
   //pull in user info from the auth factory
   addItemFuncs.addItemToDB =function (itemInfo){
     data={
@@ -14,39 +14,40 @@ angular.module('itemFactory', ['authFactory'])
       createdDate : itemInfo.createdDate.toDateString(),
       userId : userId
     };
-    console.log('userId', userId)
-
+    console.log('userId', userId);
 
     return $http({
       method: 'POST',
       url: '/api/additems',
       data: data
-    })
+    });
   },
 
   addItemFuncs.scrapePriceInfo = function(itemInfo){
     data = {
       url : itemInfo.URL
     };
+
     return $http({
       method : 'POST',
       url : '/scrape',
       data : data
-    })
+    });
   },
 
   addItemFuncs.scrapePicture = function (url){
     data = {
       url : url
     };
+
     return $http({
       method : 'POST',
       url : '/scrape',
       data: data
-    })
-  }
+    });
+  };
 
-  return addItemFuncs
+  return addItemFuncs;
 })
 .factory('displayItemsFactory', function ($http){
   displayItemsFactoryFuncts = {};
@@ -54,13 +55,14 @@ angular.module('itemFactory', ['authFactory'])
   displayItemsFactoryFuncts.getItemData = function(user){
     var data = {
       user: user
-    }
+    };
     return $http({
       method : 'POST',
       url : '/api/v1/watchedItems/user',
       data: {userId:user}
-    })
-  }
+    });
+  };
+
   return displayItemsFactoryFuncts;
 })
 
