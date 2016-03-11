@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 // var browserify = require('browserify');
-// var jshint = require('gulp-jshint');
+var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
 // var uglify = require('gulp-uglify');
 // var gutil = require('gulp-util');
