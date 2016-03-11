@@ -22,9 +22,21 @@ describe('Authentication operations', function(){
   }));
 
   describe('fbAuthCtrl', function(){
-    it('has a facebookLogin function', function(){
+
+    it('facebookLogin function is defined', function(){
       expect($scope.facebookLogin).toBeDefined();
+    });
+
+    it('has a facebookLogin function', function(){
       expect(typeof $scope.facebookLogin).toBe('function');
+    });
+
+    it('facebookLogin function is defined', function(){
+      expect($scope.facebookLogOut).toBeDefined();
+    });
+
+    it('has a facebookLogOut function', function(){
+      expect(typeof $scope.facebookLogOut).toBe('function');
     });
   });
 
