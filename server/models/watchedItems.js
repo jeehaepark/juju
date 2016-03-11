@@ -127,5 +127,21 @@ router.put('/api/v1/watchedItems/:user_id', function(req, res) {
 
 });
 
+router.post('/api/v1/watchedItems/user', function (req, res){
+    var results = [];
+    var data = { userId: req.body.userId } ;
+    pg.connect(connectionString, function(err, client, done) {
+        var query = client.query('SELECT * FROM items LEFT JOIN watcheditems ON items.id = watchedItems.itemID WHERE userid='+data.userId);
+
+        query.on('row', function(row){
+            results.push(row);
+        });
+
+        query.on('end', function() {
+            done();
+            return res.json(results);
+        })
+    })
+});
 
 module.exports = router;
