@@ -14,11 +14,20 @@ Load MockDataSet
 ============================================
 ## Testing
 
+
+### Front End
 to start karma from the command line
     sudo npm install -g karma-cli
     
 to run tests
-    karma start
+    npm run tc
+
+### Back End
+install
+    npm install -g jasmine
+
+run
+    npm test
 
 =======================================
 ##API Keys
