@@ -3,7 +3,7 @@ var app = angular.module('juju', [
   'facebook',
   'authFactory',
   'juju.item',
-  'addItemFactory',
+  'itemFactory',
   'displayItemsController'
 ])
 
