@@ -1,6 +1,6 @@
-angular.module('addItemFactory', ['authFactory'])
+angular.module('itemFactory', ['authFactory'])
 
-.factory('AddItem', function(Auth, $http){
+.factory('Item', function(Auth, $http){
   var addItemFuncs ={};
   var userId = Auth.userId
   //pull in user info from the auth factory
