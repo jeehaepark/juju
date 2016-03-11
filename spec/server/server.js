@@ -34,9 +34,9 @@ describe('main page', function() {
     });
 
     it('should not return status code 200', function(done) {
-      request.get('http://localhost:3000/api/users', function(error, response, body) {
+      request.get('http://localhost:3000/api/v1/watchedItems/poop', function(error, response, body) {
         expect(body.success).not.toBe(false);
-        expect(body).toBe('[]');
+        expect(body).toBe(2);
         done();
       });
     });
@@ -55,8 +55,8 @@ describe('main page', function() {
     it('should return users from db', function(done){
       router.get('api/users', function(req, res) {
         expect(req).toBe('something');
-        done();
       });
+      done();
     });
   });
 });
