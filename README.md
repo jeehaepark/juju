@@ -44,4 +44,9 @@ require('dotenv').config()
 -if you add an api key, add the name of the key variable (but not the key itself) to the dotEnvTemplate file so everyone can see which APIs we are playing with
 -add the api key/secret to the slack channel
  
+=======
+## GULP
+
+Run jshint
+    gulp lint
 
