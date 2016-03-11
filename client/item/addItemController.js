@@ -1,5 +1,5 @@
-angular.module('juju.addItem', ['authFactory'])
-  .controller('addItemCtrl', function($scope, AddItem, Auth){ 
+angular.module('juju.item', ['authFactory'])
+  .controller('addItemCtrl', function($scope, AddItem, Auth){
     $scope.item={};
     $scope.test='poop';
     $scope.item.createdDate=new Date();
@@ -35,6 +35,6 @@ angular.module('juju.addItem', ['authFactory'])
         });
       }else {
         AddItem.addItemToDB($scope.item);
-      }      
+      }
     }
   })
