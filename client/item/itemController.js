@@ -1,5 +1,5 @@
 angular.module('juju.item', ['authFactory'])
-  .controller('addItemCtrl', function($scope, Item, Auth){
+  .controller('itemCtrl', function($scope, Item, Auth){
     $scope.item={};
     $scope.test='poop';
     $scope.item.createdDate=new Date();

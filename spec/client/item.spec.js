@@ -13,7 +13,7 @@ describe('Add item factory', function(){
     Item = $injector.get('Item'); // this is okay
 
     createController = function() {
-      return $controller('addItemCtrl', {
+      return $controller('itemCtrl', {
         $scope: $scope,
         Item: Item
       });

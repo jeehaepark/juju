@@ -34,7 +34,7 @@ app.config(function ($stateProvider, $urlRouterProvider){
         templateUrl: './layout/header.html'
       }
     },
-    controller: 'addItemCtrl',
+    controller: 'itemCtrl',
     authenticate: true
   })
   .state('login', {
