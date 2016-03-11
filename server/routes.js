@@ -3,7 +3,7 @@ var itemHistory=require('./models/itemHistories.js')
 var watchItem=require('./models/watchedItems.js')
 var addItem=require('./models/items.js')
 var app = require('./index.js')
-var mock = require('./mockData.js');
+// var mock = require('./mockData.js');
 
 module.exports = function (app) {
 	app.get('/test', function (req, res) {
@@ -12,7 +12,7 @@ module.exports = function (app) {
   app.post('/scrape',scrapeTools.scrape);
 
   app.get('/api/v1/watchedItems/dummy', function (req, res){
-    res.send(mock);
+  //   res.send(mock);
   });
   // app.get('/api/users', function (req, res){
   // 	res.json(results);
