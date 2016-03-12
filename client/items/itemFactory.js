@@ -49,9 +49,7 @@ angular.module('itemFactory', [])
 })
 .factory('displayItemsFactory', function ($http){
   displayItemsFactoryFuncts = {};
-
   displayItemsFactoryFuncts.getItemData = function(user){
-
     return $http({
       method : 'GET',//'POST',
       url : '/api/v1/watchedItems/user/'+ user
