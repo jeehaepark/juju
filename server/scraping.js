@@ -1,9 +1,16 @@
 var request = require('request');
 var cheerio = require('cheerio');
 
-//scrapes item data from amazon
-var scrape = function (req,response){
+//scrapes item data from target
+var scrape=function(req, response){
+  var url=req.body.url;
+  var site=url.match(/([A-Z])*www\.([a-z])*\./g);
+  site=site[0].slice(4, -1);
+  scrapeObj[site](req, response)
+};
 
+var scrapeObj={
+  amazon: function (req,response){
   var url = req.body.url ;
 
   request(url,  function(error, res , html){
@@ -35,6 +42,33 @@ var scrape = function (req,response){
     //sends scraped data to sender
     response.send(productObj);
   });
+  },
+  target: function (req,response){
+    var url = req.body.url ;
+
+    request(url,  function(error, res , html){
+
+      if(error){
+        console.log('Error in scrape request');
+        return 'error in scrape';
+      }
+      //convert into html into a cheerio object
+      var $ = cheerio.load(html);
+
+      var productTitle = $('.product-name').children('name').text();
+      //var priceDiv = 
+      var productPrice=$('.offerPrice').text();
+     
+
+      var image = $('#Hero').children('img').attr('src');
+
+      var productObj = {Name : productTitle, price: productPrice, picture: image };
+
+      //sends scraped data to sender
+      response.send(productObj);
+    });
+  }
 };
 
-module.exports = {scrape: scrape};
+
+module.exports = {scrape: scrape, scrapeObj: scrapeObj};
