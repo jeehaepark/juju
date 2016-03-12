@@ -2,98 +2,55 @@ var express = require('express');
 var router = express.Router();
 var pg = require('pg');
 var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/juju';
-
+var pgp = require('pg-promise')(/*options*/)
+//var connectionString = process.env.DATABASE_URL || 'postgres://Madison:poop@localhost:5432/juju';
+var db = pgp(connectionString);
 // CREATE A SINGLE ITEM
 //curl --data 'name=photo&itemUrl=www.photo.com&itemImageUrl=www.photo.com&currentPrice=9000' http://127.0.0.1:3000/api/v1/items
-
+ // After all data is returned, close connection and return results
 router.post('/api/additems', function(req, res) {
   var results = [];
-  console.log('req', req.body);
+  console.log('****req', req.body)
   // Grab data from http request
-  var data = {
-    name: req.body.itemNickName,
-    itemUrl: req.body.itemUrl,
-    itemImageUrl:req.body.itemImageUrl,
-    currentPrice:req.body.currentPrice,
-    idealPrice : req.body.idealPrice,
-    createdDate : req.body.createdDate,
-    userId : req.body.userId,
-    itemExists : false
-  };
-
+    var data = {
+        name: req.body.itemNickName, 
+        itemUrl: req.body.itemUrl, 
+        itemImageUrl:req.body.itemImageUrl, 
+        currentPrice:req.body.currentPrice,
+        idealPrice : req.body.idealPrice,
+        createdDate : req.body.createdDate,
+        userId : req.body.userId,
+        itemExists : false
+    };
+  
   // Get a Postgres client from the connection pool
-  pg.connect(connectionString, function(err, client, done) {
-
-    // Handle connection errors
-    if(err) {
-      done();
-      return res.status(500).json({ success: false, data: err});
-    }
-
-    // SQL Query
-    var query = client.query({
-      text : 'SELECT id FROM items WHERE itemUrl = $1',
-      values : [data.itemUrl]},
-      function(err, result){
-        if(err){
-          console.log('err', err);
-        } else {
-          console.log('result', result);
-          if (result.rows.length===0){
-            console.log('item not yet in database');
-            client.query({
-              text :'INSERT INTO items(name, itemUrl, itemImageUrl, currentPrice) values($1, $2, $3, $4) Returning id',
-              values : [data.name, data.itemUrl, data.itemImageUrl, data.currentPrice] },
-              function (err, result){
-                if(err){
-                  console.log('err', err);
-                } else {
-                  console.log('result of insert', result);
-                  data.itemId=result.rows[0].id;
-                  console.log('added item to the database, saving itemId', data);
-                }
-              });
-          } else {
-            data.itemId=result.rows[0].id;
-            data.itemExists=true;
-            console.log('data', data);
-          }
-        }
-        if(!data.itemExists){
-          client.query({
-            text: 'INSERT INTO itemHistories(price, checkDate, itemID) values ($1, $2, $3)',
-            values : [data.currentPrice, data.createdDate, data.itemId]
-          }, function(err, result){
-            if(err){
-              console.log(err);
-            }
-          })
-        }
-        client.query({
-          text: 'INSERT INTO watchedItems(idealPrice, priceReached, emailed, itemID, userID) values ($1, $2, $3, $4, $5)',
-          values: [data.idealPrice, false, false, data.itemId, data.userId]},
-          function(err, result){
-            if (err){
-              console.log(err);
-            }else{
-              console.log('OMG I THINK WE DID IT!!!!');
-            }
-          })
-
-      });
-
-      // Stream results back one row at a time
-      query.on('row', function(row) {
-        results.push(row);
-        console.log('res in query on', res);
-      });
-
-      // After all data is returned, close connection and return results
-      query.on('end', function() {
-        done();
-        return res;
-      });
+    db.task(function(t) {
+    return t.oneOrNone('SELECT id FROM items WHERE itemUrl=${itemUrl}', data)
+    .then(function(itemID){
+      if(itemID){
+        data.itemExists=true;
+        data.itemId=itemID.id;
+        t.one('INSERT INTO watchedItems(idealPrice, priceReached, emailed, itemID, userID) values (${idealPrice}, false, false, ${itemId}, ${userId})', data)
+        res.send(itemID)
+      } else {
+        return t.one('INSERT INTO items(name, itemUrl, itemImageUrl, currentPrice) values(${name}, ${itemUrl}, ${itemImageUrl}, ${currentPrice}) returning id', data)
+      }
+      })
+    .then(function(itemID){
+      data.itemId=itemID.id
+      return t.one('INSERT INTO watchedItems(idealPrice, priceReached, emailed, itemID, userID) values (${idealPrice}, false, false, ${itemId}, ${userId}) returning id', data)
+    })
+    .then(function(id){
+      return t.one('INSERT INTO itemHistories(price, checkDate, itemID) values (${currentPrice}, ${createdDate}, ${itemId}) returning id', data)
+    })
+    .then(function(data){
+      res.send(data)
+    })
+    .catch(function(error){
+      res.send(error)
+    })
   });
+
 });
 
 //READ GET ALL ITEMS
