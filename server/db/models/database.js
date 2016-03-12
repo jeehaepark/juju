@@ -40,8 +40,7 @@ router.post('/api/users', function(req, res) {
       console.log('error', error)
     })
     .then(function(userID){
-    console.log('userid', userID)
-    res.send(userID)
+      res.send(userID)
     });
   });
 });

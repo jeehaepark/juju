@@ -19,8 +19,7 @@ router.post('/api/additems', function(req, res) {
         currentPrice:req.body.currentPrice,
         idealPrice : req.body.idealPrice,
         createdDate : req.body.createdDate,
-        userId : req.body.userId,
-        itemExists : false
+        userId : req.body.userId
     };
   
   // Get a Postgres client from the connection pool
@@ -28,7 +27,6 @@ router.post('/api/additems', function(req, res) {
     return t.oneOrNone('SELECT id FROM items WHERE itemUrl=${itemUrl}', data)
     .then(function(itemID){
       if(itemID){
-        data.itemExists=true;
         data.itemId=itemID.id;
         t.one('INSERT INTO watchedItems(idealPrice, priceReached, emailed, itemID, userID) values (${idealPrice}, false, false, ${itemId}, ${userId})', data)
         res.send(itemID)

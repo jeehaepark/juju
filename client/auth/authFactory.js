@@ -20,7 +20,7 @@ angular.module('authFactory', [])
     return $window.localStorage.removeItem('firebase:session::jtimes3');
   };
 
-  authFuncs.userId = 'test';
+  authFuncs.userId = 1;
 
   authFuncs.addUserToDB =function (authData){
     data = {
@@ -35,8 +35,9 @@ angular.module('authFactory', [])
       url: 'api/users',
       data: data
     }).then(function successCallback(response) {
-      authFuncs.userId=response.data[0].id;
-      console.log(authFuncs.userId);
+      console.log('response', response);
+      authFuncs.userId=response.data.id;
+      console.log('authFuncs.userId', authFuncs.userId);
     });
   };
 
