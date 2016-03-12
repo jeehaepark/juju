@@ -1,6 +1,6 @@
 angular.module('authFactory', [])
 
-.factory('Auth', function ($window, $http){
+.factory('Auth', function ($window, $http, $state){
   var loggedIn;
   var authFuncs={};
   var data;
@@ -16,11 +16,13 @@ angular.module('authFactory', [])
     $window.localStorage.removeItem('firebase:host:jtimes3.firebaseio.com');
     $window.localStorage.removeItem('firebase:session::jtimes3');
     loggedIn=$window.localStorage.getItem('firebase:session::jtimes3');
-
+    $state.go('login');
     return $window.localStorage.removeItem('firebase:session::jtimes3');
   };
 
-  authFuncs.userId = 1;
+
+  authFuncs.userId = '1';
+
 
   authFuncs.addUserToDB =function (authData){
     data = {
@@ -29,15 +31,14 @@ angular.module('authFactory', [])
     };
     //edge case, what if someone changes their display name?
     console.log('sending post from client route');
-
+    $state.go('additems')
     return $http({
       method: 'POST',
       url: 'api/users',
       data: data
     }).then(function successCallback(response) {
-      console.log('response', response);
-      authFuncs.userId=response.data.id;
-      console.log('authFuncs.userId', authFuncs.userId);
+      authFuncs.userId= response.data[0].id;
+      console.log(authFuncs.userId);
     });
   };
 

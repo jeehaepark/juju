@@ -19,10 +19,17 @@ angular.module('juju.item', ['authFactory'])
   $scope.addItem = function(){
 
     if($scope.item.currentPrice || $scope.item.imageUrl){
-      Item.scrapePriceInfo($scope.item).then(function successCallback(response){
+      Item.scrapePriceInfo($scope.item)
+      .then(function successCallback(response){
+        console.log(response);
         $scope.item.imageUrl=response.data.picture;
         $scope.item.currentPrice=response.data.price;
-        Item.addItemToDB($scope.item);
+        console.log("scope.item is " , $scope.item);
+        Item.addItemToDB($scope.item)
+        .then(function successCallback(response) { 
+          console.log('omg we made it')
+          $state.go('items');
+        });
       }, function errorCallback(response){
         console.log(response);
       });
