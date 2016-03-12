@@ -21,17 +21,13 @@ angular.module('authFactory', [])
   };
 
 
-  authFuncs.userId = '1';
-
-
   authFuncs.addUserToDB =function (authData){
     data = {
       FBuID : authData.facebook.id,
       userName : authData.facebook.displayName
     };
     //edge case, what if someone changes their display name?
-    console.log('sending post from client route');
-    $state.go('additems')
+    console.log('sending post from client route'); 
     return $http({
       method: 'POST',
       url: 'api/users',
@@ -39,7 +35,8 @@ angular.module('authFactory', [])
     }).then(function successCallback(response) {
       authFuncs.userId= response.data.id;
       console.log(authFuncs.userId);
-    });
+      $state.go('additems');
+    })
   };
 
   return authFuncs
