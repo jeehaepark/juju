@@ -18,24 +18,30 @@ router.post('/api/users', function(req, res) {
   console.log('req', req.body)
   
   // Grab data from http request
-  var data = {email: req.body.email,
+  var data = {
+    email: req.body.email,
     phoneNumber: req.body.phoneNumber,
     FBuID:req.body.FBuID,
-    userName:req.body.userName};
+    userName:req.body.userName
+  };
     console.log('data', data.FBuID)
 
   // Get a Postgres client from the connection pool
   db.task(function(t) {
-    return t.one('SELECT id FROM users WHERE FBuID=${FBuID}', data)
-    .then(function(data){res.send(data)
+    return t.oneOrNone('SELECT id FROM users WHERE FBuID=${FBuID}', data)
+    .then(function(userID){
+      if(userID){
+        res.send(userID)
+      }else{
+        return t.one('INSERT INTO users(email, phoneNumber, FBuID, userName) values(${email}, ${phoneNumber}, ${FBuID}, ${userName}) returning id', data)
+      }
     })
     .catch(function(error){
-      console.log(error)
-      return t.one('INSERT INTO users(email, phoneNumber, FBuID, userName) values(${email}, ${phoneNumber}, ${FBuID}, ${userName}) returning id', data)
+      console.log('error', error)
     })
-    .then(function(data){
-    console.log(data)
-    res.send(data)
+    .then(function(userID){
+    console.log('userid', userID)
+    res.send(userID)
     });
   });
 });
