@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var pg = require('pg');
-var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/juju';
+var pgp = require('pg-promise')(/*options*/)
+var connectionString = process.env.DATABASE_URL || 'postgres://Madison:poop@localhost:5432/juju';
+var db = pgp(connectionString);
 
 // var client = new pg.Client(connectionString);
 // client.connect();
@@ -14,49 +16,26 @@ var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/ju
 router.post('/api/users', function(req, res) {
   var results = [];
   console.log('req', req.body)
+  
   // Grab data from http request
   var data = {email: req.body.email,
     phoneNumber: req.body.phoneNumber,
     FBuID:req.body.FBuID,
     userName:req.body.userName};
     console.log('data', data.FBuID)
+
   // Get a Postgres client from the connection pool
-  pg.connect(connectionString, function(err, client, done) {
-
-    // Handle connection errors
-    if(err) {
-      done();
-      return res.status(500).json({ success: false, data: err});
-    };
-
-    // SQL Query > check if this user exists in the table and grab their user_id if they do
-    var query = client.query({
-      text :'INSERT INTO users(email, phoneNumber, FBuID, userName) values($1, $2, $3, $4) ON CONFLICT (FBuID) DO NOTHING',
-      values : [data.email, data.phoneNumber, data.FBuID, data.userName] }, function(err, result){
-        if(err){
-          console.log(err);
-        }
-        else{
-          console.log('inside the select statement');
-          client.query({
-          text : "SELECT id FROM users WHERE FBuID = $1",
-          values : [data.FBuID]}, function(err, result){
-            res.send(result.rows);
-          })};
-          console.log('results', results);
-          return result;
-        });
-
-    // Stream results back one row at a time
-    query.on('row', function(row) {
-      results.push(row);
-      console.log('res in query on', res)
-    });
-
-    // After all data is returned, close connection and return results
-    query.on('end', function() {
-      done();
-      return res;
+  db.task(function(t) {
+    return t.one('SELECT id FROM users WHERE FBuID=${FBuID}', data)
+    .then(function(data){res.send(data)
+    })
+    .catch(function(error){
+      console.log(error)
+      return t.one('INSERT INTO users(email, phoneNumber, FBuID, userName) values(${email}, ${phoneNumber}, ${FBuID}, ${userName}) returning id', data)
+    })
+    .then(function(data){
+    console.log(data)
+    res.send(data)
     });
   });
 });
