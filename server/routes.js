@@ -1,7 +1,7 @@
 var scrapeTools = require('./scraping.js')
-var itemHistory=require('./models/itemHistories.js')
-var watchItem=require('./models/watchedItems.js')
-var addItem=require('./models/items.js')
+var itemHistory=require('./db/models/itemHistories.js')
+var watchItem=require('./db/models/watchedItems.js')
+var addItem=require('./db/models/items.js')
 var app = require('./index.js')
 // var mock = require('./mockData.js');
 
