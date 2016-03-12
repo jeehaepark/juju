@@ -53,13 +53,11 @@ angular.module('itemFactory', ['authFactory'])
   displayItemsFactoryFuncts = {};
 
   displayItemsFactoryFuncts.getItemData = function(user){
-    var data = {
-      user: user
-    };
+    
     return $http({
-      method : 'POST',
+      method : 'GET',
       url : '/api/v1/watchedItems/user',
-      data: {userId:user}
+      params: {userId:user}
     });
   };
 
