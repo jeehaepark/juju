@@ -37,7 +37,7 @@ angular.module('authFactory', [])
       url: 'api/users',
       data: data
     }).then(function successCallback(response) {
-      authFuncs.userId= response.data[0].id;
+      authFuncs.userId= response.data.id;
       console.log(authFuncs.userId);
     });
   };
