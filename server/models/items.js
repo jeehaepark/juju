@@ -42,7 +42,7 @@ router.post('/api/additems', function(req, res) {
             console.log('item not yet in database');
             client.query({
               text :'INSERT INTO items(name, itemUrl, itemImageUrl, currentPrice) values($1, $2, $3, $4) Returning id', 
-              values : [data.name, data.itemUrl, data.itemImageUrl, data.currentPrice] }, 
+              values : [data.name, dat a.itemUrl, data.itemImageUrl, data.currentPrice] }, 
               function (err, result){
                 if(err){
                   console.log('err', err);
@@ -52,21 +52,35 @@ router.post('/api/additems', function(req, res) {
                   console.log('added item to the database, saving itemId', data);
                 }
                 data.itemExists=true;
-              })
+              });
+
+            client.query({
+                  text: 'INSERT INTO watchedItems(deadline,idealPrice,  settlePrice, priceReached, emailed, itemID, userID) values ($1, $2, $3, $4, $5, $6 ,$7)',
+                  values: [data.createdDate, data.idealPrice, data.settlePrice, false, false, data.itemId, data.userId]}, 
+                  function(err, result){
+                    if (err){
+                      console.log(err);
+                    }else{
+                      console.log('OMG I THINK WE DID IT!!!!');
+                    }
+                  }); 
+
+
           }else{
               data.itemId=result.rows[0].id;
               data.itemExists=true;
 
               client.query({
-                text: 'INSERT INTO itemHistories(price, checkDate, itemID) values ($1, $2, $3)',
-                values : [data.currentPrice, data.createdDate, data.itemId]
+                 text: 'INSERT INTO watchedItems(deadline,idealPrice,  settlePrice, priceReached, emailed, itemID, userID) values ($1, $2, $3, $4, $5, $6 ,$7)',
+                  values:  [data.createdDate, data.idealPrice, data.settlePrice, false, false, data.itemId, data.userId]
+                
               }, function(err, result){
                 if(err){
                   console.log(err);
                 } else {
                 client.query({
-                  text: 'INSERT INTO watchedItems(idealPrice, priceReached, emailed, itemID, userID) values ($1, $2, $3, $4, $5)',
-                  values: [data.idealPrice, false, false, data.itemId, data.userId]}, 
+                  text: 'INSERT INTO itemHistories(price, checkDate, itemID) values ($1, $2, $3)',
+                values : [data.currentPrice, data.createdDate, data.itemId]}, 
                   function(err, result){
                     if (err){
                       console.log(err);
