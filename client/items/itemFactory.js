@@ -14,7 +14,7 @@ angular.module('itemFactory', ['authFactory'])
       createdDate : itemInfo.createdDate.toDateString(),
       userId : userId
     };
-    console.log('userId', userId);
+   
 
     return $http({
       method: 'POST',
@@ -55,9 +55,8 @@ angular.module('itemFactory', ['authFactory'])
   displayItemsFactoryFuncts.getItemData = function(user){
     
     return $http({
-      method : 'GET',
-      url : '/api/v1/watchedItems/user',
-      params: {userId:user}
+      method : 'GET',//'POST',
+      url : '/api/v1/watchedItems/user/'+ user
     });
   };
 
