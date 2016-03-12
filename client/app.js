@@ -2,9 +2,9 @@ var app = angular.module('juju', [
   'ui.router',
   'facebook',
   'authFactory',
+  'displayItemsController',
   'itemFactory',
   'juju.item',
-  'displayItemsController'
 ]);
 
 app.config(function ($stateProvider, $urlRouterProvider){
@@ -16,7 +16,7 @@ app.config(function ($stateProvider, $urlRouterProvider){
     views: {
       'body' : {
         templateUrl:'./items/views/item.html',
-        controller: 'displayItemsController'
+        controller: 'displayItemsCtrl'
       },
       'header' : {
         templateUrl: './layout/header.html'
