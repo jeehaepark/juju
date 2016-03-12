@@ -24,7 +24,7 @@ angular.module('juju.item', ['authFactory'])
         console.log(response);
         $scope.item.imageUrl=response.data.picture;
         $scope.item.currentPrice=response.data.price;
-        console.log("scope.item is " , $scope.item);
+        console.log('scope.item is ' , $scope.item);
         Item.addItemToDB($scope.item)
         .then(function successCallback(response) { 
           console.log('omg we made it')
