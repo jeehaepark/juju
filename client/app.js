@@ -2,8 +2,8 @@ var app = angular.module('juju', [
   'ui.router',
   'facebook',
   'authFactory',
-  'juju.item',
   'itemFactory',
+  'juju.item',
   'displayItemsController'
 ]);
 
@@ -34,7 +34,7 @@ app.config(function ($stateProvider, $urlRouterProvider){
         templateUrl: './layout/header.html'
       }
     },
-    controller: 'itemCtrl',
+    controller: 'itemsCtrl',
     authenticate: true
   })
   .state('login', {

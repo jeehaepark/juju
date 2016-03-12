@@ -5,8 +5,10 @@ var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/ju
 
 // CREATE A ITEM HISTORY
 //curl --data "price=10&checkDate=2016-03-08&itemID=1" http://127.0.0.1:3000/api/v1/histories
-router.post('/api/v1/histories', function(req, res) {
+router.post('/api/v1/histories', historiesPost);
+router.get('/api/v1/histories', historiesGet);
 
+function historiesPost (req, res) {
   var results = [];
 
   // Grab data from http request
@@ -44,10 +46,10 @@ router.post('/api/v1/histories', function(req, res) {
       return res.json(results);
     });
   });
-});
-
+}
 //READ GET ALL HISTORIES
-router.get('/api/v1/histories', function(req, res) {
+
+function historiesGet (req, res) {
   var results = [];
 
   // Get a Postgres client from the connection pool
@@ -75,6 +77,5 @@ router.get('/api/v1/histories', function(req, res) {
       return res.json(results);
     });
   });
-});
-
+}
 module.exports = router;
