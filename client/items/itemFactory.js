@@ -48,7 +48,7 @@ angular.module('itemFactory', [])
   return addItemFuncs;
 })
 .factory('displayItemsFactory', function ($http){
-  displayItemsFactoryFuncts = {};
+  var displayItemsFactoryFuncts = {};
   displayItemsFactoryFuncts.getItemData = function(user){
     return $http({
       method : 'GET',//'POST',
