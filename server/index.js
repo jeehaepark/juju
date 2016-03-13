@@ -7,7 +7,7 @@ var cron = require('./cronJobs.js')
 var app = express();
 var port = process.env.PORT || 3000;
 
-var router = require('./db/models/database');
+var router = require('./db/models/users');
 var items = require('./db/models/items');
 var histories = require('./db/models/itemHistories');
 var watched = require('./db/models/watchedItems');
