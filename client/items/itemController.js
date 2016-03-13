@@ -1,7 +1,6 @@
-angular.module('juju.item', ['authFactory'])
-.controller('itemCtrl', function($scope, Item, Auth, $state){
+angular.module('juju.item', [])
+.controller('itemsCtrl', function($scope, Item, Auth, $state, displayItemsFactory){
   $scope.item={};
-  $scope.test='poop';
   $scope.item.createdDate=new Date();
   $scope.item.currentPrice;
   $scope.item.imageUrl;
@@ -17,8 +16,7 @@ angular.module('juju.item', ['authFactory'])
     }
   });
   $scope.addItem = function(){
-
-    if($scope.item.currentPrice || $scope.item.imageUrl){
+    if($scope.item.currentPrice === null || $scope.item.imageUrl === null){
       Item.scrapePriceInfo($scope.item)
       .then(function successCallback(response){
         console.log(response);
@@ -26,7 +24,7 @@ angular.module('juju.item', ['authFactory'])
         $scope.item.currentPrice=response.data.price;
         console.log('scope.item is ' , $scope.item);
         Item.addItemToDB($scope.item)
-        .then(function successCallback(response) { 
+        .then(function successCallback(response) {
           console.log('omg we made it')
           $state.go('items');
         });
@@ -36,5 +34,16 @@ angular.module('juju.item', ['authFactory'])
     }else {
       Item.addItemToDB($scope.item);
     }
+  };
+  $scope.displayItems = function() {
+    console.log('Auth.userId', Auth.userId)
+    displayItemsFactory.getItemData(Auth.userId.toString()).then(
+      function successCallback(response){
+        console.log(response);
+        $scope.itemData = response.data;
+      }, function errorCallback(err){
+        console.log(err);
+        $scope.err = "There was a problem loading your data";
+      })
   };
 });

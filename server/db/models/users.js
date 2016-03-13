@@ -5,18 +5,14 @@ var pgp = require('pg-promise')(/*options*/)
 var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/juju';
 var db = pgp(connectionString);
 
-// var client = new pg.Client(connectionString);
-// client.connect();
-// var query = client.query('CREATE TABLE items(id SERIAL PRIMARY KEY, text VARCHAR(40) not null, complete BOOLEAN)');
-// query.on('end', function() {
+router.post('/api/users', usersPost);
+router.get('/api/users', usersGet);
+router.put('/api/users/:user_id', userUpdate);
 
-//   console.log('hello bitches')
-//   client.end(); });
-
-router.post('/api/users', function(req, res) {
+function usersPost(req, res) {
   var results = [];
   console.log('req', req.body)
-  
+
   // Grab data from http request
   var data = {
     email: req.body.email,
@@ -27,12 +23,15 @@ router.post('/api/users', function(req, res) {
     console.log('data', data.FBuID)
 
   // Get a Postgres client from the connection pool
+  // if user exists in the db it won't create a new user and fetch it's user ID
   db.task(function(t) {
     return t.oneOrNone('SELECT id FROM users WHERE FBuID=${FBuID}', data)
     .then(function(userID){
       if(userID){
         res.send(userID)
       }else{
+
+        // if user doesn't exist in the db a new one will be created
         return t.one('INSERT INTO users(email, phoneNumber, FBuID, userName) values(${email}, ${phoneNumber}, ${FBuID}, ${userName}) returning id', data)
       }
     })
@@ -43,15 +42,13 @@ router.post('/api/users', function(req, res) {
       res.send(userID)
     });
   });
-});
-
+}
 
 // CREATE A SINGLE USER
 //curl --data "email=juju@test.com2&phoneNumber=415-111-111&FBuID=jujupw&userName=AdminJuJu" http://127.0.0.1:3000/api/users
 
-
 //READ GET ALL USERS
-router.get('/api/users', function(req, res) {
+function usersGet(req, res) {
 
   var results = [];
 
@@ -78,11 +75,10 @@ router.get('/api/users', function(req, res) {
       return res.json(results);
     });
   });
-});
-
+}
 //UPDATE A SINGLE USER
 //curl -X PUT --data "email=test@test.com&phoneNumber=510-111-1111&FBuID=jujupw&userName=JuJu" http://127.0.0.1:3000/api/users/1
-router.put('/api/users/:user_id', function(req, res) {
+function userUpdate(req, res) {
 
   var results = [];
 
@@ -118,6 +114,5 @@ router.put('/api/users/:user_id', function(req, res) {
       return res.json(results);
     });
   });
-});
-
+}
 module.exports = router;

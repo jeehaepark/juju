@@ -1,5 +1,4 @@
-angular.module('itemFactory', ['authFactory'])
-
+angular.module('itemFactory', [])
 .factory('Item', function(Auth, $http){
   var addItemFuncs ={};
   var userId = Auth.userId;
@@ -14,7 +13,6 @@ angular.module('itemFactory', ['authFactory'])
       createdDate : itemInfo.createdDate.toDateString(),
       userId : userId
     };
-   
 
     return $http({
       method: 'POST',
@@ -50,10 +48,8 @@ angular.module('itemFactory', ['authFactory'])
   return addItemFuncs;
 })
 .factory('displayItemsFactory', function ($http){
-  displayItemsFactoryFuncts = {};
-
+  var displayItemsFactoryFuncts = {};
   displayItemsFactoryFuncts.getItemData = function(user){
-    
     return $http({
       method : 'GET',//'POST',
       url : '/api/v1/watchedItems/user/'+ user
