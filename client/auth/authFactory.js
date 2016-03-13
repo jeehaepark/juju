@@ -5,10 +5,14 @@ angular.module('authFactory', [])
   var authFuncs={};
   var data;
 
-  authFuncs.isloggedIn = function () {
-    loggedIn = $window.localStorage.getItem('firebase:session::jtimes3');
 
-    // returns a boolean value of whether or not logged in is defined
+  authFuncs.isloggedIn = function () {
+    //make the the firebase data to an object to get fb data
+    loggedIn = JSON.parse($window.localStorage.getItem('firebase:session::jtimes3'));
+    if(!!loggedIn){
+      //sends to database to get userId
+      authFuncs.addUserToDB(loggedIn)
+    }
     return !!loggedIn;
   };
 
@@ -17,7 +21,7 @@ angular.module('authFactory', [])
     $window.localStorage.removeItem('firebase:session::jtimes3');
     loggedIn=$window.localStorage.getItem('firebase:session::jtimes3');
     $state.go('login');
-    return $window.localStorage.removeItem('firebase:session::jtimes3');
+    return $window.localStorage.removeItem('firebase:session::jtimes3');  
   };
 
 
