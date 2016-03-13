@@ -6,7 +6,12 @@ var scrape=function(req, response){
   var url=req.body.url;
   var site=url.match(/([A-Z])*www\.([a-z])*\./g);
   site=site[0].slice(4, -1);
-  scrapeObj[site](req, response)
+  if(scrapeObj[site]){
+    scrapeObj[site](req, response)
+  }else{
+    console.log('not a site')
+    response.send('not a site')
+  }
 };
 
 var scrapeObj={

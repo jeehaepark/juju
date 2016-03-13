@@ -5,16 +5,22 @@ angular.module('juju.item', [])
   $scope.item.currentPrice;
   $scope.item.imageUrl;
   $scope.item.userId=Auth.userId;
-  $scope.$watch('item.URL', function(newValue, oldValue){
+  $scope.$watch('item.URL', _.debounce(function(newValue, oldValue){
     if(newValue){
       Item.scrapePicture(newValue).then(function successCallback(response){
-        $scope.item.imageUrl= response.data.picture;
-        $scope.item.currentPrice = response.data.price;
+        if(response.data === 'not a site'){
+          alert("Not a usable site");
+        }else{
+          $scope.item.imageUrl= response.data.picture;
+          $scope.item.currentPrice = response.data.price;
+          console.log('success response: ', response)
+        }
       }, function errorCallback(response){
-        console.log(response);
+        console.log("error response", response)
+        
       })
     }
-  });
+  }, 400));
   $scope.addItem = function(){
     if($scope.item.currentPrice === null || $scope.item.imageUrl === null){
       Item.scrapePriceInfo($scope.item)
