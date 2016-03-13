@@ -11,7 +11,20 @@ angular.module('authFactory', [])
     loggedIn = JSON.parse($window.localStorage.getItem('firebase:session::jtimes3'));
     if(!!loggedIn){
       //sends to database to get userId
-      authFuncs.addUserToDB(loggedIn)
+      data = {
+        FBuID : loggedIn.facebook.id,
+        userName : loggedIn.facebook.displayName
+      };
+      
+      return $http({
+        method: 'POST',
+        url: 'api/users',
+        data: data
+        }).then(function successCallback(response) {
+        authFuncs.userId= response.data.id;
+        console.log(authFuncs.userId);
+        //$state.go('additems');
+      })
     }
     return !!loggedIn;
   };
