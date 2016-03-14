@@ -32,6 +32,34 @@ function itemHistoryGet (req, res){
   });
 }
 
+router.post('/api/v1/histories', itemHistoryPost);
+router.get('/api/v1/histories', allItemsHistoryGet);
+router.get('/api/v1/histories/:itemID', itemHistoryGet);
+
+function itemHistoryGet (req, res){
+  var results = [];
+  pg.connect(connectionString, function(err, client, done) {
+    if (err) {
+      done();
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        data: err});
+    }
+
+    var query = client.query('SELECT * FROM itemhistories WHERE itemid=($1) ORDER BY checkdate ASC;', [req.params.itemID]);
+
+    query.on('row', function(row) {
+      results.push(row);
+    });
+
+    query.on('end', function() {
+      done();
+      return res.json(results);
+    });
+  });
+}
+
 // CREATE A ITEM HISTORY
 //curl --data "price=10&checkDate=2016-03-08&itemID=1" http://127.0.0.1:3000/api/v1/histories
 function itemHistoryPost (req, res) {
