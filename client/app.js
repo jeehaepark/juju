@@ -4,7 +4,8 @@ var app = angular.module('juju', [
   'authFactory',
   'displayItemsController',
   'itemFactory',
-  'juju.item'
+  'juju.item',
+  'juju.user'
 ]);
 
 app.config(function ($stateProvider, $urlRouterProvider){
@@ -48,6 +49,18 @@ app.config(function ($stateProvider, $urlRouterProvider){
       }
     },
     controller: 'fbAuthCtrl'
+  })
+  .state('usersettings',{
+    url: '/users',
+    views: {
+      'header': {
+        templateUrl: './layout/header.html'
+      },
+      'body' : {
+        templateUrl: './users/views/usersettings.html'
+      }
+    },
+    controller: 'usersCtrl'
   });
 })
 .run(function($rootScope, $state, Auth){
