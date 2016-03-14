@@ -13,12 +13,6 @@ createdb juju
 
 ```
 psql juju < server/db/preloadedSchemas/schema.sql
-``` 
-
-- Start Database Server (locally)
-
-```
-node server/db/databases.js
 ```
 
 - Load MockDataSet
@@ -30,8 +24,13 @@ psql juju < server/db/preloadedSchemas/mockData.sql
 
 - Config Evironment
 
-Refer to config.example.js to make your ```config.js ```file.
-Modify connection string to work for your local database setup.
+Create a file in your root path called ```config.js```.
+
+Add the following line to that file.  Note - you need to change or
+remove username & password to your system settings.
+```
+exports.connectionString = 'postgres://username:password@localhost/juju';
+```
 
 ============================================
 ## Testing
@@ -65,7 +64,7 @@ run a specific test
 require('dotenv').config()
 - if you add an api key, add the name of the key variable (but not the key itself) to the dotEnvTemplate file so everyone can see which APIs we are playing with
 -add the api key/secret to the slack channel
- 
+
 =======
 ## GULP
 
