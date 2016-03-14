@@ -1,7 +1,16 @@
 var Item = require('./itemModel.js');
 var pg = require('pg');
 var config = require('./../../config.js');
-var connectionString = process.env.DATABASE_URL || config.connectionString;
+var connectionString;
+
+// handling DB connection for tests
+if(process.env.NODE_ENV === 'test'){
+  console.log('in test env');
+  connectionString = 'postgres://localhost:5432/jujuTestDB';
+} else if(process.env.NODE_ENV !== 'test') {
+  connectionString = process.env.DATABASE_URL || config.connectionString;
+}
+
 var pgp = require('pg-promise')(/*options*/)
 var db = pgp(connectionString);
 
