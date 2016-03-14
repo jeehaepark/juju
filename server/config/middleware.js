@@ -3,11 +3,11 @@ var bodyParser = require('body-parser');
 var path = require('path');
 
 module.exports = function (app, express) {
-  // var router = require('../db/models/users');
+  var router = require('../db/models/users');
   // var items = require('../db/models/items');
   var itemRouter = express.Router();
-  // var histories = require('../db/models/itemHistories');
-  // var watched = require('../db/models/watchedItems');
+  var histories = require('../db/models/itemHistories');
+  var watched = require('../db/models/watchedItems');
 
   app.use(morgan('dev'));
   app.use(bodyParser.json());

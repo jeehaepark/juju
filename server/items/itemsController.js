@@ -1,5 +1,6 @@
 var Item = require('./itemModel.js');
 var pg = require('pg');
+var config = require('./../../config.js');
 var connectionString = process.env.DATABASE_URL || config.connectionString;
 var pgp = require('pg-promise')(/*options*/)
 var db = pgp(connectionString);
@@ -13,7 +14,6 @@ module.exports = {
 
    addItem : function (req, res) {
     var results = [];
-    console.log('****req', req.body)
     // Grab data from http request
     var data = {
       name: req.body.itemNickName,
@@ -127,13 +127,3 @@ module.exports = {
     });
   }
 }
-
-
-// module.exports = {
-// }
-
-// var app = {
-//   prop1 : 1,
-//   prop2 : 2
-// }
-// module.exports = app;
