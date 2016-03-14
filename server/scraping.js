@@ -33,11 +33,11 @@ var scrapeObj={
 
     //check if item is onsale
     if(priceDiv.find('#priceblock_dealprice').length) {
-      productPrice = priceDiv.find('#priceblock_dealprice').text();
+      productPrice = priceFilter(priceDiv.find('#priceblock_dealprice').text());
     } else if (priceDiv.find('#priceblock_saleprice').length){
-      productPrice =$('#priceblock_saleprice').text();
+      productPrice =priceFilter($('#priceblock_saleprice').text());
     } else {
-      productPrice = $('#priceblock_ourprice').text();
+      productPrice = priceFilter($('#priceblock_ourprice').text());
     }
 
     var image = $('#imgTagWrapperId').children('img').attr('src');
@@ -61,8 +61,13 @@ var scrapeObj={
       var $ = cheerio.load(html);
 
       var productTitle = $('.product-name').children('name').text();
+      
+      if($('.product-name').children().length){
+        var productTitle = $('.fn').text()
+      }
+      console.log(productTitle)
       //var priceDiv = 
-      var productPrice=$('.offerPrice').text();
+      var productPrice= priceFilter($('.offerPrice').text());
      
 
       var image = $('#Hero').children('img').attr('src');
@@ -75,5 +80,18 @@ var scrapeObj={
   }
 };
 
+var priceFilter = function (scrapedPrice) {
+  var isRange = scrapedPrice.match(/\$?(\d+,?)+\.?\d+\S - \S\$?(\d+,?)+\.?\d+/g); 
+  if(isRange){
+    return "you choose a product with multiple price options please select 1";
+  }
+  var hasPrice = scrapedPrice.match(/\$?(\d+,?)+\.?\d+/g);
+  if(hasPrice){
+    return hasPrice[0]
+  }
+
+
+  return 'no price found';
+}
 
 module.exports = {scrape: scrape, scrapeObj: scrapeObj};
