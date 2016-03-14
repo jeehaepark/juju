@@ -6,10 +6,11 @@
 Create Database (from command line)
     createdb juju
 Load Schema (from command line)
-    psql juju < server/db/schema.sql
+    psql juju < server/db/preloadedSchemas/schema.sql
 Start Database Server (locally)
     node server/db/databases.js
 Load MockDataSet
+    psql juju < server/db/preloadedSchemas/mockData.sql
 
 Config Evironment
     Refer to config.example.js to make your config.js file.
