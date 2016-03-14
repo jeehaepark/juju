@@ -3,8 +3,9 @@ CREATE TABLE users (
   id SERIAL PRIMARY KEY, 
   email VARCHAR(50) UNIQUE,
   phoneNumber VARCHAR(13),
+  contactPref VARCHAR(15),
   FBuID VARCHAR(250) UNIQUE,
-  userName VARCHAR(250)
+  FBname VARCHAR(250)
 );
 
 
