@@ -129,6 +129,7 @@ router.put('/api/v1/watchedItems/:user_id', function(req, res) {
 });
 
 router.get('/api/v1/watchedItems/user/:user_id', function (req, res){
+
   var results = [];
   var data = { userId: req.params.user_id } ;
   console.log(data)

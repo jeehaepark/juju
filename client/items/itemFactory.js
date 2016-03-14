@@ -16,7 +16,7 @@ angular.module('itemFactory', [])
 
     return $http({
       method: 'POST',
-      url: '/api/additems',
+      url: '/api/items',
       data: data
     });
   },

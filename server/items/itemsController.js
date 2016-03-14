@@ -13,6 +13,7 @@ module.exports = {
   // After all data is returned, close connection and return results
 
    addItem : function (req, res) {
+    console.log("sent to add item")
     var results = [];
     // Grab data from http request
     var data = {
@@ -27,10 +28,12 @@ module.exports = {
 
     // Get a Postgres client from the connection pool
     db.task(function(t) {
+      console.log("attempt to log in db")
       return t.oneOrNone('SELECT id FROM items WHERE itemUrl=${itemUrl}', data)
       .then(function(itemID){
         if(itemID){
           data.itemId=itemID.id;
+          console.log('in first promise')
           t.one('INSERT INTO watchedItems(idealPrice, priceReached, emailed, itemID, userID) values (${idealPrice}, false, false, ${itemId}, ${userId})', data)
           res.send(itemID)
         } else {
@@ -45,12 +48,15 @@ module.exports = {
         return t.one('INSERT INTO itemHistories(price, checkDate, itemID) values (${currentPrice}, ${createdDate}, ${itemId}) returning id', data)
       })
       .then(function(data){
+        console.log('successfully added to db ')
         res.send(data)
       })
       .catch(function(error){
+        console.log(error)
         res.send(error)
       })
     });
+  console.log('end of addItem')
   },
 
   //READ GET ALL ITEMS
