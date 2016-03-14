@@ -30,6 +30,8 @@ angular.module('itemFactory', [])
       method : 'POST',
       url : '/scrape',
       data : data
+    }).then(function(response){
+      console.log(response)
     });
   },
 
