@@ -4,9 +4,9 @@ var pg = require('pg');
 var config = require('../../../config.js');
 var connectionString = process.env.DATABASE_URL || config.connectionString;
 
-router.post('/api/v1/histories', itemHistoryPost);
-router.get('/api/v1/histories', allItemsHistoryGet);
-router.get('/api/v1/histories/:itemID', itemHistoryGet);
+router.post('/api/histories', itemHistoryPost);
+router.get('/api/histories', allItemsHistoryGet);
+router.get('/api/histories/:itemID', itemHistoryGet);
 
 function itemHistoryGet (req, res){
   var results = [];
@@ -32,9 +32,9 @@ function itemHistoryGet (req, res){
   });
 }
 
-router.post('/api/v1/histories', itemHistoryPost);
-router.get('/api/v1/histories', allItemsHistoryGet);
-router.get('/api/v1/histories/:itemID', itemHistoryGet);
+router.post('/api/histories', itemHistoryPost);
+router.get('/api/histories', allItemsHistoryGet);
+router.get('/api/histories/:itemID', itemHistoryGet);
 
 function itemHistoryGet (req, res){
   var results = [];
@@ -61,7 +61,7 @@ function itemHistoryGet (req, res){
 }
 
 // CREATE A ITEM HISTORY
-//curl --data "price=10&checkDate=2016-03-08&itemID=1" http://127.0.0.1:3000/api/v1/histories
+//curl --data "price=10&checkDate=2016-03-08&itemID=1" http://127.0.0.1:3000/api/histories
 function itemHistoryPost (req, res) {
   var results = [];
 

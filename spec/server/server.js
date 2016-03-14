@@ -72,4 +72,24 @@ describe('main page', function() {
       });
     });
   });
+
+  describe('itemHistories router', function(){
+    it('should return all item histories', function(done){
+      request.get('http://localhost:3000/api/histories', function(err, res, body) {
+        expect(res.statusCode).toBe(200);
+
+        // only checking data that was seeded from mockData.sql
+        expect(JSON.parse(body)[0].price).toEqual('$10.08');
+        expect(JSON.parse(body)[1].price).toEqual('$21.56');
+        done();
+      });
+    });
+
+    it('should return a specific item history', function(done){
+      request.get('http://localhost:3000/api/histories/1', function(err, res, body) {
+        expect(JSON.parse(body)[0].price).toEqual('$10.08');
+        done();
+      });
+    });
+  });
 });
