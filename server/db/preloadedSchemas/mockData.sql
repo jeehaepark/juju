@@ -4,8 +4,8 @@
   #########
 */
 
-INSERT INTO users (email,phoneNumber,FBuID,userName) VALUES ('james@gmail.com', '949-466-4483', 'poop', 'hyoun44');
-INSERT INTO users (email,phoneNumber,FBuID,userName) VALUES ('joe@gmail.com', '555-555-5555', 'peep', 'chiral');
+INSERT INTO users (email,phoneNumber, contactPref, FBuID,FBname) VALUES ('james@gmail.com', '949-466-4483', 'email', 'poop', 'hyoun44');
+INSERT INTO users (email,phoneNumber, contactPref, FBuID,FBname) VALUES ('joe@gmail.com', '555-555-5555', 'text', 'peep', 'chiral');
 
 
 /*
