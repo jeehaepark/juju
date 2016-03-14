@@ -1,6 +1,6 @@
 var Item = require('./itemModel.js');
 var pg = require('pg');
-var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/juju';
+var connectionString = process.env.DATABASE_URL || config.connectionString;
 var pgp = require('pg-promise')(/*options*/)
 var db = pgp(connectionString);
 
