@@ -82,9 +82,9 @@ var scrapeObj={
 
 var priceFilter = function (scrapedPrice) {
   var isRange = scrapedPrice.match(/\$?(\d+,?)+\.?\d+\S - \S\$?(\d+,?)+\.?\d+/g); 
-  if(isRange){
-    return "you choose a product with multiple price options please select 1";
-  }
+  // if(isRange){
+  //   return "you choose a product with multiple price options please select 1";
+  // }
   var hasPrice = scrapedPrice.match(/\$?(\d+,?)+\.?\d+/g);
   if(hasPrice){
     return hasPrice[0]

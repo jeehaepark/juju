@@ -8,6 +8,7 @@ module.exports = function (app, express) {
   var itemRouter = express.Router();
   var histories = require('../db/models/itemHistories');
   var watched = require('../db/models/watchedItems');
+  var scrapeTools  = require('../scraping.js');
 
   app.use(morgan('dev'));
   app.use(bodyParser.json());
@@ -18,6 +19,7 @@ module.exports = function (app, express) {
 
   app.use(router);
   app.use('/api/items', itemRouter);
+  app.use('/scrape', scrapeTools.scrape);
   app.use(histories);
   app.use(watched);
 
