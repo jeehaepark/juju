@@ -34,29 +34,28 @@ describe('main page', function() {
     });
 
     it('should not return status code 200', function(done) {
-      request.get('http://localhost:3000/api/v1/watchedItems/poop', function(error, response, body) {
-        expect(body.success).not.toBe(false);
-        expect(body).toBe(2);
+      request.get('http://localhost:3000/api/v1/random', function(error, response, body) {
+        expect(body.success).not.toBe(true);
         done();
       });
     });
   });
 
   describe('test routes', function(){
-    it('should be defined', function(done){
-      request.get('http://localhost:3000/test', function(error, response, body) {
-        expect(response.body).toBe('hello');
-        done();
-      });
-    });
+    // it('should be defined', function(done){
+    //   request.get('http://localhost:3000/test', function(error, response, body) {
+    //     expect(response.body).toBe('hello');
+    //     done();
+    //   });
+    // });
   });
 
-  describe('test router', function(){
-    it('should return users from db', function(done){
-      router.get('api/users', function(req, res) {
-        expect(req).toBe('something');
+  describe('items router', function(){
+    it('should return items from db', function(done){
+      request.get('http://localhost:3000/api/items', function(err, res, body) {
+        expect(res.statusCode).toBe(200);
+        done();
       });
-      done();
     });
   });
 });
