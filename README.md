@@ -3,10 +3,11 @@
 =====
 ## DB
 
-Create Database (from command line)
+- Create Database (from command line)
 ```
 createdb juju
 ```
+
 Load Schema (from command line)
 
 
@@ -14,6 +15,7 @@ Load Schema (from command line)
 
 
 Start Database Server (locally)
+
 ```
 node server/db/databases.js
 ```
@@ -21,8 +23,9 @@ node server/db/databases.js
 Load MockDataSet
     psql juju < server/db/preloadedSchemas/mockData.sql
 
--Config Evironment
-    Refer to config.example.js to make your config.js file.
+
+- Config Evironment
+    Refer to config.example.js to make your ```config.js ```file.
     Modify connection string to work for your local database setup.
 
 ============================================
@@ -44,18 +47,18 @@ install
 stop server
 
 run all tests
-    npm test
+    ``` npm test ```
 
 run a specific test
-    jasmine spec/server/path/to/your/test.js
+    ``` jasmine spec/server/path/to/your/test.js ```
 
 =======================================
 ## API Keys
--put them in the .env file
+- put them in the .env file
 
--this line goes in any file you are trying to require an api key in
+- this line goes in any file you are trying to require an api key in
 require('dotenv').config()
--if you add an api key, add the name of the key variable (but not the key itself) to the dotEnvTemplate file so everyone can see which APIs we are playing with
+- if you add an api key, add the name of the key variable (but not the key itself) to the dotEnvTemplate file so everyone can see which APIs we are playing with
 -add the api key/secret to the slack channel
  
 =======
