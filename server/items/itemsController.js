@@ -3,8 +3,6 @@ var pg = require('pg');
 var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/juju';
 var pgp = require('pg-promise')(/*options*/)
 var db = pgp(connectionString);
-console.log('items controller');
-
 
 //var connectionString = process.env.DATABASE_URL || 'postgres://Madison:poop@localhost:5432/juju';
 
@@ -129,3 +127,13 @@ module.exports = {
     });
   }
 }
+
+
+// module.exports = {
+// }
+
+// var app = {
+//   prop1 : 1,
+//   prop2 : 2
+// }
+// module.exports = app;

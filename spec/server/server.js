@@ -42,12 +42,12 @@ describe('main page', function() {
   });
 
   describe('test routes', function(){
-    it('should be defined', function(done){
-      request.get('http://localhost:3000/test', function(error, response, body) {
-        expect(response.body).toBe('hello');
-        done();
-      });
-    });
+    // it('should be defined', function(done){
+    //   request.get('http://localhost:3000/test', function(error, response, body) {
+    //     expect(response.body).toBe('hello');
+    //     done();
+    //   });
+    // });
   });
 
   describe('items router', function(){
