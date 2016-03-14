@@ -4,7 +4,8 @@ var app = angular.module('juju', [
   'authFactory',
   'displayItemsController',
   'itemFactory',
-  'juju.item'
+  'juju.item',
+  'juju.user'
 ]);
 
 app.config(function ($stateProvider, $urlRouterProvider){
