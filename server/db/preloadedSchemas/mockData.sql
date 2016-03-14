@@ -53,13 +53,13 @@ INSERT INTO itemHistories (price,checkdate,itemID) VALUES ('$250.11', '2016-03-1
 */
 
 /* User #1 */
-INSERT INTO watchedItems (deadline,idealPrice,settlePrice,priceReached,emailed,itemID,userID)
-VALUES ('2016-04-01', '$15.00', '$19.98', false, false, 1, 1);
+INSERT INTO watchedItems (deadline, nickName, idealPrice,settlePrice,priceReached,emailed,itemID,userID)
+VALUES ('2016-04-01', 'shoes (with poop for james)', '$15.00', '$19.98', false, false, 1, 1);
 
-INSERT INTO watchedItems (deadline,idealPrice,settlePrice,priceReached,emailed,itemID,userID)
-VALUES ('2016-04-01', '$12.99', '$17.22', true, true, 2, 1);
+INSERT INTO watchedItems (deadline, nickName, idealPrice,settlePrice,priceReached,emailed,itemID,userID)
+VALUES ('2016-04-01', 'poopShirt', '$12.99', '$17.22', true, false, 2, 1);
 
 /* User #2 */
-INSERT INTO watchedItems (deadline,idealPrice,settlePrice,priceReached,emailed,itemID,userID)
-VALUES ('2016-04-01', '$12.99', '$17.22', true, true, 2, 2);
+INSERT INTO watchedItems (deadline, nickName, idealPrice,settlePrice,priceReached,emailed,itemID,userID)
+VALUES ('2016-04-01', 'candyBar', '$12.99', '$17.22', true, true, 2, 2);
 

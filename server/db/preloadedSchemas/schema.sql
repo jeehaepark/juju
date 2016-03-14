@@ -34,6 +34,7 @@ DROP TABLE IF EXISTS watchedItems CASCADE;
 CREATE TABLE watchedItems (
   id SERIAL PRIMARY KEY,
   deadline DATE,
+  nickName VARCHAR(100),
   idealPrice MONEY,
   settlePrice MONEY,
   priceReached BOOLEAN,
