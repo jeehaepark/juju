@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var pg = require('pg');
-var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/juju';
+var config = require('../../../config.js');
+var connectionString = process.env.DATABASE_URL || config.connectionString;
 
 // CREATE A ITEM HISTORY
 //curl --data "price=10&checkDate=2016-03-08&itemID=1" http://127.0.0.1:3000/api/v1/histories
