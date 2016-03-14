@@ -11,6 +11,9 @@ Start Database Server (locally)
     node server/db/databases.js
 Load MockDataSet
 
+Config Evironment
+    Refer to config.example.js to make your config.js file.
+    Modify connection string to work for your local database setup.
 ============================================
 ## Testing
 

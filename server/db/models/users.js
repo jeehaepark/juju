@@ -1,8 +1,9 @@
 var express = require('express');
+var config = require('../../../config.js');
 var router = express.Router();
 var pg = require('pg');
 var pgp = require('pg-promise')(/*options*/)
-var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/juju';
+var connectionString = process.env.DATABASE_URL || config.connectionString;
 var db = pgp(connectionString);
 
 router.post('/api/users', usersPost);
