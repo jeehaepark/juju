@@ -58,6 +58,14 @@ angular.module('itemFactory', [])
     });
   };
 
+  displayItemsFactoryFuncts.deleteData =
+  function(watchedId){
+    return $http({
+      method : 'DELETE',
+      url: '/api/v1/watchedItems/'+watchedId
+    });
+  };
+
   return displayItemsFactoryFuncts;
 })
 
