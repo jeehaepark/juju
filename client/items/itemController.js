@@ -1,11 +1,26 @@
 angular.module('juju.item', [])
 .controller('itemsCtrl', function($scope, Item, Auth, $state, displayItemsFactory){
   $scope.item={};
+  Auth.isloggedIn()
   $scope.item.createdDate=new Date();
   $scope.item.currentPrice;
   $scope.item.imageUrl;
   $scope.item.productTitle;
   $scope.item.userId=Auth.userId;
+  $scope.loading = false;
+  var ableTosend = false;
+  var checkAbleTosend = function (item) {
+    for(property in item){
+      if(!property){
+        ableTosend = false;
+        alert(property + 'is missing');
+      }
+    }
+    if(typeof item.currentPrice){
+      alert('could not get price')
+    }
+  }
+
   $scope.$watch('item.URL', _.debounce(function(newValue, oldValue){
     if(newValue){
       Item.scrapePicture(newValue).then(function successCallback(response){
@@ -24,7 +39,9 @@ angular.module('juju.item', [])
     }
   }, 400));
   $scope.addItem = function(){
+    $scope.loading = true;
     if($scope.item.currentPrice === null || $scope.item.imageUrl === null){
+      checkAbleTosend($scope.item)
       Item.scrapePriceInfo($scope.item)
       .then(function successCallback(response){
         console.log(response);
@@ -41,7 +58,16 @@ angular.module('juju.item', [])
         console.log(response);
       });
     }else {
-      Item.addItemToDB($scope.item);
+      console.log('item is $scope.item',$scope.item)
+      checkAbleTosend($scope.item);
+      Item.addItemToDB($scope.item)
+      .then(function successCallback (response) {
+        console.log('add item response', response)
+        $state.go('items')
+      },
+      function errorCallbac(response) {
+        console.log(response)
+      });
     }
   };
   // $scope.displayItems = function() {
@@ -56,3 +82,4 @@ angular.module('juju.item', [])
   //     });
   // };
 });
+
