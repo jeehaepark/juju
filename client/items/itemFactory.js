@@ -67,6 +67,15 @@ angular.module('itemFactory', [])
       url: '/api/v1/watchedItems/'+watchedId
     });
   };
+  
+  displayItemsFactoryFuncts.updateData = function (watchedId, watchedObj) {
+      console.log('hit factory update data', watchedId ,'data',watchedObj);
+      return $http({
+          method: 'PUT',
+          url: '/api/v1/watchedItems/'+watchedId,
+          data: watchedObj
+      })
+  }
 
   return displayItemsFactoryFuncts;
 })

@@ -5,11 +5,16 @@
       <div> product title = {{item.producttitle}} </div>
       <div> item id = {{item.id}}</div>
       <div>
-        <button ng-click="delete(item.id)"> delete </button>
+        <button ng-click="deleteWatched(item.id)"> delete </button>
       </div>
       <img ng-src = "{{ item.itemimageurl }}">
-      <div id="price"> {{"current price $" + item.currentprice }} </div>
+      <div id="price"> {{"current price " + item.currentprice }} </div>
+      <div>ideal price : {{item.idealprice}}
+          <input type = "text" ng-model= "item.idealprice">
+          <a href="" ng-click="update(item.id, item)">update</a>
+      </div>
     </div>
+    <!--<div>{{item}}</div>-->
     <hr>
   </div>
   <div class="col-md-4">

@@ -9,7 +9,12 @@ angular.module('displayItemsController', [])
       console.log(err);
       $scope.err = 'There was a problem loading your data';
     });
-  $scope.delete = function(itemId){
+  $scope.update = function (itemId , itemObj) {
+    // console.log('clicked', itemId, itemObj);
+    displayItemsFactory.updateData(itemId, itemObj);
+  };  
+    
+  $scope.deleteWatched = function(itemId){
     console.log('itemID',itemId);
     displayItemsFactory.deleteData(itemId);
   };
