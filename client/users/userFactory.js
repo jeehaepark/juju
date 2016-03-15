@@ -21,5 +21,13 @@ angular.module('userFactory',[])
 		});
 	};
 
+	userInfo.updateOneInfo = function (user, userObj){
+		return $http({
+			method : 'PUT',
+			url : '/api/users/' + user,
+			data : userObj
+		});
+	};
+
 	return userInfo;
 });
