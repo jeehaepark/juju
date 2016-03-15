@@ -5,7 +5,8 @@ var app = angular.module('juju', [
   'displayItemsController',
   'itemFactory',
   'juju.item',
-  'juju.user'
+  'juju.user',
+  'userFactory'
 ]);
 
 app.config(function ($stateProvider, $urlRouterProvider){
@@ -54,13 +55,14 @@ app.config(function ($stateProvider, $urlRouterProvider){
     url: '/users',
     views: {
       'header': {
-        templateUrl: './layout/header.html'
+        templateUrl: './layout/header.html',
+        controller: 'usersCtrl'
       },
       'body' : {
         templateUrl: './users/views/usersettings.html'
       }
     },
-    controller: 'usersCtrl'
+    authenticate: true
   });
 })
 .run(function($rootScope, $state, Auth){
