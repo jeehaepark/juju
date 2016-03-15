@@ -128,6 +128,35 @@ router.put('/api/v1/watchedItems/:user_id', function(req, res) {
   });
 });
 
+//curl -X DELETE http://127.0.0.1:3000/api/v1/watchedItems/:watchedItem_id
+router.delete('/api/v1/watchedItems/:watchedItem_id', function(req, res){
+  var results = [];
+  var id = req.params.watchedItem_id;
+
+  pg.connect(connectionString, function(err, client, done){
+    if(err){
+      done();
+      return res.status(500),json({
+        success: false, data: err
+      });
+    }
+    client.query('DELETE FROM watchedItems WHERE id=($1)',[id]);
+
+    var query = client.query('SELECT * FROM watchedItems ORDER BY id ASC');
+
+    query.on('row',function(row){
+      results.push(row);
+    });
+
+    query.on('end',function(){
+      done();
+      return res.json(results);
+    });
+  });
+});
+
+
+
 router.get('/api/v1/watchedItems/user/:user_id', function (req, res){
 
   var results = [];
