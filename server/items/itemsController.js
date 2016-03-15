@@ -5,7 +5,6 @@ var connectionString;
 
 // handling DB connection for tests
 if(process.env.NODE_ENV === 'test'){
-  console.log('in test env');
   connectionString = 'postgres://localhost:5432/jujuTestDB';
 } else if(process.env.NODE_ENV !== 'test') {
   connectionString = process.env.DATABASE_URL || config.connectionString;
