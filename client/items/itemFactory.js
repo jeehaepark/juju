@@ -5,7 +5,8 @@ angular.module('itemFactory', [])
   //pull in user info from the auth factory
   addItemFuncs.addItemToDB =function (itemInfo){
     data={
-      itemNickName : itemInfo.nickname,
+      itemNickName : itemInfo.nickName,
+      productTitle : itemInfo.productTitle,
       itemUrl : itemInfo.URL,
       itemImageUrl : itemInfo.imageUrl,
       currentPrice : itemInfo.currentPrice,
