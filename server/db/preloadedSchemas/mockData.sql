@@ -13,7 +13,7 @@ INSERT INTO users (email,phoneNumber, contactPref, FBuID,FBname) VALUES ('joe@gm
   # ITEMS #
   #########
 */
-INSERT INTO items (name,itemUrl,itemImageUrl,currentPrice)
+INSERT INTO items (productTitle,itemUrl,itemImageUrl,currentPrice)
 VALUES (
   'light',
   'http://www.amazon.com/gp/product/B00LXTP2FA/ref=s9_simh_gw_g468_i1_r?ie=UTF8&fpl=fresh&pf_rd_m=ATVPDKIKX0DER&pf_rd_s=desktop-1&pf_rd_r=1AP11P4BPYNJ3KJ17WJ4&pf_rd_t=36701&pf_rd_p=2079475242&pf_rd_i=desktop',
@@ -21,7 +21,7 @@ VALUES (
   '$5.00'
 );
 
-INSERT INTO items (name,itemUrl,itemImageUrl,currentPrice)
+INSERT INTO items (productTitle,itemUrl,itemImageUrl,currentPrice)
 VALUES (
   'light',
   'http://www.amazon.com/Torero-Inflatables-Dancer-Complete-20-Feet/dp/B00ASSF6MQ/ref=sr_1_1?s=sporting-goods&ie=UTF8&qid=1457732654&sr=1-1&keywords=air+dancer',

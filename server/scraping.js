@@ -40,7 +40,7 @@ var scrapeObj = {
 
       var image = $('#imgTagWrapperId').children('img').attr('src');
       var productObj = {
-        Name : productTitle,
+        productTitle : productTitle,
         price: productPrice,
         picture: image
       };
@@ -67,7 +67,7 @@ var scrapeObj = {
       var productPrice = priceFilter($('.offerPrice').text());
       var image = $('#Hero').children('img').attr('src');
       var productObj = {
-        Name : productTitle,
+        productTitle : productTitle,
         price: productPrice,
         picture: image
       };

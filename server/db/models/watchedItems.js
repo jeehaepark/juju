@@ -171,6 +171,7 @@ router.get('/api/v1/watchedItems/user/:user_id', function (req, res){
 
     query.on('end', function() {
       done();
+      console.log(results);
       return res.json(results);
     });
   });

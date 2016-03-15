@@ -4,6 +4,7 @@ angular.module('juju.item', [])
   $scope.item.createdDate=new Date();
   $scope.item.currentPrice;
   $scope.item.imageUrl;
+  $scope.item.productTitle;
   $scope.item.userId=Auth.userId;
   $scope.$watch('item.URL', _.debounce(function(newValue, oldValue){
     if(newValue){
@@ -13,6 +14,7 @@ angular.module('juju.item', [])
         }else{
           $scope.item.imageUrl= response.data.picture;
           $scope.item.currentPrice = response.data.price;
+          $scope.item.productTitle = response.data.productTitle;
           console.log('success response: ', response)
         }
       }, function errorCallback(response){
@@ -28,6 +30,7 @@ angular.module('juju.item', [])
         console.log(response);
         $scope.item.imageUrl=response.data.picture;
         $scope.item.currentPrice=response.data.price;
+        $scope.item.productTitle = response.data.productTitle;
         console.log('scope.item is ' , $scope.item);
         Item.addItemToDB($scope.item)
         .then(function successCallback(response) {

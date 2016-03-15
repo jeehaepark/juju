@@ -25,7 +25,8 @@ module.exports = {
     var results = [];
     // Grab data from http request
     var data = {
-      name: req.body.itemNickName,
+      itemNickName: req.body.itemNickName,
+      productTitle: req.body.productTitle,
       itemUrl: req.body.itemUrl,
       itemImageUrl:req.body.itemImageUrl,
       currentPrice:req.body.currentPrice,
@@ -33,7 +34,7 @@ module.exports = {
       createdDate : req.body.createdDate,
       userId : req.body.userId
     };
-
+    console.log(data)
     // Get a Postgres client from the connection pool
     db.task(function(t) {
       console.log("attempt to log in db")
@@ -42,15 +43,15 @@ module.exports = {
         if(itemID){
           data.itemId=itemID.id;
           console.log('in first promise')
-          t.one('INSERT INTO watchedItems(idealPrice, priceReached, emailed, itemID, userID) values (${idealPrice}, false, false, ${itemId}, ${userId})', data)
+          t.one('INSERT INTO watchedItems(idealPrice, priceReached, emailed, nickName, itemID, userID) values (${idealPrice}, false, false, ${itemNickName} ${itemId}, ${userId})', data)
           res.send(itemID)
         } else {
-          return t.one('INSERT INTO items(name, itemUrl, itemImageUrl, currentPrice) values(${name}, ${itemUrl}, ${itemImageUrl}, ${currentPrice}) returning id', data)
+          return t.one('INSERT INTO items(productTitle, itemUrl, itemImageUrl, currentPrice) values(${productTitle}, ${itemUrl}, ${itemImageUrl}, ${currentPrice}) returning id', data)
         }
       })
       .then(function(itemID){
         data.itemId=itemID.id
-        return t.one('INSERT INTO watchedItems(idealPrice, priceReached, emailed, itemID, userID) values (${idealPrice}, false, false, ${itemId}, ${userId}) returning id', data)
+        return t.one('INSERT INTO watchedItems(idealPrice, priceReached, emailed, nickName, itemID, userID) values (${idealPrice}, false, false, ${itemNickName}, ${itemId}, ${userId}) returning id', data)
       })
       .then(function(id){
         return t.one('INSERT INTO itemHistories(price, checkDate, itemID) values (${currentPrice}, ${createdDate}, ${itemId}) returning id', data)
@@ -60,7 +61,7 @@ module.exports = {
         res.send(data)
       })
       .catch(function(error){
-        console.log(error)
+        console.log('****error', error)
         res.send(error)
       })
     });
