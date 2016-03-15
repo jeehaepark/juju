@@ -9,4 +9,16 @@ angular.module('displayItemsController', [])
       console.log(err);
       $scope.err = 'There was a problem loading your data';
     });
+  $scope.delete = function(itemId){
+    console.log('itemID',itemId);
+    displayItemsFactory.deleteData(itemId);
+  };
+  // displayItemsFactoryFuncts.deleteData(item.id).then(function successCallback(response){
+  //     console.log(response);
+  //     $scope.itemData = response.data;
+  //   }, function errorCallback(err){
+  //     console.log(err);
+  //     $scope.err = 'There was a problem loading your data';
+  //   }
+  // 	);
 });

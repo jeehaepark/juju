@@ -1,12 +1,17 @@
-<div class = 'row'>
+<div class = "row">
   <div  ng-repeat = "item in itemData">
     <div class = "col-md-4">
-      <div id='name'> {{ item.name }} </div>
+      <div id="name"> {{ item.name }} </div>
+      <div> item id = {{item.id}}</div>
+      <div>
+        <button ng-click="delete(item.id)"> delete </button>
+      </div>
       <img ng-src = "{{ item.itemimageurl }}">
-      <div id='price'> {{"current price $" + item.currentprice }} </div>
+      <div id="price"> {{"current price $" + item.currentprice }} </div>
     </div>
+    <hr>
   </div>
-  <div class='col-md-4'>
+  <div class="col-md-4">
    <a ui-sref="additems">add item</a> 
   </div>
 </div>
