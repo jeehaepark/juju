@@ -11,9 +11,6 @@ require('./config/middleware.js')(app, express);
 var port = process.env.PORT || 3000;
 
 app.post('/scrape',scrapeTools.scrape);
-// app.config('test', function(){
-//     port = 3002;
-// });
 
 app.listen(port);
 
