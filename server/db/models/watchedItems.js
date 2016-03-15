@@ -163,7 +163,7 @@ router.get('/api/v1/watchedItems/user/:user_id', function (req, res){
   var data = { userId: req.params.user_id } ;
   console.log(data)
   pg.connect(connectionString, function(err, client, done) {
-    var query = client.query('SELECT * FROM items LEFT JOIN watcheditems ON items.id = watchedItems.itemID WHERE userid='+data.userId);
+    var query = client.query('SELECT * FROM items LEFT JOIN watcheditems ON items.id = watchedItems.itemID WHERE userid='+data.userId +'ORDER BY watcheditems.id ASC');
 
     query.on('row', function(row){
       results.push(row);
