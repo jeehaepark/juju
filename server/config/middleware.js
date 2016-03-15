@@ -4,9 +4,8 @@ var path = require('path');
 
 module.exports = function (app, express) {
   var router = require('../db/models/users');
-  // var items = require('../db/models/items');
   var itemRouter = express.Router();
-  var histories = require('../db/models/itemHistories');
+  var itemHistoryRouter = require('../db/models/itemHistories');
   var watched = require('../db/models/watchedItems');
   var scrapeTools  = require('../scraping.js');
 
@@ -20,7 +19,7 @@ module.exports = function (app, express) {
   app.use(router);
   app.use('/api/items', itemRouter);
   app.use('/scrape', scrapeTools.scrape);
-  app.use(histories);
+  app.use(itemHistoryRouter);
   app.use(watched);
 
   require('./../items/itemRoutes.js')(itemRouter);
