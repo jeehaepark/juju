@@ -1,20 +1,21 @@
 process.env.NODE_ENV = 'test';
 var request = require('request');
 var app = require('../../server/index.js');
-var routes = require("../../server/routes.js");
 var express = require('express');
 var router = express.Router();
+
+var base_url = 'http://localhost:3000/';
+
+// TODO for doing posts with tests
 // require pgp
 // write before eachf
 // query a new db
 // mock data
 // drop database
 
-var base_url = 'http://localhost:3000/';
-
+// TODO: set up connection below
 beforeEach(function(){
   // open connection
-  // 
 });
 
 describe('main page', function() {
@@ -52,20 +53,10 @@ describe('main page', function() {
     });
   });
 
-  describe('test routes', function(){
-    // it('should be defined', function(done){
-    //   request.get('http://localhost:3000/test', function(error, response, body) {
-    //     expect(response.body).toBe('hello');
-    //     done();
-    //   });
-    // });
-  });
-
   describe('items router', function(){
     it('should return items from db', function(done){
       request.get('http://localhost:3000/api/items', function(err, res, body) {
         expect(res.statusCode).toBe(200);
-
         // the 'request' module stringifies the response so we need to parse it
         expect(JSON.parse(body)[0].name).toEqual('light');
         done();
