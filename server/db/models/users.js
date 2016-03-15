@@ -1,5 +1,5 @@
 var express = require('express');
-var config = require('../../../config.js');
+var config = require('./../../../config.js');
 var router = express.Router();
 var pg = require('pg');
 var pgp = require('pg-promise')(/*options*/)
