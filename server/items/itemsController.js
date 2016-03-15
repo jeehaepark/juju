@@ -102,42 +102,42 @@ module.exports = {
 
   //UPDATE A SINGLE ITEM
   //curl -X PUT --data 'name=test@test.com&itemUrl=510-111-1111&itemImageUrl=jujupw&currentPrice=JuJu' http://127.0.0.1:3000/api/v1/items/1
-   updateItem : function (req, res) {
+  //  updateItem : function (req, res) {
 
-    var results = [];
+  //   var results = [];
 
-    // Grab data from the URL parameters
-    var id = req.params.item_id;
+  //   // Grab data from the URL parameters
+  //   var id = req.params.item_id;
 
-    // Grab data from http request
-    var data = {name: req.body.name, itemUrl: req.body.itemUrl, itemImageUrl:req.body.itemImageUrl, currentPrice:req.body.currentPrice};
+  //   // Grab data from http request
+  //   var data = {name: req.body.name, itemUrl: req.body.itemUrl, itemImageUrl:req.body.itemImageUrl, currentPrice:req.body.currentPrice};
 
-    // Get a Postgres client from the connection pool
-    pg.connect(connectionString, function(err, client, done) {
-      // Handle connection errors
-      if(err) {
-        done();
-        console.log(err);
-        // james:  does json kick any errors?
-        return res.status(500).send(json({ success: false, data: err}));
-      }
+  //   // Get a Postgres client from the connection pool
+  //   pg.connect(connectionString, function(err, client, done) {
+  //     // Handle connection errors
+  //     if(err) {
+  //       done();
+  //       console.log(err);
+  //       // james:  does json kick any errors?
+  //       return res.status(500).send(json({ success: false, data: err}));
+  //     }
 
-      // SQL Query > Update Data
-      client.query('UPDATE items SET email=($1), phoneNumber=($2), password=($3), userName=($4) WHERE id=($5)', [data.name, data.itemUrl, data.itemImageUrl, data.currentPrice, id]);
+  //     // SQL Query > Update Data
+  //     client.query('UPDATE items SET email=($1), phoneNumber=($2), password=($3), name=($4) WHERE id=($5)', [data.email, data.phoneNumber, data.password, data.name, id]);
 
-      // SQL Query > Select Data
-      var query = client.query('SELECT * FROM items ORDER BY id ASC');
+  //     // SQL Query > Select Data
+  //     var query = client.query('SELECT * FROM items ORDER BY id ASC');
 
-      // Stream results back one row at a time
-      query.on('row', function(row) {
-        results.push(row);
-      });
+  //     // Stream results back one row at a time
+  //     query.on('row', function(row) {
+  //       results.push(row);
+  //     });
 
-      // After all data is returned, close connection and return results
-      query.on('end', function() {
-        done();
-        return res.json(results);
-      });
-    });
-  }
+  //     // After all data is returned, close connection and return results
+  //     query.on('end', function() {
+  //       done();
+  //       return res.json(results);
+  //     });
+  //   });
+  // }
 }

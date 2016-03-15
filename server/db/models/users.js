@@ -20,7 +20,7 @@ function usersPost(req, res) {
     email: req.body.email,
     phoneNumber: req.body.phoneNumber,
     FBuID:req.body.FBuID,
-    userName:req.body.userName
+    FBname:req.body.FBname
   };
     console.log('data', data.FBuID)
 
@@ -34,7 +34,7 @@ function usersPost(req, res) {
       }else{
 
         // if user doesn't exist in the db a new one will be created
-        return t.one('INSERT INTO users(email, phoneNumber, FBuID, userName) values(${email}, ${phoneNumber}, ${FBuID}, ${userName}) returning id', data)
+        return t.one('INSERT INTO users(email, phoneNumber, FBuID, FBname) values(${email}, ${phoneNumber}, ${FBuID}, ${FBname}) returning id', data)
       }
     })
     .catch(function(error){

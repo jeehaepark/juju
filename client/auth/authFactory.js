@@ -41,7 +41,7 @@ angular.module('authFactory', [])
   authFuncs.addUserToDB =function (authData){
     data = {
       FBuID : authData.facebook.id,
-      userName : authData.facebook.displayName
+      FBname : authData.facebook.displayName
     };
     //edge case, what if someone changes their display name?
     console.log('sending post from client route'); 
