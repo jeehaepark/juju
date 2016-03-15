@@ -12,7 +12,13 @@ var scrape = function(req, response){
   site = site[0].slice(1,-1);
   console.log('site is', site)
   if(scrapeObj[site]){
+<<<<<<< HEAD
     scrapeObj[site](req, response);
+=======
+    scrapeObj[site](req, response)
+    //console.log('req', req)
+    //console.log('response', response)
+>>>>>>> (cron) add scrape to cron job
   } else {
     response.send('not a site');
   }
