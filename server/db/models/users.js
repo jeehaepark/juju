@@ -8,6 +8,7 @@ var db = pgp(connectionString);
 
 router.post('/api/users', usersPost);
 router.get('/api/users', usersGet);
+router.get('/api/users/:user_id', userOneUserInfo);
 router.put('/api/users/:user_id', userUpdate);
 
 function usersPost(req, res) {
@@ -76,6 +77,32 @@ function usersGet(req, res) {
       return res.json(results);
     });
   });
+}
+
+//READ GETT ONE SINGLE USER
+function userOneUserInfo (req, res){
+  var results = [];
+  var id = req.params.user_id;
+
+  pg.connect(connectionString, function(err, client, done){
+    if(err){
+      done();
+      console.log(err);
+      return res.status(500).json({ success: false, data: err});
+    }
+
+  var query = client.query('SELECT * FROM users WHERE id=($1)', [id]);
+
+  query.on('row', function(row) {
+      results.push(row);
+    });
+
+  query.on('end', function() {
+      done();
+      return res.json(results);
+    });
+
+  })
 }
 //UPDATE A SINGLE USER
 //curl -X PUT --data "email=test@test.com&phoneNumber=510-111-1111&FBuID=jujupw&userName=JuJu" http://127.0.0.1:3000/api/users/1
