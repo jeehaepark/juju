@@ -17,7 +17,8 @@ function usersPost(req, res) {
   // Grab data from http request
   var data = {
     email: req.body.email,
-    phoneNumber: req.body.phoneNumber,
+    phoneNumber: req.body.phonenumber,
+    contactPref: req.body.contactpref,
     FBuID:req.body.FBuID,
     FBname:req.body.userName
   };
@@ -108,13 +109,19 @@ function userOneUserInfo (req, res){
 function userUpdate(req, res) {
 
   var results = [];
-
+  
   // Grab data from the URL parameters
   var id = req.params.user_id;
 
   // Grab data from http request
-  var data = {email: req.body.email, phoneNumber: req.body.phonenumber, FBuID:req.body.FBuID, userName:req.body.username};
-
+  var data = {
+    email: req.body.email,
+    phoneNumber: req.body.phonenumber,
+    contactPref: req.body.contactpref,
+    FBuID:req.body.fbuid,
+    FBname:req.body.fbname
+  };
+  console.log('updating',data);
   // Get a Postgres client from the connection pool
   pg.connect(connectionString, function(err, client, done) {
     // Handle connection errors
@@ -125,7 +132,7 @@ function userUpdate(req, res) {
     };
 
     // SQL Query > Update Data
-    client.query('UPDATE users SET email=($1), phoneNumber=($2)  WHERE id=($3)', [data.email, data.phoneNumber, id]);
+    client.query('UPDATE users SET email=($1), phoneNumber=($2), contactPref=($3), FBname=($4)  WHERE id=($5)', [data.email, data.phoneNumber, data.contactPref, data.FBname, id]);
 
     // SQL Query > Select Data
     var query = client.query('SELECT * FROM users ORDER BY id ASC');
