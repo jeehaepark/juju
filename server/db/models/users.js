@@ -12,7 +12,6 @@ router.put('/api/users/:user_id', userUpdate);
 
 function usersPost(req, res) {
   var results = [];
-  console.log('req', req.body)
 
   // Grab data from http request
   var data = {
@@ -22,7 +21,6 @@ function usersPost(req, res) {
     FBuID:req.body.FBuID,
     FBname:req.body.userName
   };
-    console.log('data', data.FBuID)
 
   // Get a Postgres client from the connection pool
   // if user exists in the db it won't create a new user and fetch it's user ID
@@ -32,8 +30,9 @@ function usersPost(req, res) {
     .then(function(userID){
       if(userID){
         existingUserId = userID;
-        return existingUserId;        
-      }else{
+        return existingUserId;
+      } else {
+
         // if user doesn't exist in the db a new one will be created
         return t.one('INSERT INTO users(email, phoneNumber, FBuID, FBname) values(${email}, ${phoneNumber}, ${FBuID}, ${FBname}) returning id', data)
       }
@@ -93,13 +92,13 @@ function userOneUserInfo (req, res){
       return res.status(500).json({ success: false, data: err});
     }
 
-  var query = client.query('SELECT * FROM users WHERE id=($1)', [id]);
+    var query = client.query('SELECT * FROM users WHERE id=($1)', [id]);
 
-  query.on('row', function(row) {
+    query.on('row', function(row) {
       results.push(row);
     });
 
-  query.on('end', function() {
+    query.on('end', function() {
       done();
       return res.json(results);
     });
