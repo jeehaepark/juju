@@ -22,8 +22,7 @@ angular.module('authFactory', [])
         data: data
         }).then(function successCallback(response) {
         authFuncs.userId= response.data.id;
-        console.log(authFuncs.userId);
-        //$state.go('additems');
+        
       })
     }
     return !!loggedIn;
