@@ -1,6 +1,6 @@
 var Item = require('./itemModel.js');
 var pg = require('pg');
-var config = require('./../../config.js');
+// var config = require('./../../config.js');
 var connectionString;
 
 // handling DB connection for tests

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var pg = require('pg');
-var config = require('../../config.js');
+// var config = require('../../config.js');
 var connectionString = process.env.DATABASE_URL || config.connectionString;
 
 module.exports = {
