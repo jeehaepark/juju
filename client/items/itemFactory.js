@@ -48,6 +48,21 @@ angular.module('itemFactory', [])
     });
   };
 
+  addItemFuncs.checkAbleTosend = function (item) {
+    for(property in item){
+      if(!property){
+        
+        alert(property + 'is missing');
+        return  false;
+      }
+    }
+    if(Number(item.currentPrice)===NaN){
+      alert('could not get price')
+      return false
+    }
+    return true
+  }
+
   return addItemFuncs;
 })
 .factory('displayItemsFactory', function ($http){
