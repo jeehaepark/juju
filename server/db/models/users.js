@@ -19,7 +19,7 @@ function usersPost(req, res) {
     email: req.body.email,
     phoneNumber: req.body.phoneNumber,
     FBuID:req.body.FBuID,
-    FBname:req.body.FBname
+    FBname:req.body.userName
   };
     console.log('data', data.FBuID)
 
