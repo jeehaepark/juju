@@ -27,12 +27,13 @@ function usersPost(req, res) {
   // Get a Postgres client from the connection pool
   // if user exists in the db it won't create a new user and fetch it's user ID
   db.task(function(t) {
+    var existingUserId;
     return t.oneOrNone('SELECT id FROM users WHERE FBuID=${FBuID}', data)
     .then(function(userID){
       if(userID){
-        res.send(userID)
+        existingUserId = userID;
+        return existingUserId;        
       }else{
-
         // if user doesn't exist in the db a new one will be created
         return t.one('INSERT INTO users(email, phoneNumber, FBuID, FBname) values(${email}, ${phoneNumber}, ${FBuID}, ${FBname}) returning id', data)
       }
@@ -41,7 +42,8 @@ function usersPost(req, res) {
       console.log('error', error)
     })
     .then(function(userID){
-      res.send(userID)
+      existingUserId = userID;
+      res.send(existingUserId);
     });
   });
 }
