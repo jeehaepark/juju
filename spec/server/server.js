@@ -58,7 +58,7 @@ describe('main page', function() {
       request.get('http://localhost:3000/api/items', function(err, res, body) {
         expect(res.statusCode).toBe(200);
         // the 'request' module stringifies the response so we need to parse it
-        expect(JSON.parse(body)[0].name).toEqual('light');
+        expect(JSON.parse(body)[0].producttitle).toEqual('light');
         done();
       });
     });
