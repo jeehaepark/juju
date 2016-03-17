@@ -3,11 +3,7 @@ var pg = require('pg');
 var connectionString;
 
 // handling DB connection for tests
-if(process.env.NODE_ENV === 'test'){
-  connectionString = 'postgres://localhost:5432/jujutestdb';
-} else if(process.env.NODE_ENV !== 'test') {
-  connectionString = process.env.DATABASE_URL || require('./../../config.js').connectionString;
-}
+var connectionString = process.env.DATABASE_URL;
 
 var pgp = require('pg-promise')(/*options*/)
 var db = pgp(connectionString);
