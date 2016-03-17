@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var pg = require('pg');
 var pgp = require('pg-promise')(/*options*/)
-var connectionString = process.env.DATABASE_URL || require('./../../../config.js').connectionString;
+var connectionString = process.env.DATABASE_URL;
 var db = pgp(connectionString);
 
 router.post('/api/users', usersPost);
