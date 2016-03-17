@@ -35,6 +35,10 @@ function usersPost(req, res) {
 
         // if user doesn't exist in the db a new one will be created
         return t.one('INSERT INTO users(email, phoneNumber, FBuID, FBname) values(${email}, ${phoneNumber}, ${FBuID}, ${FBname}) returning id', data)
+        .catch( function (err){
+          console.log(err)
+          res.send(err);
+        })
       }
     })
     .catch(function(error){
