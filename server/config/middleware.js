@@ -6,7 +6,6 @@ module.exports = function (app, express) {
   var router = require('../db/models/users');
   var itemRouter = express.Router();
   var itemHistoryRouter = express.Router();
-  var watched = require('../db/models/watchedItems');
   var scrapeTools  = require('../scraping.js');
 
   app.use(morgan('dev'));
@@ -19,7 +18,6 @@ module.exports = function (app, express) {
   app.use('/api/items', itemRouter);
   app.use('/api/itemHistory', itemHistoryRouter);
   app.use('/scrape', scrapeTools.scrape);
-  app.use(watched);
 
   require('./../items/itemRoutes.js')(itemRouter);
   require('./../itemHistory/itemHistoryRoutes.js')(itemHistoryRouter);

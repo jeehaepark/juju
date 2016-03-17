@@ -75,7 +75,7 @@ angular.module('itemFactory', [])
   displayItemsFactoryFuncts.getItemData = function(user){
     return $http({
       method : 'GET',//'POST',
-      url : '/api/v1/watchedItems/user/'+ user
+      url : '/api/watchedItems/user/'+ user
     });
   };
 
@@ -84,7 +84,7 @@ angular.module('itemFactory', [])
     console.log('hit factory delte and id is',watchedId);
     return $http({
       method : 'DELETE',
-      url: '/api/v1/watchedItems/'+watchedId
+      url: '/api/watchedItems/'+watchedId
     });
   };
   
@@ -92,7 +92,7 @@ angular.module('itemFactory', [])
       console.log('hit factory update data', watchedId ,'data',watchedObj);
       return $http({
           method: 'PUT',
-          url: '/api/v1/watchedItems/'+watchedId,
+          url: '/api/watchedItems/'+watchedId,
           data: watchedObj
       })
   }
