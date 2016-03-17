@@ -23,6 +23,6 @@ module.exports = function (app, express) {
 
   require('./../items/itemRoutes.js')(itemRouter);
   require('./../itemHistory/itemHistoryRoutes.js')(itemHistoryRouter);
-  require('./../watcheditems/watchedItemRoutes.js')(watchedItemRouter);
+  require('./../watchedItems/watchedItemRoutes.js')(watchedItemRouter);
 };
 
