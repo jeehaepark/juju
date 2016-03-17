@@ -1,13 +1,11 @@
 angular.module('juju.item', [])
 .controller('itemsCtrl', function($scope, Item, Auth, $state, displayItemsFactory){
   $scope.item={};
+  //$scope.item.id;
   Auth.isloggedIn()
-  .then( function successCallback (response) {
-    // console.log("isloggedIn response " , response)
-    // $scope.item.userId=response;
-  })
   $scope.item.userId = Auth.userId;
-  console.log('$scope.item.itemId ' ,Auth.userId)
+
+  console.log('$scope.item.userId ' ,Auth.userId)
   $scope.item.createdDate=new Date();
   $scope.item.currentPrice;
   $scope.item.imageUrl;
