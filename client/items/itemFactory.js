@@ -49,18 +49,23 @@ angular.module('itemFactory', [])
   };
 
   addItemFuncs.checkAbleTosend = function (item) {
-    for(property in item){
-      if(!property){
-        
-        alert(property + 'is missing');
+    var sampleItem = {
+      productTitle : 'String',
+      userId : 'String',
+      currentPrice : 'String',
+      imageUrl : 'String'
+    }
+    for(property in sampleItem){
+      if(item[property] === undefined) {
+        alert(property + ' is missing');
         return  false;
       }
     }
-    if(Number(item.currentPrice)===NaN){
+    if(parseInt(item['currentPrice'],10)===NaN){
       alert('could not get price')
-      return false
+      return false;
     }
-    return true
+    return true;
   }
 
   return addItemFuncs;
