@@ -6,7 +6,6 @@ module.exports = function (app, express) {
   var router = require('../db/models/users');
   var itemRouter = express.Router();
   var itemHistoryRouter = express.Router();
-  var notificationsRouter = express.Router();
   var watched = require('../db/models/watchedItems');
   var scrapeTools  = require('../scraping.js');
 
@@ -18,14 +17,11 @@ module.exports = function (app, express) {
 
   app.use(router);
   app.use('/api/items', itemRouter);
-  app.use('/api/v1/notifications', notificationsRouter)
   app.use('/api/itemHistory', itemHistoryRouter);
   app.use('/scrape', scrapeTools.scrape);
   app.use(watched);
 
   require('./../items/itemRoutes.js')(itemRouter);
   require('./../itemHistory/itemHistoryRoutes.js')(itemHistoryRouter);
-  require('./../notifications/notificationsRouter.js')(notificationsRouter);
-  ;
 };
 
