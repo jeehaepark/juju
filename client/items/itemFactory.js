@@ -81,7 +81,6 @@ angular.module('itemFactory', [])
 
   displayItemsFactoryFuncts.deleteData =
   function(watchedId){
-    console.log('hit factory delte and id is',watchedId);
     return $http({
       method : 'DELETE',
       url: '/api/watchedItems/'+watchedId
@@ -89,7 +88,6 @@ angular.module('itemFactory', [])
   };
   
   displayItemsFactoryFuncts.updateData = function (watchedId, watchedObj) {
-      console.log('hit factory update data', watchedId ,'data',watchedObj);
       return $http({
           method: 'PUT',
           url: '/api/watchedItems/'+watchedId,

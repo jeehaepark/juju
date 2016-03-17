@@ -63,7 +63,7 @@ module.exports = {
       // Handle connection errors
       if(err) {
         done();
-        console.log(err);
+        // console.log(err);
         return res.status(500).json({ success: false, data: err});
       }
 
@@ -98,7 +98,6 @@ module.exports = {
       emailed: req.body.emailed,
       itemID: req.body.itemid,
       userID: req.body.userid};
-  console.log('hit server-side id',id ,'data',data);
     // Get a Postgres client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
       // Handle connection errors
