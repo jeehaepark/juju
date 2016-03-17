@@ -2,24 +2,30 @@ angular.module('juju.item', [])
 .controller('itemsCtrl', function($scope, Item, Auth, $state, displayItemsFactory){
   $scope.item={};
   Auth.isloggedIn()
+  .then( function successCallback (response) {
+    // console.log("isloggedIn response " , response)
+    // $scope.item.userId=response;
+  })
+  $scope.item.userId = Auth.userId;
+  console.log('$scope.item.itemId ' ,Auth.userId)
   $scope.item.createdDate=new Date();
   $scope.item.currentPrice;
   $scope.item.imageUrl;
   $scope.item.productTitle;
-  $scope.item.userId=Auth.userId;
+  
   $scope.loading = false;
   var ableTosend = false;
  
   $scope.$watch('item.URL', _.debounce(function(newValue, oldValue){
     if(newValue){
-      Item.scrapePicture(newValue).then(function successCallback(response){
+      Item.scrapePicture(newValue).then(function successCallback(response) {
         if(response.data === 'not a site'){
           alert("Not a usable site");
         }else{
           $scope.item.imageUrl= response.data.picture;
           $scope.item.currentPrice = response.data.price;
           $scope.item.productTitle = response.data.productTitle;
-          console.log('success response: ', response)
+          //console.log('success response: ', response)
         }
       }, function errorCallback(response){
         console.log("error response", response)
@@ -29,11 +35,11 @@ angular.module('juju.item', [])
   }, 400));
   $scope.addItem = function(){
     $scope.loading = true;
-    if($scope.item.currentPrice === null || $scope.item.imageUrl === null){
-      
+    if($scope.item.currentPrice === undefined || $scope.item.imageUrl === undefined){
+      console.log('scrape wasn\' called')
       Item.scrapePriceInfo($scope.item)
       .then(function successCallback(response){
-        console.log(response);
+        console.log('scrape after add item' , response);
         $scope.item.imageUrl=response.data.picture;
         $scope.item.currentPrice=response.data.price;
         $scope.item.productTitle = response.data.productTitle;
@@ -51,6 +57,7 @@ angular.module('juju.item', [])
     } else {
       console.log('item is $scope.item',$scope.item)
       if(Item.checkAbleTosend($scope.item)) {
+        console.log($scope.item)
         Item.addItemToDB($scope.item)
         .then(function successCallback (response) {
           console.log('add item response', response)
