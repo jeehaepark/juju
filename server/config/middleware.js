@@ -7,7 +7,6 @@ module.exports = function (app, express) {
   var itemRouter = express.Router();
   var itemHistoryRouter = express.Router();
   var notificationsRouter = express.Router();
-  //var sendSMSRouter = express.Router();
   var watched = require('../db/models/watchedItems');
   var scrapeTools  = require('../scraping.js');
 
@@ -27,7 +26,6 @@ module.exports = function (app, express) {
   require('./../items/itemRoutes.js')(itemRouter);
   require('./../itemHistory/itemHistoryRoutes.js')(itemHistoryRouter);
   require('./../notifications/notificationsRouter.js')(notificationsRouter);
-
   ;
 };
 
