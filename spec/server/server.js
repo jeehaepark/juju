@@ -83,7 +83,7 @@ describe('main page', function() {
       });
     });
   });
-  
+
   describe('wathcedItem router', function(){
     it('should return all watched items', function(done){
       request.get('http://localhost:3000/api/watcheditems', function(err, res, body) {
@@ -103,5 +103,25 @@ describe('main page', function() {
       });
     });
   });
-  
+  describe('user router', function(){
+    it('should get all users', function(done){
+      request.get('http://localhost:3000/api/users', function(err, res, body) {
+        expect(res.statusCode).toBe(200);
+
+        // assuming our mock data populates the first two users with mock
+        // data.  There could be more users but this is the simplest way
+        // to test a dynamically growing and shrinking user count
+        expect(JSON.parse(body)[1].email).toEqual('joe@gmail.com');
+        done();
+      });
+    });
+
+    it('should get a specific user', function(done){
+      request.get('http://localhost:3000/api/users/1', function(err, res, body) {
+        expect(JSON.parse(body)[0].email).toEqual('james@gmail.com');
+        expect(JSON.parse(body)[1]).toEqual(undefined);
+        done();
+      });
+    });
+  });
 });
