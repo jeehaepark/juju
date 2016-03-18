@@ -41,6 +41,7 @@
     "karma-mocha-reporter": "2.0.0",
     "morgan": "1.7.0",
     "node-env-file": "0.1.8",
+    "nodemailer": "0.7.1",
     "pg": "4.5.1",
     "pg-promise": "3.3.0",
     "request": "2.69.0",

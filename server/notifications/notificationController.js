@@ -1,14 +1,15 @@
 //var express = require('express');
 //var router = express.Router();
+require('dotenv').config();
 var pg = require('pg');
 var config = require('./../../config.js');
 var connectionString; // = process.env.DATABASE_URL || config.connectionString;
 
 // handling DB connection for tests
 if(process.env.NODE_ENV === 'test'){
-  connectionString = 'postgres://localhost:5432/jujuTestDB';
+  connectionString = process.env.TEST_DATABASE_URL;
 } else if(process.env.NODE_ENV !== 'test') {
-  connectionString = process.env.DATABASE_URL || config.connectionString;
+  connectionString = process.env.DATABASE_URL;
 }
 
 

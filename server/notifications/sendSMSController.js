@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 // Your accountSid and authToken from twilio.com/user/account
 //sudo npm install -g twilio
 //change stuff in the node modules twilio client file in order to make shit work.... probs not ideal...gotta figure out the env file thing
