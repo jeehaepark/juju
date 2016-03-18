@@ -11,16 +11,13 @@ module.exports = {
       //console.log('ppooop');
       request.getAsync('http://localhost:3000/api/items')
       .then(function(res){
-        //console.log('res', res.body);
-
         var items = JSON.parse(res.body);
+
+        // items is an array of objects
         return items;
       })
       .then(function(items){
-
-        //create an array to push the reulst objs to
-        var resultArray = [];
-        Promise.each(items, function(item){
+        return Promise.map(items, function(item){
           // console.log('item: ', item);
           //do scrape request in here
           var options = {
@@ -29,31 +26,29 @@ module.exports = {
             form: {'url': item.itemurl}
           }
 
-          return requestMultiArg.postAsync(options).then(function(response, body){
-            console.log('inside each - response.body', response.body)
-
-            if(response.statusCode===200){
-              var price=response.body.price;
-            }
-            //push obj containing currentprice and item id to resultArray
-            var pushResults = {id: item.id, currentPrice: price}
-            // console.log('push results: ', pushResults);
-            resultArray.push(pushResults)
-          })
+          return requestMultiArg.postAsync(options)
         })
-        // console.log(resultArray.length)
-        // return resultArray;
-      })
+        .then(function(responseArray){
+          console.log('inside each - response.body', responseArray[0].body);
+          /*
+           * {
+           * "productTitle":"Cygolite Expilion 720 USB Light",
+           * "price":"$79.99",
+           * "picture":"http://ecx.images-amazon.com/images/I/51jgDUFBEmL._SX300_QL70_.jpg"
+           * }
+           */
 
+          // if(response.statusCode===200){
+          //   var price=response.body.price;
 
-
-      .then(function(items){
-        // console.log('made it to here', items);
+          //   item.price = price;
+          // }
+        })
       })
-      .catch(function(e){
-        console.log('error', e);
-      })
-      // .then(function(itemUrlArr){
+        .catch(function(e){
+          console.log('error', e);
+        })
+          // .then(function(itemUrlArr){
 
       //   // building up req/res parameters to inject in scrape function
       //   for(var i = 0; i < itemUrlArr.length; i++){
