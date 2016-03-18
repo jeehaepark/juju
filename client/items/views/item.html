@@ -1,28 +1,3 @@
-<!--<div class = "row">
-  <div  ng-repeat = "item in itemData">
-    <div class = "col-md-4">
-      <div id="name"> {{"item nickname " + item.nickname }} </div>
-      <div> product title = {{item.producttitle}} </div>
-      <div> item id = {{item.id}}</div>
-      <div>
-        <button ng-click="deleteWatched(item.id)"> delete </button>
-      </div>
-      <img ng-src = "{{ item.itemimageurl }}">
-      <div id="price"> {{"current price " + item.currentprice }} </div>
-      <div>ideal price : {{item.idealprice}}
-          <input type = "text" ng-model= "item.idealprice">
-          <a href="" ng-click="update(item.id, item)">update</a>
-      </div>
-    </div>
-    <!--<div>{{item}}</div>-->
-    <!--<hr>
-  </div>
-  <div class="col-md-4">
-   <a ui-sref="additems">add item</a> 
-  </div>
-</div>-->-->
-
-    <!-- list of items Section -->
     <section id="portfolio">
         <div class="container">
             <div class="row">
@@ -41,6 +16,10 @@
                         </div>-->
                         <img ng-src = "{{ item.itemimageurl }}" class="img-responsive" alt="">
                     </a>
+                      <canvas id="line" class="chart chart-line" chart-data="itemHistoryData[item.itemid].priceGraph[0][1]"
+      chart-labels="itemHistoryData[1].priceGraph[0][0]" chart-legend="true" chart-series="series"
+      chart-click="onClick" >
+      </canvas> 
                     <div id="name"> {{"item nickname " + item.nickname }} </div>
                     <div> product title = {{item.producttitle}} </div>
                     <div> item id = {{item.id}}</div>
@@ -66,3 +45,39 @@
             </div>
         </div>
     </section>
+</div>
+
+ <!-- =======
+<div class = "row">
+  <div  ng-repeat = "item in itemData">
+    <div class = "col-md-4">
+      <div id="name"> {{"item nickname " + item.nickname }} </div>
+      <div> product title = {{item.producttitle}} </div>
+      <div> item id = {{item.id}}</div>
+      <div>
+        <button ng-click="deleteWatched(item.id)"> delete </button>
+      </div>
+      <img ng-src = "{{ item.itemimageurl }}">
+    
+      <div> {{ data }}</div>
+      <div> {{ labels }}
+      <div id="price"> {{"current price " + item.currentprice }} </div>
+      <div>ideal price : {{item.idealprice}}
+          <input type = "text" ng-model= "item.idealprice">
+          <a href="" ng-click="update(item.id, item)">update</a>
+      </div>
+    </div>
+    <!--<div>{{item}}</div>
+    <hr>
+  </div>
+  <div class="col-md-4">
+   <a ui-sref="additems">add item</a> 
+  </div>
+  <button ng-click = "itemHistory()">asdkl;fjsal</button>
+  <h1> itemHistoryData </h1>
+  
+  <h1> itemData </h1>
+  <!-- <div> {{ itemData}} </div>
+</div>
+>>>>>>> Wip added graphs
+ --> 

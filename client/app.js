@@ -6,7 +6,8 @@ var app = angular.module('juju', [
   'itemFactory',
   'juju.item',
   'juju.user',
-  'userFactory'
+  'userFactory',
+  'chart.js'
 ]);
 
 app.config(function ($stateProvider, $urlRouterProvider){
