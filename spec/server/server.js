@@ -58,7 +58,7 @@ describe('main page', function() {
       request.get('http://localhost:3000/api/items', function(err, res, body) {
         expect(res.statusCode).toBe(200);
         // the 'request' module stringifies the response so we need to parse it
-        expect(JSON.parse(body)[0].producttitle).toEqual('light');
+        expect(JSON.parse(body).length).toEqual(10);
         done();
       });
     });
@@ -70,15 +70,14 @@ describe('main page', function() {
         expect(res.statusCode).toBe(200);
 
         // only checking data that was seeded from mockData.sql
-        expect(JSON.parse(body)[0].price).toEqual('$10.08');
-        expect(JSON.parse(body)[1].price).toEqual('$21.56');
+        expect(JSON.parse(body).length).toEqual(50);
         done();
       });
     });
 
     it('should return a specific item history', function(done){
       request.get('http://localhost:3000/api/itemHistory/1', function(err, res, body) {
-        expect(JSON.parse(body)[0].price).toEqual('$10.08');
+        expect(JSON.parse(body)[0].price).toEqual('$79.99');
         done();
       });
     });
@@ -90,15 +89,15 @@ describe('main page', function() {
         expect(res.statusCode).toBe(200);
 
         // only checking data that was seeded from mockData.sql
-        expect(JSON.parse(body)[0].idealprice).toEqual('$15.00');
-        expect(JSON.parse(body)[1].settleprice).toEqual('$17.22');
+        expect(JSON.parse(body).length).toEqual(30);
+        expect(JSON.parse(body)[1].settleprice).toEqual('$0.00');
         done();
       });
     });
 
     it('should return a specific item with specific user Id', function(done){
       request.get('http://localhost:3000/api/watcheditems/user/1', function(err, res, body) {
-        expect(JSON.parse(body)[0].producttitle).toEqual('light');
+        expect(JSON.parse(body)[0].producttitle).toEqual('Torero Inflatables Air Dancer Tube Man Fly Guy');
         done();
       });
     });
@@ -111,14 +110,14 @@ describe('main page', function() {
         // assuming our mock data populates the first two users with mock
         // data.  There could be more users but this is the simplest way
         // to test a dynamically growing and shrinking user count
-        expect(JSON.parse(body)[1].email).toEqual('joe@gmail.com');
+        expect(JSON.parse(body)[1].email).toEqual('jpark2973@gmail.com');
         done();
       });
     });
 
     it('should get a specific user', function(done){
       request.get('http://localhost:3000/api/users/1', function(err, res, body) {
-        expect(JSON.parse(body)[0].email).toEqual('james@gmail.com');
+        expect(JSON.parse(body)[0].email).toEqual('dunitzm@gmail.com');
         expect(JSON.parse(body)[1]).toEqual(undefined);
         done();
       });

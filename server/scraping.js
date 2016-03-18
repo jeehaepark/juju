@@ -5,12 +5,15 @@ var cheerio = require('cheerio');
 
 //scrapes item data from target
 var scrape = function(req, response){
+  // console.log('req inside scrape: ', req.body.url);
   var url = req.body.url;
   var site = url.match(/([A-Z])*www\.([a-z])*\./g);
   site = site[0].slice(4, -1);
 
   if(scrapeObj[site]){
     scrapeObj[site](req, response)
+    //console.log('req', req)
+    //console.log('response', response)
   } else {
     response.send('not a site')
   }
@@ -52,7 +55,7 @@ var scrapeObj = {
     });
   },
   target: function(req, response){
-    var url = req.body.url ;
+    var url = req.body.url;
 
     request(url, function(error, res , html){
       if(error){
