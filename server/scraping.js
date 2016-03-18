@@ -7,15 +7,14 @@ var cheerio = require('cheerio');
 var scrape = function(req, response){
   // console.log('req inside scrape: ', req.body.url);
   var url = req.body.url;
-  var site = url.match(/([A-Z])*www\.([a-z])*\./g);
-  site = site[0].slice(4, -1);
-
+  console.log('url is ' , url)
+  var site = url.match(/([A-Z])*\.([a-z])*\./g);
+  site = site[0].slice(1,-1);
+  console.log('site is', site)
   if(scrapeObj[site]){
-    scrapeObj[site](req, response)
-    //console.log('req', req)
-    //console.log('response', response)
+    scrapeObj[site](req, response);
   } else {
-    response.send('not a site')
+    response.send('not a site');
   }
 };
 
@@ -80,8 +79,42 @@ var scrapeObj = {
       //sends scraped data to sender
       response.send(productObj);
     });
+  },
+  nordstrom: function (req, response){
+        var url = req.body.url ;
+
+    request(url, function(error, res , html){
+      if(error){
+        return 'error in scrape';
+      }
+
+      //convert html into a cheerio object
+      var $ = cheerio.load(html);
+      var productTitle = $('.product-title').children('h1').text();
+
+      if($('.product-name').children().length){
+        var productTitle = $('.fn').text()
+      }
+
+      if($('.regular-price').text()){
+        var productPrice = priceFilter($('.regular-price').text());
+      }else {
+        var productPrice = priceFilter($('.price-current').text());
+      }
+      var image = $('.gallery').children('link').attr('href');
+      console.log(image)
+      var productObj = {
+        productTitle : productTitle,
+        price: productPrice,
+        picture: image
+      };
+
+      //sends scraped data to sender
+      response.send(productObj);
+    });
   }
 };
+
 
 var priceFilter = function (scrapedPrice) {
   var isRange = scrapedPrice.match(/\$?(\d+,?)+\.?\d+\S - \S\$?(\d+,?)+\.?\d+/g);
