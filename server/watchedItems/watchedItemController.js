@@ -1,12 +1,13 @@
+require('dotenv').config();
 var watched = require('./watchedItemModel.js');
 var pg = require('pg');
 var connectionString;
 
 // handling DB connection for tests
 if(process.env.NODE_ENV === 'test'){
-  connectionString = 'postgres://localhost:5432/jujutestdb';
+  connectionString = process.env.TEST_DATABASE_URL;
 } else if(process.env.NODE_ENV !== 'test') {
-  connectionString = process.env.DATABASE_URL || require('./../../config.js').connectionString;
+  connectionString = process.env.DATABASE_URL;
 }
 
 var pgp = require('pg-promise')(/*options*/)
