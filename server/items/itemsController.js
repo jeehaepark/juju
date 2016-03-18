@@ -1,9 +1,14 @@
+require('dotenv').config();
 var Item = require('./itemModel.js');
 var pg = require('pg');
 var connectionString;
 
 // handling DB connection for tests
-var connectionString = process.env.DATABASE_URL;
+if(process.env.NODE_ENV === 'test'){
+  connectionString = TEST_DATABASE_URL;
+} else if(process.env.NODE_ENV !== 'test') {
+  connectionString = process.env.DATABASE_URL;
+}
 
 var pgp = require('pg-promise')(/*options*/)
 var db = pgp(connectionString);

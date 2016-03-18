@@ -2,7 +2,6 @@
 //var router = express.Router();
 require('dotenv').config();
 var pg = require('pg');
-var config = require('./../../config.js');
 var connectionString; // = process.env.DATABASE_URL || config.connectionString;
 
 // handling DB connection for tests

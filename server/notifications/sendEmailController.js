@@ -1,8 +1,16 @@
 require('dotenv').config();
 var nodemailer = require("nodemailer");
 
+var smtpTransport = nodemailer.createTransport("SMTP",{
+    service: "Gmail",
+    auth: {
+        user: process.env.GMAIL_ACCOUNT,
+        pass: process.env.GMAIL_PWD
+    }
+});
+
 module.exports = {
-  sendEmail: function(req, res) {
+  sendEmailMessage: function(req, res) {
     //console.log('sendtextmessage req: ', req);
     var itemNickname = req.body.nickname || 'oops';
     var currentPrice = req.body.currentprice || 'oops';
@@ -26,9 +34,6 @@ module.exports = {
       }
     });
 
-  },
-  getAllEmail: function(){
-  	
   }
 
 };
