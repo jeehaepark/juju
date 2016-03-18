@@ -59,8 +59,6 @@ module.exports = {
 
   //READ GET ALL ITEMS
   getAllItems : function (req, res) {
-    console.log('inside #getAllItems in items controller');
-
     var results = [];
 
     // Get a Postgres client from the connection pool
