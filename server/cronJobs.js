@@ -3,7 +3,7 @@ var Promise = require("bluebird");
 var request = Promise.promisifyAll(require("request"));
 var requestMultiArg = Promise.promisifyAll(require("request"), {multiArgs: true});
 
-var pgp = require('pg-promise')
+var pgp = require('pg-promise')(/*options*/);
 var connectionString = process.env.DATABASE_URL;
 var db = pgp(connectionString);
 
@@ -65,11 +65,16 @@ module.exports = {
     }, true, 'America/Los_Angeles');
   },
 
-  // TODO: test that it works
   watchedItems : function() {
-    db.tx(function(t){
-      return t.many("UPDATE watcheditems SET pricereached=true FROM items WHERE watcheditems.itemid=items.id AND items.currentprice <= watcheditems.idealprice");
-    })
+    new CronJob('00-60 * * * * *' , function () {
+      db.task(function(t){
+        return t.many("UPDATE watcheditems SET pricereached=true FROM items WHERE watcheditems.itemid=items.id AND items.currentprice <= watcheditems.idealprice;");
+      })
+      console.log('ran cron job: watchedItems');
+    },
+    function(){
+      console.log('job stopped');
+    }, true, 'America/Los_Angeles');
   },
 
   // pseudo code
@@ -103,4 +108,3 @@ module.exports = {
     }, true, 'America/Los_Angeles');
   }
 }
-
