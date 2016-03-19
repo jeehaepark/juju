@@ -2,27 +2,27 @@ var CronJob = require('cron').CronJob;
 var Promise = require("bluebird");
 var request = Promise.promisifyAll(require("request"));
 var requestMultiArg = Promise.promisifyAll(require("request"), {multiArgs: true});
-var scrapeTool = require('./scraping.js');
-var pgp = require('pg-promise')(/*options*/)
+
+var pgp = require('pg-promise')
 var connectionString = process.env.DATABASE_URL;
 var db = pgp(connectionString);
+
+var sendSMSController = require('./notifications/sendSMSController.js');
+var sendEmailController = require('./notifications/sendEmailController.js');
+var scrapeTool = require('./scraping.js');
 
 module.exports = {
   itemHistory : function (){
     var allItems;
     new CronJob('01 01-60 * * * *' , function () {
-      //console.log('ppooop');
       request.getAsync('http://localhost:3000/api/items')
       .then(function(res){
         var items = JSON.parse(res.body);
 
-        // items is an array of objects
         return items;
       })
       .then(function(items){
         return Promise.map(items, function(item){
-          // console.log('item: ', item);
-          //do scrape request in here
           var options = {
             url: 'http://localhost:3000/scrape',
             method: 'POST',
@@ -32,13 +32,13 @@ module.exports = {
           return requestMultiArg.postAsync(options)
         })
         .then(function(responseArray){
+          // TODO: add currentDate function
           var currentDate = ///function
 
           Promise.each(responseArray, function(resp){
             var res = JSON.parse(resp.body);
-            // console.log('resp body: ', typeof resp.body);
             db.tx(function(t){
-              return t.one("UPDATE items SET currentPrice=${price}  WHERE items.itemUrl = ${productUrl} returning id", res)
+              return t.one("UPDATE items SET currentPrice=${price} WHERE items.itemUrl = ${productUrl} returning id", res)
               .then(function(itemID){
                 res.itemID = itemID.id;
                 res.currentDate = '2016-04-19';
@@ -52,66 +52,44 @@ module.exports = {
               })
             });
           });
-
-          // console.log('inside each - response.body', responseArray[0].body);
-
-          /*
-           * {
-           * "productTitle":"Cygolite Expilion 720 USB Light",
-           * "price":"$79.99",
-           * "picture":"http://ecx.images-amazon.com/images/I/51jgDUFBEmL._SX300_QL70_.jpg",
-           * "productUrl":"http://www.amazon.com/gp/product/B00LXTP2FA/ref=s9_simh_gw_g468_i1_r?ie=UTF8&fpl=fresh&pf_rd_m=ATVPDKIKX0DER&pf_rd_s=desktop-1&pf_rd_r=1AP11P4BPYNJ3KJ17WJ4&pf_rd_t=36701&pf_rd_p=2079475242&pf_rd_i=desktop"
-           * }
-           */
-
-          // if(response.statusCode===200){
-          //   var price=response.body.price;
-
-          //   item.price = price;
-          // }
           return responseArray;
         })
       })
       .catch(function(e){
         console.log('error', e);
       })
-      // .then(function(itemUrlArr){
-
-      //   // building up req/res parameters to inject in scrape function
-      //   for(var i = 0; i < itemUrlArr.length; i++){
-      //     var reqBodyUrl = {
-      //       body: {
-      //         url : itemUrlArr[i]
-      //       }
-      //     }
-      //     scrapeTool.scrape(reqBodyUrl);
-      //   }
-      // console.log(scrapeTool.scrape);
-      //});
-      // // check getAsync's callbacks or use callbacks to handle the async results
-      // .then(function(err, res, body) {
-      //   // console.log(JSON.parse(body));
-      //   allItems = JSON.parse(body);
-      //   // console.log(allItems);
-      //   return allItems;
-      // })
-      // .then(function(items){
-      //   console.log('hill', items);
-      //   // return items;
-      // });
-
-      // add promise
-
-      // console.log('look', typeof allItems);
-      // allItems = Array.prototype.slice.call(allItems);
-
-
     },
 
-    // function to run when job stops
     function (){
       console.log('job stopped.  Could be a cron jrob crash');
     }, true, 'America/Los_Angeles');
+  },
+
+  // TODO: test that it works
+  watchedItems : function() {
+    db.tx(function(t){
+      return t.many("UPDATE watcheditems SET pricereached=true FROM items WHERE watcheditems.itemid=items.id AND items.currentprice <= watcheditems.idealprice");
+    })
+  },
+
+  // pseudo code
+  // WIP: this function is still being written
+  sendNotifications : function() {
+    request.getAsync('http://localhost:3000/api/notifications')
+    .then(function(res){
+      // res will be an object containing 2 arrays
+      var toNotify = JSON.parse(res.body);
+      var toTextArr = toNotify.text;
+      var toEmailArr = toNotify.email;
+
+      Promise.each(toEmailArr, function(toEmail){
+        sendEmailController.sendEmailMessage(toEmail);
+      });
+
+      Promise.each(toTextArr, function(toText){
+        sendSMSController.sendTextMessage(toText);
+      });
+    })
   },
 
   test : function () {
