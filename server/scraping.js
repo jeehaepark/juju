@@ -158,7 +158,10 @@ crateandbarrel : function (req, response) {
       var productPrice = priceFilter(price);
       
       var image = $('.carousel-inner picture').first().attr('data-image');
-      image = image.slice(2);
+      if(image[0]==='/'){
+        image = image.slice(2);
+        image = 'http://'+image;
+      }
       
       var productObj = {
         productTitle : productTitle,
@@ -250,6 +253,7 @@ crateandbarrel : function (req, response) {
       var image = $('.img-wrap').find('img').attr('src');
       if(image[0]==='/'){
         image = image.slice(2);
+        image = 'http://'+image;
       }
      
       var productObj = {
@@ -282,6 +286,7 @@ crateandbarrel : function (req, response) {
       var image = $('.prim-image').find('img').attr('src');
       if(image[0]==='/'){
         image = image.slice(2);
+        image = 'http://'+image;
       }
      
       var productObj = {
