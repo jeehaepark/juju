@@ -2,94 +2,94 @@ var CronJob = require('cron').CronJob;
 var Promise = require("bluebird");
 var request = Promise.promisifyAll(require("request"));
 var requestMultiArg = Promise.promisifyAll(require("request"), {multiArgs: true});
+
+var pgp = require('pg-promise')
+var connectionString = process.env.DATABASE_URL;
+var db = pgp(connectionString);
+
+var sendSMSController = require('./notifications/sendSMSController.js');
+var sendEmailController = require('./notifications/sendEmailController.js');
 var scrapeTool = require('./scraping.js');
 
 module.exports = {
   itemHistory : function (){
     var allItems;
     new CronJob('01 01-60 * * * *' , function () {
-      //console.log('ppooop');
       request.getAsync('http://localhost:3000/api/items')
       .then(function(res){
-        //console.log('res', res.body);
-
         var items = JSON.parse(res.body);
+
         return items;
       })
       .then(function(items){
-
-        //create an array to push the reulst objs to
-        var resultArray = [];
-        Promise.each(items, function(item){
-          // console.log('item: ', item);
-          //do scrape request in here
+        return Promise.map(items, function(item){
           var options = {
             url: 'http://localhost:3000/scrape',
             method: 'POST',
             form: {'url': item.itemurl}
           }
 
-          return requestMultiArg.postAsync(options).then(function(response, body){
-            console.log('inside each - response.body', response.body)
-
-            if(response.statusCode===200){
-              var price=response.body.price;
-            }
-            //push obj containing currentprice and item id to resultArray
-            var pushResults = {id: item.id, currentPrice: price}
-            // console.log('push results: ', pushResults);
-            resultArray.push(pushResults)
-          })
+          return requestMultiArg.postAsync(options)
         })
-        // console.log(resultArray.length)
-        // return resultArray;
-      })
+        .then(function(responseArray){
+          // TODO: add currentDate function
+          var currentDate = ///function
 
-
-
-      .then(function(items){
-        // console.log('made it to here', items);
+          Promise.each(responseArray, function(resp){
+            var res = JSON.parse(resp.body);
+            db.tx(function(t){
+              return t.one("UPDATE items SET currentPrice=${price} WHERE items.itemUrl = ${productUrl} returning id", res)
+              .then(function(itemID){
+                res.itemID = itemID.id;
+                res.currentDate = '2016-04-19';
+                return t.one("INSERT INTO itemhistories (itemid, price, checkdate) VALUES (${itemID}, ${price}, ${currentDate}) returning id", res)
+              })
+              .catch(function(err){
+                console.log(err);
+              })
+              .then(function(id){
+                console.log('our id: ', id);
+              })
+            });
+          });
+          return responseArray;
+        })
       })
       .catch(function(e){
         console.log('error', e);
       })
-      // .then(function(itemUrlArr){
-
-      //   // building up req/res parameters to inject in scrape function
-      //   for(var i = 0; i < itemUrlArr.length; i++){
-      //     var reqBodyUrl = {
-      //       body: {
-      //         url : itemUrlArr[i]
-      //       }
-      //     }
-      //     scrapeTool.scrape(reqBodyUrl);
-      //   }
-      // console.log(scrapeTool.scrape);
-      //});
-      // // check getAsync's callbacks or use callbacks to handle the async results
-      // .then(function(err, res, body) {
-      //   // console.log(JSON.parse(body));
-      //   allItems = JSON.parse(body);
-      //   // console.log(allItems);
-      //   return allItems;
-      // })
-      // .then(function(items){
-      //   console.log('hill', items);
-      //   // return items;
-      // });
-
-      // add promise
-
-      // console.log('look', typeof allItems);
-      // allItems = Array.prototype.slice.call(allItems);
-
-
     },
 
-    // function to run when job stops
     function (){
       console.log('job stopped.  Could be a cron jrob crash');
     }, true, 'America/Los_Angeles');
+  },
+
+  // TODO: test that it works
+  watchedItems : function() {
+    db.tx(function(t){
+      return t.many("UPDATE watcheditems SET pricereached=true FROM items WHERE watcheditems.itemid=items.id AND items.currentprice <= watcheditems.idealprice");
+    })
+  },
+
+  // pseudo code
+  // WIP: this function is still being written
+  sendNotifications : function() {
+    request.getAsync('http://localhost:3000/api/notifications')
+    .then(function(res){
+      // res will be an object containing 2 arrays
+      var toNotify = JSON.parse(res.body);
+      var toTextArr = toNotify.text;
+      var toEmailArr = toNotify.email;
+
+      Promise.each(toEmailArr, function(toEmail){
+        sendEmailController.sendEmailMessage(toEmail);
+      });
+
+      Promise.each(toTextArr, function(toText){
+        sendSMSController.sendTextMessage(toText);
+      });
+    })
   },
 
   test : function () {
