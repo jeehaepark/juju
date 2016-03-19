@@ -1,5 +1,4 @@
 require('dotenv').config();
-var connectionString;
 
 // handling DB connection for tests
 if(process.env.NODE_ENV === 'test'){
