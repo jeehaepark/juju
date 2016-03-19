@@ -4,7 +4,7 @@ var request = Promise.promisifyAll(require("request"));
 var requestMultiArg = Promise.promisifyAll(require("request"), {multiArgs: true});
 
 var pgp = require('pg-promise')(/*options*/);
-var connectionString = process.env.DATABASE_URL;
+var connectionString = require('./db/config/init');
 var db = pgp(connectionString);
 
 var sendSMSController = require('./notifications/sendSMSController.js');

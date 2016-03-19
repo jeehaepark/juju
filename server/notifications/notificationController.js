@@ -1,20 +1,7 @@
-//var express = require('express');
-//var router = express.Router();
-require('dotenv').config();
+var connectionString = require('./../db/config/init');
 var pg = require('pg');
-var connectionString; // = process.env.DATABASE_URL || config.connectionString;
-
-// handling DB connection for tests
-if(process.env.NODE_ENV === 'test'){
-  connectionString = process.env.TEST_DATABASE_URL;
-} else if(process.env.NODE_ENV !== 'test') {
-  connectionString = process.env.DATABASE_URL;
-}
-
-
 var pgp = require('pg-promise')(/*options*/)
 var db = pgp(connectionString);
-
 
 module.exports = {
   toNotifyGet : function (req, res){

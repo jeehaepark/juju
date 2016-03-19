@@ -1,6 +1,6 @@
 var pg = require('pg');
 var pgp = require('pg-promise')(/*options*/)
-var connectionString = process.env.DATABASE_URL;
+var connectionString = require('./../db/config/init');
 var db = pgp(connectionString);
 
 module.exports = {
