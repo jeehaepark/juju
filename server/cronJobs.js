@@ -3,6 +3,9 @@ var Promise = require("bluebird");
 var request = Promise.promisifyAll(require("request"));
 var requestMultiArg = Promise.promisifyAll(require("request"), {multiArgs: true});
 var scrapeTool = require('./scraping.js');
+var pgp = require('pg-promise')(/*options*/)
+var connectionString = process.env.DATABASE_URL;
+var db = pgp(connectionString);
 
 module.exports = {
   itemHistory : function (){
@@ -29,12 +32,35 @@ module.exports = {
           return requestMultiArg.postAsync(options)
         })
         .then(function(responseArray){
-          console.log('inside each - response.body', responseArray[0].body);
+          var currentDate = ///function
+
+          Promise.each(responseArray, function(resp){
+            var res = JSON.parse(resp.body);
+            // console.log('resp body: ', typeof resp.body);
+            db.tx(function(t){
+              return t.one("UPDATE items SET currentPrice=${price}  WHERE items.itemUrl = ${productUrl} returning id", res)
+              .then(function(itemID){
+                res.itemID = itemID.id;
+                res.currentDate = '2016-04-19';
+                return t.one("INSERT INTO itemhistories (itemid, price, checkdate) VALUES (${itemID}, ${price}, ${currentDate}) returning id", res)
+              })
+              .catch(function(err){
+                console.log(err);
+              })
+              .then(function(id){
+                console.log('our id: ', id);
+              })
+            });
+          });
+
+          // console.log('inside each - response.body', responseArray[0].body);
+
           /*
            * {
            * "productTitle":"Cygolite Expilion 720 USB Light",
            * "price":"$79.99",
-           * "picture":"http://ecx.images-amazon.com/images/I/51jgDUFBEmL._SX300_QL70_.jpg"
+           * "picture":"http://ecx.images-amazon.com/images/I/51jgDUFBEmL._SX300_QL70_.jpg",
+           * "productUrl":"http://www.amazon.com/gp/product/B00LXTP2FA/ref=s9_simh_gw_g468_i1_r?ie=UTF8&fpl=fresh&pf_rd_m=ATVPDKIKX0DER&pf_rd_s=desktop-1&pf_rd_r=1AP11P4BPYNJ3KJ17WJ4&pf_rd_t=36701&pf_rd_p=2079475242&pf_rd_i=desktop"
            * }
            */
 
@@ -43,12 +69,13 @@ module.exports = {
 
           //   item.price = price;
           // }
+          return responseArray;
         })
       })
-        .catch(function(e){
-          console.log('error', e);
-        })
-          // .then(function(itemUrlArr){
+      .catch(function(e){
+        console.log('error', e);
+      })
+      // .then(function(itemUrlArr){
 
       //   // building up req/res parameters to inject in scrape function
       //   for(var i = 0; i < itemUrlArr.length; i++){

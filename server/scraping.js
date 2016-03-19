@@ -52,7 +52,8 @@ var scrapeObj = {
       var productObj = {
         productTitle : productTitle,
         price: productPrice,
-        picture: image
+        picture: image,
+        productUrl: url
       };
 
       //sends scraped data to sender
@@ -79,7 +80,8 @@ var scrapeObj = {
       var productObj = {
         productTitle : productTitle,
         price: productPrice,
-        picture: image
+        picture: image,
+        productUrl: url
       };
 
       //sends scraped data to sender
