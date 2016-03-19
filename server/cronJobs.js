@@ -77,24 +77,37 @@ module.exports = {
     }, true, 'America/Los_Angeles');
   },
 
-  // pseudo code
-  // WIP: this function is still being written
   sendNotifications : function() {
+    new CronJob('01 01-60 * * * *',  function(){
     request.getAsync('http://localhost:3000/api/notifications')
-    .then(function(res){
-      // res will be an object containing 2 arrays
-      var toNotify = JSON.parse(res.body);
-      var toTextArr = toNotify.text;
-      var toEmailArr = toNotify.email;
+      .then(function(res){
+        var updateWatchedArr=[];
+        //console.log('res.body', res.body)
+        // res will be an object containing 2 arrays
+        var toNotify = JSON.parse(res.body);
+        var toTextArr = toNotify.text;
+        //console.log('text', toTextArr);
+        var toEmailArr = toNotify.email;
+        //console.log('email', toEmailArr);
 
-      Promise.each(toEmailArr, function(toEmail){
-        sendEmailController.sendEmailMessage(toEmail);
-      });
+        // Promise.each(toEmailArr, function(toEmail){
+        //   sendEmailController.sendEmailMessage(toEmail);
+        //   updateWatchedArr.push(toEmail.id);
 
-      Promise.each(toTextArr, function(toText){
-        sendSMSController.sendTextMessage(toText);
-      });
-    })
+        // });
+
+        Promise.each(toTextArr, function(toText){
+          //sendSMSController.sendTextMessage(toText);
+          updateWatchedArr.push(toText.id);
+        });
+      return updateWatchedArr;
+      })
+      .then(function(updateArr){
+        console.log(updateArr)
+      })
+    }, function(){
+      console.log('job stopped');
+    }, true, 'America/Los_Angeles');
   },
 
   test : function () {
