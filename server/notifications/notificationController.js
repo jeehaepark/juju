@@ -32,6 +32,20 @@ module.exports = {
         return res.json(results);
       });
     });
+  },
+
+  toNotifyUpdate: function(req, res){
+    pg.connecnt(connectionString, function(err, client, done){
+      if(err){
+        done();
+        console.log(err);
+        return res.status(500).json({
+          success: false,
+          data: err});
+      }
+      var data = {id=req.body.id}
+      var query=client.query('UPDATE watcheditems SET emailed=True WHERE id=${id}', data)
+    })
   }
 }
 
