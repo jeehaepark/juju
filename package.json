@@ -28,6 +28,7 @@
     "angular-ui-router": "0.2.18",
     "bluebird": "3.3.4",
     "body-parser": "1.15.0",
+    "bootstrap": "3.3.6",
     "chai": "3.5.0",
     "cheerio": "0.20.0",
     "cron": "1.1.0",
