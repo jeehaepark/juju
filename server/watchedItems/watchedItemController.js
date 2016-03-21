@@ -143,7 +143,7 @@ module.exports = {
     });
   },
 
-  joinTable: function (req, res){
+  getUserWatchedItems: function (req, res){
     var results = [];
     var data = { userId: req.params.user_id } ;
     pg.connect(connectionString, function(err, client, done) {
