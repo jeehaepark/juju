@@ -43,7 +43,9 @@
                          <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>preference</label>
-                                <input type="text" name="preference" class="form-control" placeholder="text/email" ng-model="userData.contactpref" id="message" required data-validation-required-message="Please enter a message."></textarea>
+                                <!--<input type="text" name="preference" class="form-control" placeholder="text/email" ng-model="userData.contactpref" id="message" required data-validation-required-message="Please enter a message.">-->
+                                <input type="radio" name="preference" class="form-control" value="text" ng-model="userData.contactpref" id="message" required data-validation-required-message="Please select your preference.">text
+                                <input type="radio" name="preference" class="form-control" value="email" ng-model="userData.contactpref" id="message" required data-validation-required-message="Please select your preference.">email<br>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
