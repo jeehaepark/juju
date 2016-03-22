@@ -18,13 +18,13 @@ var port = process.env.PORT;
 
 
 function cronJobsGO(){
-new CronJob('01 01-60 * * * *' , function () {
-  cron.itemHistory();
-  
-}, 
-    function (){
-      console.log('job stopped.  Could be a cron jrob crash');
-    }, true, 'America/Los_Angeles');
+  new CronJob('01 01 10 01-31 * *' , function () {
+    cron.itemHistory();
+
+  },
+  function (){
+    console.log('job stopped.  Could be a cron jrob crash');
+  }, true, 'America/Los_Angeles');
 };
 
 cronJobsGO();
