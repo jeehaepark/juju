@@ -9,10 +9,12 @@ var db = pgp(connectionString);
 
 var sendSMSController = require('./notifications/sendSMSController.js');
 var sendEmailController = require('./notifications/sendEmailController.js');
+var notificationController=require('./notifications/notificationController.js')
 var scrapeTool = require('./scraping.js');
 
 module.exports = {
   itemHistory : function (){
+    console.log('in item history');
     var allItems;
     new CronJob('01 01-60 * * * *' , function () {
       request.getAsync('http://localhost:3000/api/items')
@@ -66,6 +68,7 @@ module.exports = {
   },
 
   watchedItems : function() {
+    console.log('in watcheditems');
     new CronJob('00-60 * * * * *' , function () {
       db.task(function(t){
         return t.many("UPDATE watcheditems SET pricereached=true FROM items WHERE watcheditems.itemid=items.id AND items.currentprice <= watcheditems.idealprice;");
@@ -78,32 +81,40 @@ module.exports = {
   },
 
   sendNotifications : function() {
+    console.log('in sendnotification');
     new CronJob('01 01-60 * * * *',  function(){
     request.getAsync('http://localhost:3000/api/notifications')
       .then(function(res){
-        var updateWatchedArr=[];
-        //console.log('res.body', res.body)
         // res will be an object containing 2 arrays
+        var updateWatchedArr=[];
         var toNotify = JSON.parse(res.body);
         var toTextArr = toNotify.text;
-        //console.log('text', toTextArr);
         var toEmailArr = toNotify.email;
-        //console.log('email', toEmailArr);
+        for(var i=0; i<toTextArr.length; i++){
+          var currWatchedID=toTextArr[i].id
+          updateWatchedArr.push(currWatchedID)
+        }
+        for(var i=0; i<toEmailArr.length; i++){
+          var currWatchedID=toEmailArr[i].id
+          updateWatchedArr.push(currWatchedID)
+        }
 
-        // Promise.each(toEmailArr, function(toEmail){
-        //   sendEmailController.sendEmailMessage(toEmail);
-        //   updateWatchedArr.push(toEmail.id);
-
-        // });
+        Promise.each(toEmailArr, function(toEmail){
+          sendEmailController.sendEmailMessage(toEmail);
+        });
 
         Promise.each(toTextArr, function(toText){
-          //sendSMSController.sendTextMessage(toText);
-          updateWatchedArr.push(toText.id);
+          sendSMSController.sendTextMessage(toText);
         });
+        console.log('update watched in sendnotification', updateWatchedArr)
+
       return updateWatchedArr;
       })
-      .then(function(updateArr){
-        console.log(updateArr)
+      .then(function(updateWatchedArr){
+        Promise.each(updateWatchedArr, function(item){
+          notificationController.toNotifyUpdate(item)
+        });
+
       })
     }, function(){
       console.log('job stopped');
