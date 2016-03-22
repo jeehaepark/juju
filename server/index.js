@@ -12,12 +12,16 @@ require('./config/middleware.js')(app, express);
 
 var port = process.env.PORT;
 
-
+//cron.watchedItems();
 // TODO: write promise to schedule cron jobs correctly
-// return Promise(cron.itemHistory())
-// .then(function(){
-//   cron.test();
-// })
+Promise(cron.itemHistory())
+.then(function(){
+  cron.watchedItems()
+})
+.then(function(){
+  cron.sendNotifications();
+});
+
 
 app.post('/scrape',scrapeTools.scrape);
 
