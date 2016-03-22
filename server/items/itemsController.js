@@ -35,7 +35,7 @@ module.exports = {
       })
       .then(function(itemID){
         data.itemId=itemID.id
-        return t.one('INSERT INTO watchedItems(idealPrice, priceReached, emailed, nickName, itemID, userID) values (${idealPrice}, false, false, ${itemNickName}, ${itemId}, ${userId})', data)
+        return t.one('INSERT INTO watchedItems(idealPrice, priceReached, contacted, nickName, itemID, userID) values (${idealPrice}, false, false, ${itemNickName}, ${itemId}, ${userId})', data)
       })
       .then(function(){
         return t.one('INSERT INTO itemHistories(price, checkDate, itemID) values (${currentPrice}, ${createdDate}, ${itemId}) returning id', data)
