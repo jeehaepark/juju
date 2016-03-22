@@ -1,4 +1,5 @@
 require('dotenv').config();
+var CronJob = require('cron').CronJob;
 var express = require('express');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
@@ -14,14 +15,21 @@ var port = process.env.PORT;
 
 //cron.watchedItems();
 // TODO: write promise to schedule cron jobs correctly
-Promise(cron.itemHistory())
-.then(function(){
-  cron.watchedItems()
-})
-.then(function(){
-  cron.sendNotifications();
-});
+function cronJobsGO(){
+  
+}
 
+function blahblah(){
+new CronJob('01 01-60 * * * *' , function () {
+  cron.itemHistory();
+  
+}, 
+    function (){
+      console.log('job stopped.  Could be a cron jrob crash');
+    }, true, 'America/Los_Angeles');
+};
+
+blahblah();
 
 app.post('/scrape',scrapeTools.scrape);
 

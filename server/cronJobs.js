@@ -16,8 +16,7 @@ module.exports = {
   itemHistory : function (){
     console.log('in item history');
     var allItems;
-    new CronJob('01 01-60 * * * *' , function () {
-      request.getAsync('http://localhost:3000/api/items')
+       return request.getAsync('http://localhost:3000/api/items')
       .then(function(res){
         var items = JSON.parse(res.body);
 
@@ -51,38 +50,76 @@ module.exports = {
               })
               .then(function(id){
                 console.log('our id: ', id);
+                return;
               })
             });
-          });
+          })
           return responseArray;
+        }).then(function(nothing){
+          console.log('****nothing?', nothing.body);
+          console.log('***in watcheditems');
+          db.task(function(t){
+            return t.many("UPDATE watcheditems SET pricereached=true FROM items WHERE watcheditems.itemid=items.id AND items.currentprice <= watcheditems.idealprice;");
+          })
+          console.log('ran cron job: watchedItems');
+          return 'I hate computers';
+
+        }).then(function(words){
+          console.log('words? ', words)
+          console.log('in sendnotification');
+          request.getAsync('http://localhost:3000/api/notifications')
+          .then(function(res){
+          // res will be an object containing 2 arrays
+          var updateWatchedArr=[];
+          var toNotify = JSON.parse(res.body);
+          var toTextArr = toNotify.text;
+          var toEmailArr = toNotify.email;
+          for(var i=0; i<toTextArr.length; i++){
+            var currWatchedID=toTextArr[i].id
+            updateWatchedArr.push(currWatchedID)
+          }
+          for(var i=0; i<toEmailArr.length; i++){
+            var currWatchedID=toEmailArr[i].id
+            updateWatchedArr.push(currWatchedID)
+          }
+
+          Promise.each(toEmailArr, function(toEmail){
+            sendEmailController.sendEmailMessage(toEmail);
+          });
+
+          Promise.each(toTextArr, function(toText){
+            sendSMSController.sendTextMessage(toText);
+          });
+          console.log('update watched in sendnotification', updateWatchedArr)
+
+        return updateWatchedArr;
+        })
+        .then(function(updateWatchedArr){
+          console.log('updating watchedArr:', updateWatchedArr)
+          Promise.each(updateWatchedArr, function(item){
+            notificationController.toNotifyUpdate(item)
+          });
+
+      })
         })
       })
       .catch(function(e){
         console.log('error', e);
       })
-    },
-
-    function (){
-      console.log('job stopped.  Could be a cron jrob crash');
-    }, true, 'America/Los_Angeles');
   },
 
   watchedItems : function() {
     console.log('in watcheditems');
-    new CronJob('00-60 * * * * *' , function () {
       db.task(function(t){
         return t.many("UPDATE watcheditems SET pricereached=true FROM items WHERE watcheditems.itemid=items.id AND items.currentprice <= watcheditems.idealprice;");
       })
       console.log('ran cron job: watchedItems');
-    },
-    function(){
-      console.log('job stopped');
-    }, true, 'America/Los_Angeles');
+      return 'I hate computers';
+    
   },
 
   sendNotifications : function() {
     console.log('in sendnotification');
-    new CronJob('01 01-60 * * * *',  function(){
     request.getAsync('http://localhost:3000/api/notifications')
       .then(function(res){
         // res will be an object containing 2 arrays
@@ -116,10 +153,9 @@ module.exports = {
         });
 
       })
-    }, function(){
-      console.log('job stopped');
-    }, true, 'America/Los_Angeles');
+    
   },
+
 
   test : function () {
     var seconds = 0;
