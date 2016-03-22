@@ -7,7 +7,8 @@ var app = angular.module('juju', [
   'juju.item',
   'juju.user',
   'userFactory',
-  'chart.js'
+  'chart.js',
+  'ui.bootstrap'
 ]);
 
 app.config(function ($stateProvider, $urlRouterProvider){

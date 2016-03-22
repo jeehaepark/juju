@@ -46,4 +46,5 @@ angular.module('displayItemsController', [])
   $scope.onClick = function (points, evt) {
     console.log(points, evt);
   };
+
 });
