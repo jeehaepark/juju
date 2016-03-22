@@ -6,7 +6,9 @@ var app = angular.module('juju', [
   'itemFactory',
   'juju.item',
   'juju.user',
-  'userFactory'
+  'userFactory',
+  'chart.js',
+  'ui.bootstrap'  
 ]);
 
 app.config(function ($stateProvider, $urlRouterProvider){
@@ -25,6 +27,12 @@ app.config(function ($stateProvider, $urlRouterProvider){
       }
     },
     authenticate: true
+  })
+  .state('items/aItem', {
+    url: '/yourItems/item',
+    templateUrl : './item/view/itemGraphModal.html',
+    authenticate:true
+    
   })
   .state('additems', {
     url: '/additems',
