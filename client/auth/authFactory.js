@@ -51,8 +51,22 @@ angular.module('authFactory', [])
       data: data
     }).then(function successCallback(response) {
       authFuncs.userId= response.data.id;
-      console.log(authFuncs.userId);
-      $state.go('additems');
+      // console.log(authFuncs.userId);
+      // console.log('data',data)
+      return $http({
+        method: 'GET',
+        url : '/api/users/' + authFuncs.userId
+      }).then(function successCallback(req, res) {
+        var userData =req.data[0];
+        if(userData.email === null || userData.phonenumber === null){
+          console.log('null');
+          $state.go('usersettings');
+          alert('We need your phone number or email to inform you!');
+
+        }else{
+          $state.go('additems');
+        } 
+      })
     })
   };
 
