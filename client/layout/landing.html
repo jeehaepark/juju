@@ -8,13 +8,15 @@
         <div class="intro-text">
           <span class="name">Saja</span>
           <hr class="star-light">
-          <button ng-click = "facebookLogin()">fb Login</button>
-          <br>
-          <span class="skills">Amazon, Target, Nordstorm, Disneystore</span>
+          <button type="button" class="btn btn-round btn-primary" ng-click="facebookLogin()">
+            <span class="fa fa-facebook"> Login</span>
+          </button>
         </div>
+        <br>
+        <span class="skills">Amazon, Target, Nordstorm, Disneystore</span>
       </div>
-    </div><!-- row -->
-  </div>
+    </div>
+  </div><!-- row -->
 </header>
 <!-- feature description #1 -->
 <section>
@@ -25,7 +27,10 @@
         <p>Let's say you have an item you really want but want to wait until the price drops.  Use our app to check it's prices daily and we'll contact you once it reaches your ideal price</p>
       </div>
       <div class="col-md-6">
-        <img class="img-circle img-responsive img-center" src="http://placehold.it/300x300" alt="">
+        <span class="fa-stack fa-5x">
+          <i class="fa fa-circle fa-stack-2x"></i>
+          <i class="fa fa-cloud fa-stack-1x text-primary"></i>
+        </span>
       </div>
     </div><!-- row -->
   </div>
@@ -37,7 +42,10 @@
       <div class="col-md-3">
       </div>
       <div class="col-md-3">
-        <img class="img-circle img-responsive img-center" src="http://placehold.it/300x300" alt="">
+        <span class="fa-stack fa-5x">
+          <i class="fa fa-circle fa-stack-2x"></i>
+          <i class="fa fa-cloud fa-stack-1x text-primary"></i>
+        </span>
       </div>
       <div class="col-md-6">
         <h3>Track prices on your favorite items</h3>
@@ -56,7 +64,10 @@
         <p>Let's say you have an item you really want but want to wait until the price drops.  Use our app to check it's prices daily and we'll contact you once it reaches your ideal price</p>
       </div>
       <div class="col-md-6">
-        <img class="img-circle img-responsive img-center" src="http://placehold.it/300x300" alt="">
+        <span class="fa-stack fa-5x">
+          <i class="fa fa-circle fa-stack-2x"></i>
+          <i class="fa fa-cloud fa-stack-1x text-primary"></i>
+        </span>
       </div>
     </div><!-- row -->
   </div>
@@ -106,3 +117,31 @@
   </div>
   <!-- /.container -->
 </section>
+<section>
+  <div class="container">
+    <div class="row text-center">
+      <h2>Pick from your favorite retailers</h2>
+      <!-- TODO: add logos -->
+      <hr class="star-light">
+    </div>
+  </div>
+</section>
+<section id="services" class="services green-background">
+  <div class="container">
+    <div class="row text-center">
+      <h2>Product Video</h2>
+      <hr class="star-light">
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <div class="row text-center">
+      <h3>Login to start</h3>
+      <button type="button" class="btn btn-round btn-primary" ng-click="facebookLogin()">
+        <span class="fa fa-facebook"> Login</span>
+      </button>
+    </div>
+  </div>
+</section>
+
