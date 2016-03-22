@@ -1,5 +1,5 @@
 angular.module('displayItemsController', [])
-.controller('displayItemsCtrl', function ($scope, displayItemsFactory, Auth){
+.controller('displayItemsCtrl', function ($scope, displayItemsFactory, Auth, $uibModal){
   //console.log('userId from displayItemsCtrl', Auth.userId);
   var user;
   Auth.isloggedIn()
@@ -42,9 +42,55 @@ angular.module('displayItemsController', [])
       $scope.ItemHistoryData = data;
     })
   }
-  
+  $scope.ok = function () {
+    $uibModalInstance.close('hello');
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+
   $scope.onClick = function (points, evt) {
     console.log(points, evt);
   };
 
+  $scope.open = function (size) {
+    console.log('open called')
+    var modalInstance = $uibModal.open({
+      animation: $scope.animationsEnabled,
+      templateUrl: 'myModalContent.html',
+      backdrop : false,//'/scripts/angular-ui-bootstrap/template/modal/backdrop.html',
+      controller: 'ModalInstanceCtrl',
+      size: size,
+      windowTemplateUrl : '/scripts/angular-ui-bootstrap/template/modal/window.html',
+
+      resolve: {
+        items: function () {
+          return $scope.items;
+        }
+      }
+    });
+  };
+
+})
+.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, Auth , displayItemsFactory) {
+
+  // $scope.items = items;
+  // $scope.selected = {
+  //   item: $scope.items[0]
+  // };
+  console.log(Auth.userId)
+  displayItemsFactory.getItemHistoryData(Auth.userId)
+  .then(
+    function successCallback(response) {
+      console.log(response.data)
+      $scope.itemHistoryData = displayItemsFactory.organizeData(response.data);
+    });
+  $scope.ok = function () {
+    $uibModalInstance.close();
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
 });
