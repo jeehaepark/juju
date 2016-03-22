@@ -10,7 +10,7 @@ module.exports = {
       idealPrice: req.body.idealPrice,
       settlePrice: req.body.settlePrice,
       priceReached: req.body.priceReached,
-      emailed: req.body.emailed,
+      contacted: req.body.contacted,
       itemID: req.body.itemID,
       userID: req.body.userID
     };
@@ -26,7 +26,7 @@ module.exports = {
 
       // SQL Query > Insert Data
 
-      client.query('INSERT INTO watchedItems(deadline, idealPrice, settlePrice, priceReached, emailed, itemID, userID) values($1, $2, $3, $4, $5, $6, $7)', [data.deadline, data.idealPrice, data.settlePrice, data.priceReached,data.emailed,data.itemID,data.userID]);
+      client.query('INSERT INTO watchedItems(deadline, idealPrice, settlePrice, priceReached, contacted, itemID, userID) values($1, $2, $3, $4, $5, $6, $7)', [data.deadline, data.idealPrice, data.settlePrice, data.priceReached,data.contacted,data.itemID,data.userID]);
       //(routing)set up route to pass user info
 
       // SQL Query > Select Data
@@ -85,7 +85,7 @@ module.exports = {
       idealPrice: req.body.idealprice,
       settlePrice:req.body.settleprice,
       priceReached:req.body.pricereached,
-      emailed: req.body.emailed,
+      contacted: req.body.contacted,
       itemID: req.body.itemid,
       userID: req.body.userid};
       // Get a Postgres client from the connection pool
@@ -98,7 +98,7 @@ module.exports = {
         }
 
         // SQL Query > Update Data
-        client.query('UPDATE watchedItems SET deadline=($1), idealPrice=($2), settlePrice=($3), priceReached=($4), emailed=($5)  WHERE id=($6)', [data.deadline, data.idealPrice, data.settlePrice, data.priceReached,data.emailed, id]);
+        client.query('UPDATE watchedItems SET deadline=($1), idealPrice=($2), settlePrice=($3), priceReached=($4), contacted=($5)  WHERE id=($6)', [data.deadline, data.idealPrice, data.settlePrice, data.priceReached,data.contacted, id]);
 
         // SQL Query > Select Data
         var query = client.query('SELECT * FROM watchedItems ORDER BY id ASC');
