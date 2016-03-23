@@ -153,14 +153,15 @@ angular.module('itemFactory', [])
   var orgData = {};
   var itemId;
   var aHistroy;
-  //group the itemData based on itemId 
+  var priceArray;
+  //group the itemData based on nickname 
   for(var entryId in itemHistory) {
     aHistory = itemHistory[entryId];
-    console.log(aHistory)
+    console.log('ahistory', aHistory)
     itemId = itemHistory[entryId].nickname;
     orgData[itemId] !==undefined ? orgData[itemId].push(aHistory) : orgData[itemId] = [aHistory]
   }
-  
+
   //sort itemData by date for each time
   for(var item in orgData){
     console.log(typeof orgData)
@@ -174,14 +175,20 @@ angular.module('itemFactory', [])
     
   return orgData;
   }
-
+  displayItemsFactoryFuncts.buyNow='Wait';
   displayItemsFactoryFuncts.makeLabels = function (itemData) {
   if(itemData<5){
     return [];
   }
+  var idealPrice=itemData[itemData.length-1].idealprice.slice(1);
+  console.log('idealPrice', idealPrice)
   var graphData = [];
   var datesArray = [];
   var pricesArray = [];
+  var priceSum=0;
+  var priceAvg;
+  var mostRecentPrice;
+  var ninetyPerc;
   var date;
   var price;
   for(var i=0; i< itemData.length;i++){
@@ -194,6 +201,16 @@ angular.module('itemFactory', [])
     if(itemData[i].price !==null){
       pricesArray.push(Number(itemData[i].price.slice(1)));
     }
+  }
+  //calculate Avg price
+  for(var i=0; i<pricesArray.length; i++){
+    priceSum+=pricesArray[i];
+  }
+  priceAvg=priceSum/(pricesArray.length);
+  mostRecentPrice=pricesArray[pricesArray.length-1];
+  ninetyPerc=priceAvg*.9;
+  if(mostRecentPrice<=idealPrice || mostRecentPrice<=ninetyPerc){
+    displayItemsFactoryFuncts.buyNow='Buy Now!';
   }
   graphData.push([datesArray, [pricesArray]]);
   return graphData;
