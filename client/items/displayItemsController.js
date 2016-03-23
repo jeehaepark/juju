@@ -10,33 +10,39 @@ angular.module('displayItemsController', [])
   })
   .then(
     function successCallback(response) {
-      console.log(response);
-      $scope.itemData = response.data;
+      var allItems = response.data;
+      var numberofItems = response.data.length - 1;
+      $scope.itemData = allItems.slice(0,6);
+
+      $scope.loadMoreItems = function(){
+        var last = $scope.itemData.length - 1;
+        if(numberofItems > last){
+          for (var i = 0; i <= 1; i++){
+            $scope.itemData.push(allItems[last + i]);
+          }
+        }
+      };
     }, function errorCallback(err) {
-      console.log(err);
       $scope.err = 'There was a problem loading your data';
     })
   .then(
     function successCallback(response) {
-      console.log($scope.user)
       return displayItemsFactory.getItemHistoryData($scope.user)
     })
   .then(
     function successCallback(response) {
-      console.log(response.data)
       $scope.itemHistoryData = displayItemsFactory.organizeData(response.data);
     });
 
   $scope.update = function (itemId , itemObj) {
     displayItemsFactory.updateData(itemId, itemObj);
-  };  
-    
+  };
+
   $scope.deleteWatched = function(itemId){
-    
+
     displayItemsFactory.deleteData(itemId);
   };
 
-  console.log('userId' , $scope.user)
   $scope.itemHistory = function () {
       displayItemsFactory.getItemHistoryData($scope.user)
     .then( function successCallback (data) {
@@ -72,18 +78,16 @@ angular.module('displayItemsController', [])
 
 })
 .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, Auth , displayItemsFactory , simpleObj) {
-  console.log(simpleObj.value)
   $scope.itemid = simpleObj.value;
   $scope.itemHistoryData = simpleObj.itemHistory;
   $scope.lackofData = false;
   $scope.errMessage = false;
 
   if($scope.itemHistoryData[$scope.itemid].priceGraph[0][0].length<4){
-    console.log($scope.itemHistoryData[$scope.itemid].priceGraph[0][0].length)
     $scope.lackofData = true;
     $scope.errMessage = true;
   }
-  
+
   $scope.ok = function () {
     $uibModalInstance.close();
   };
