@@ -1,7 +1,14 @@
 angular.module('juju.user', [])
 .controller('usersCtrl', function($scope, User, Auth){
   console.log('userCtrl Auth.userId',Auth.userId);
-  User.getOneInfo(Auth.userId).then(
+  Auth.isloggedIn()
+  .then( function successCallback (userId) {
+    $scope.user = userId;
+    return User.getOneInfo(Auth.userId)
+  }, function errorCallback (err) {
+    console.log(err)
+  })
+  .then(
     function successCallback(res){
       $scope.userData = res.data[0];
     },function errorCallback(err){
