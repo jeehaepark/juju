@@ -29,7 +29,20 @@ angular.module('itemFactory', [])
       url: 'api/items/categories/'+userId
     }).then(function(response){
       for(var i=0; i<response.data.length; i++){
-        addItemFuncs.category.push(response.data[i].category)
+        var currCat=response.data[i].category;
+        var inIt=false;
+        if(currCat==='null'){
+          inIt=true;
+        }
+        for(var j=0; j<addItemFuncs.category.length; j++){
+          if(currCat===addItemFuncs.category[j]){
+            inIt=true;
+            break;
+          }
+        }
+        if(!inIt){
+        addItemFuncs.category.push(currCat)
+        }
       }
       console.log('categories', addItemFuncs.category)
     })
