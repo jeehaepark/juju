@@ -6,19 +6,20 @@
         <hr class="star-primary">
       </div>
     </div>
-    <div class="row"  >
-      <div class="col-sm-4 portfolio-item" ng-repeat = "item in itemData" >
-        <button ng-click='open(item.nickname)' class="portfolio-link" data-toggle="modal" data-target="#myModal" >
-        <!-- <div class="caption">
-          <div class="caption-content">
-            <i class="fa fa-search-plus fa-3x"></i>
-          </div>
-        </div> -->
-        <img ng-src = "{{ item.itemimageurl }}" class="img-responsive" alt="">
-        </button>
-        
-        <script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-header">
+    <div class="row">
+      <div infinite-scroll="loadMoreItems()" infinite-scroll-distance='1'>
+        <div class="col-sm-4 portfolio-item" ng-repeat="item in itemData track by $index">
+          <button ng-click='open(item.nickname)' class="portfolio-link" data-toggle="modal" data-target="#myModal" >
+            <!-- <div class="caption">
+              <div class="caption-content">
+              <i class="fa fa-search-plus fa-3x"></i>
+              </div>
+              </div> -->
+              <img ng-src = "{{ item.itemimageurl }}" class="img-responsive" alt="">
+          </button>
+
+          <script type="text/ng-template" id="myModalContent.html">
+<div class="modal-header">
           <h3 class="modal-title">{{ itemid + " price over time" }}!</h3>
         </div>
         <div class="modal-body">
@@ -32,32 +33,28 @@
           <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
           <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
         </div>
-        </script>
-        
-        <div id="name"> {{"item nickname " + item.nickname }} </div>
-        <div> product title = {{item.producttitle}} </div>
-        <div> item id = {{item.id}}</div>
-        <div>
-          <button ng-click="deleteWatched(item.id)"> delete </button>
-        </div>
-        <div id="price"> {{"current price " + item.currentprice }} </div>
-        <div>ideal price : {{item.idealprice}}
-          <input type = "text" ng-model= "item.idealprice">
-          <a href="" ng-click="update(item.id, item)">update</a>
+          </script>
+          <div id="name"><strong>ITEM NICKNAME:</strong> {{item.nickname }} </div>
+          <div><strong>PRODUCT TITLE:</strong> {{item.producttitle}} </div>
+          <div><button class="fa fa-trash btn" ng-click="deleteWatched(item.id)"> delete </button></div>
+          <div id="price"><strong>Current price:</strong> {{item.currentprice }} </div>
+          <div><strong>Ideal price:</strong> {{item.idealprice}}
+            <input type = "text" ng-model= "item.idealprice">
+            <button class="btn btn-primary fa fa-gears" ng-click="update(item.id, item)"> Update</button>
+          </div>
+        </div><!--ng-repeat-->
+      </div><!--infinite-scroll-->
+      </div><!--row-->
+  </div>
+  <div class="col-sm-4 portfolio-item">
+    <a ui-sref="additems" class="portfolio-link" data-toggle="modal">
+      <div class="caption">
+        <div class="caption-content">
+          <i class="fa fa-search-plus fa-3x"></i>
         </div>
       </div>
-    </div>
-    <div class="col-sm-4 portfolio-item">
-      <a ui-sref="additems" class="portfolio-link" data-toggle="modal">
-        <div class="caption">
-          <div class="caption-content">
-            <i class="fa fa-search-plus fa-3x"></i>
-          </div>
-        </div>
-        add item
-      </a>
-    </div>
+      add item
+    </a>
   </div>
-</div>
 </section>
 </div>
