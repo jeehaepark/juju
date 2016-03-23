@@ -19,6 +19,7 @@ module.exports = {
       currentPrice:req.body.currentPrice,
       idealPrice : req.body.idealPrice,
       createdDate : req.body.createdDate,
+      category : req.body.category,
       userId : req.body.userId
     };
     // Get a Postgres client from the connection pool
@@ -35,7 +36,7 @@ module.exports = {
       })
       .then(function(itemID){
         data.itemId=itemID.id
-        return t.one('INSERT INTO watchedItems(idealPrice, priceReached, contacted, nickName, itemID, userID) values (${idealPrice}, false, false, ${itemNickName}, ${itemId}, ${userId})', data)
+        return t.one('INSERT INTO watchedItems(idealPrice, priceReached, contacted, nickName, itemID, category, userID) values (${idealPrice}, false, false, ${itemNickName}, ${itemId}, ${category}, ${userId})', data)
       })
       .then(function(){
         return t.one('INSERT INTO itemHistories(price, checkDate, itemID) values (${currentPrice}, ${createdDate}, ${itemId}) returning id', data)

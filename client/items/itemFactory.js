@@ -12,6 +12,7 @@ angular.module('itemFactory', [])
       currentPrice : itemInfo.currentPrice,
       idealPrice : itemInfo.idealPrice,
       createdDate : itemInfo.createdDate.toDateString(),
+      category : itemInfo.categories.repeatSelect,
       userId : userId
     };
 
@@ -21,12 +22,18 @@ angular.module('itemFactory', [])
       data: data
     });
   },
-  addItemFuncs.getCategories = function(userId){
+  addItemFuncs.category=['Add Category']
+  addItemFuncs.getCategories = function(){
     return $http({
       method : 'GET',
-      url: 'api/items/categories/' + userId
+      url: 'api/items/categories/'+userId
+    }).then(function(response){
+      for(var i=0; i<response.data.length; i++){
+        addItemFuncs.category.push(response.data[i].category)
+      }
+      console.log('categories', addItemFuncs.category)
     })
-  }
+  },
   addItemFuncs.scrapePriceInfo = function(itemInfo){
     data = {
       url : itemInfo.URL
