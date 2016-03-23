@@ -3,23 +3,25 @@
     <div class="row">
       <div class="col-lg-12 text-center">
         <h2>Your List</h2>
+        <h2>Search<input type ='text' ng-model=search></h2>
         <hr class="star-primary">
       </div>
     </div>
-    <div class="row">
-      <div infinite-scroll="loadMoreItems()" infinite-scroll-distance='1'>
-        <div class="col-sm-4 portfolio-item" ng-repeat="item in itemData track by $index">
-          <button ng-click='open(item.nickname)' class="portfolio-link" data-toggle="modal" data-target="#myModal" >
-            <!-- <div class="caption">
-              <div class="caption-content">
-              <i class="fa fa-search-plus fa-3x"></i>
-              </div>
-              </div> -->
-              <img ng-src = "{{ item.itemimageurl }}" class="img-responsive" alt="">
-          </button>
 
-          <script type="text/ng-template" id="myModalContent.html">
-<div class="modal-header">
+    <div class="row">
+    <div infinite-scroll="loadMoreItems()" infinite-scroll-distance='1'>
+      <div class="col-sm-4 portfolio-item" ng-repeat = "item in itemData | filter: search track by $index" >
+        <button ng-click='open(item.nickname)' class="portfolio-link" data-toggle="modal" data-target="#myModal" >
+        <!-- <div class="caption">
+          <div class="caption-content">
+            <i class="fa fa-search-plus fa-3x"></i>
+          </div>
+        </div> -->
+        <img ng-src = "{{ item.itemimageurl }}" class="img-responsive" alt="">
+        </button>
+        
+        <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
           <h3 class="modal-title">{{ itemid + " price over time" }}!</h3>
         </div>
         <div class="modal-body">
