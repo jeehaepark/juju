@@ -21,6 +21,11 @@
     <!-- User Profile Section -->
     <section id="contact">
         <div class="container" ng-controller="usersCtrl">
+          <script type="text/ng-template" id="alert.html">
+            <div class="alert" style="background-color:#fa39c3;color:white" role="alert">
+              <div ng-transclude></div>
+            </div>
+          </script>
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Profile</h2>
@@ -72,6 +77,7 @@
                         </div>
                         <br>
                         <div id="success"></div>
+                         <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
                         <div class="row">
                             <div class="form-group col-xs-12">
                                 <button type="submit" class="btn btn-success btn-lg" ng-click="updateUserInfo(userData.id,userData)" >Update</button>

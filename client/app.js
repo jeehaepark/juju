@@ -10,6 +10,7 @@ var app = angular.module('juju', [
   'chart.js',
   'ui.bootstrap',
   'infinite-scroll'
+  'ui.bootstrap.tpls'
 ]);
 
 app.config(function ($stateProvider, $urlRouterProvider){

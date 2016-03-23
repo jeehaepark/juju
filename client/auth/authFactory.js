@@ -24,6 +24,9 @@ angular.module('authFactory', [])
       .then(function successCallback(response) {
         authFuncs.userId= response.data.id;
         return response.data.id;
+      }, function errorCallback(response) {
+        alert('Sorry we can\'t get login, Please try again');
+        $state.go('login');
       })
     }
     return !!loggedIn;
@@ -61,12 +64,15 @@ angular.module('authFactory', [])
         if(userData.email === null || userData.phonenumber === null){
           console.log('null');
           $state.go('usersettings');
+          
           alert('We need your phone number or email to inform you!');
 
         }else{
           $state.go('additems');
         } 
       })
+    }, function errorCallback (response){
+      alert('Sorry we are unable to get your information! \n Please try again');
     })
   };
 
