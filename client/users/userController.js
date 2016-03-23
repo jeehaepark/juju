@@ -1,4 +1,4 @@
-angular.module('juju.user', ['ui.bootstrap'])
+angular.module('juju.user', [])
 .controller('usersCtrl', function($scope, User, Auth){
   $scope.alerts = [];
   
@@ -34,7 +34,7 @@ angular.module('juju.user', ['ui.bootstrap'])
       }
     User.updateOneInfo(userId,userObj).then(
       function success(res) {
-       $scope.alerts.push( { type: 'success', msg: 'Well done! You successfully read this important alert message.' } );
+       $scope.addAlert( { type: 'success', msg: 'Well done! You successfully read this important alert message.' } );
         //  $("#btnSubmit").attr("disabled", false);
         //  $('#success').html("<div class='alert alert-success'>");
         //  $('#success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;").append("</button>");
@@ -43,7 +43,7 @@ angular.module('juju.user', ['ui.bootstrap'])
 
         
       },function error (err) {
-        addAlert( { type: 'danger', msg: 'Oh snap! Change a few things up and try submitting again.' } );
+        $scope.addAlert( { type: 'danger', msg: 'Sorry! Try it again' } );
         
       //  $('#success').html("<div class='alert alert-danger'>");
       //  $('#success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;").append("</button>");
