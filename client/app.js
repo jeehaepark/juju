@@ -9,7 +9,7 @@ var app = angular.module('juju', [
   'userFactory',
   'chart.js',
   'ui.bootstrap',
-  'infinite-scroll'
+  'infinite-scroll',
   'ui.bootstrap.tpls'
 ]);
 
