@@ -81,6 +81,23 @@ module.exports = {
 
   },
 
+  getUserCategories: function (req, res){
+    var results=[]
+    var data={userId: req.params.user_id};
+    pg.connect(connectionString, function(err, client, done){
+      var query = client.query('SELECT category FROM watchedItems WHERE userid=' +data.userId);
+
+      query.on('row', function(row){
+        results.push(row);
+      });
+
+      query.on('end', function(){
+        done();
+        return res.json(results);
+      })
+    })
+  },
+
   //UPDATE A SINGLE ITEM
   //curl -X PUT --data 'name=test@test.com&itemUrl=510-111-1111&itemImageUrl=jujupw&currentPrice=JuJu' http://127.0.0.1:3000/api/v1/items/1
   //  updateItem : function (req, res) {

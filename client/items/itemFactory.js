@@ -21,7 +21,12 @@ angular.module('itemFactory', [])
       data: data
     });
   },
-
+  addItemFuncs.getCategories = function(userId){
+    return $http({
+      method : 'GET',
+      url: 'api/items/categories/' + userId
+    })
+  }
   addItemFuncs.scrapePriceInfo = function(itemInfo){
     data = {
       url : itemInfo.URL
