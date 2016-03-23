@@ -47,6 +47,18 @@
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
+                         <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <select name="categories" id="categories" ng-model="item.categories.repeatSelect" ng-change="checkCategory()"> 
+                                <option ng-repeat="category in item.categories.categories" value="{{category}}">{{category}}</option>
+                                </select>
+                                <div ng-show="addNewCategory">
+                                    <input class="textbox" placeholder="Add New Category" type="text" ng-model="label" /><br>
+                                    <button ng-click="addCategory(label)">add</button>
+                                </div>
+                                <!-- <input type="text" name="category" class="form-control" placeholder="category"  -->
+                                <p class="help-block text-danger"></p>
+                            </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>Preview image</label>
