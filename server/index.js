@@ -27,7 +27,7 @@ function cronJobsGO(){
   }, true, 'America/Los_Angeles');
 };
 
-cronJobsGO();
+//cronJobsGO();
 
 app.post('/scrape',scrapeTools.scrape);
 
