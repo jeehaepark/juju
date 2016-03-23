@@ -8,7 +8,8 @@ var app = angular.module('juju', [
   'juju.user',
   'userFactory',
   'chart.js',
-  'ui.bootstrap'  
+  'ui.bootstrap',
+  'infinite-scroll'
 ]);
 
 app.config(function ($stateProvider, $urlRouterProvider){
