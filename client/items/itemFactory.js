@@ -165,7 +165,9 @@ angular.module('itemFactory', [])
     datesArray.push(dateStr);
     
     //arrange price data
-    pricesArray.push(Number(itemData[i].price.slice(1)));
+    if(itemData[i].price !==null){
+      pricesArray.push(Number(itemData[i].price.slice(1)));
+    }
   }
   graphData.push([datesArray, [pricesArray ]]);
   return graphData;

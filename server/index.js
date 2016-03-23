@@ -27,7 +27,7 @@ new CronJob('01 01-60 * * * *' , function () {
     }, true, 'America/Los_Angeles');
 };
 
-cronJobsGO();
+//cronJobsGO();
 
 app.post('/scrape',scrapeTools.scrape);
 
