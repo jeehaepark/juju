@@ -172,16 +172,14 @@ angular.module('itemFactory', [])
     });
     orgData[item].priceGraph = displayItemsFactoryFuncts.makeLabels(orgData[item])
   }
-    
   return orgData;
   }
-  displayItemsFactoryFuncts.buyNow='Wait';
+  
   displayItemsFactoryFuncts.makeLabels = function (itemData) {
   if(itemData<5){
     return [];
   }
   var idealPrice=itemData[itemData.length-1].idealprice.slice(1);
-  console.log('idealPrice', idealPrice)
   var graphData = [];
   var datesArray = [];
   var pricesArray = [];
@@ -191,6 +189,7 @@ angular.module('itemFactory', [])
   var ninetyPerc;
   var date;
   var price;
+  var buyNow='Wait';
   for(var i=0; i< itemData.length;i++){
     //make dateString
     date = new Date(itemData[i].checkdate);
@@ -210,9 +209,14 @@ angular.module('itemFactory', [])
   mostRecentPrice=pricesArray[pricesArray.length-1];
   ninetyPerc=priceAvg*.9;
   if(mostRecentPrice<=idealPrice || mostRecentPrice<=ninetyPerc){
-    displayItemsFactoryFuncts.buyNow='Buy Now!';
+    buyNow='Buy Now!';
   }
-  graphData.push([datesArray, [pricesArray]]);
+  if(mostRecentPrice===undefined){
+    buyNow='Sorry Not Enough Data';
+  }
+  console.log('displayItemsFactoryFuncts buyNow', buyNow)
+  graphData.push([datesArray, [pricesArray], buyNow]);
+  console.log(graphData)
   return graphData;
 }
 

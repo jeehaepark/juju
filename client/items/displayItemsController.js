@@ -60,7 +60,6 @@ angular.module('displayItemsController', [])
   $scope.onClick = function (points, evt) {
     console.log(points, evt);
   };
-  $scope.buyNow=displayItemsFactory.buyNow;
   $scope.open = function (nikename) {
     var modalInstance = $uibModal.open({
       animation: $scope.animationsEnabled,
@@ -71,16 +70,16 @@ angular.module('displayItemsController', [])
       windowTemplateUrl : '/scripts/angular-ui-bootstrap/template/modal/window.html',
     //  scope: $scope.item = size ,
       resolve: {
-        simpleObj : {value: nikename , itemHistory: $scope.itemHistoryData, buyNow: $scope.buyNow }
+        simpleObj : {value: nikename , itemHistory: $scope.itemHistoryData}
       }
     });
+
   };
 
 })
 .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, Auth , displayItemsFactory , simpleObj) {
   $scope.itemid = simpleObj.value;
   $scope.itemHistoryData = simpleObj.itemHistory;
-  $scope.buyNow = simpleObj.buyNow;
   $scope.lackofData = false;
   $scope.errMessage = false;
 
