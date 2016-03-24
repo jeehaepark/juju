@@ -11,14 +11,17 @@ angular.module('displayItemsController', [])
   .then(
     function successCallback(response) {
       var allItems = response.data;
-      var numberofItems = response.data.length - 1;
-      $scope.itemData = allItems.slice(0,6);
-
+      var priceReachedArray=allItems[0];
+      var priceNotReachedArray=allItems[1];
+      var numberofItemspriceReached=priceReachedArray.length-1;
+      var numberofItems = priceNotReachedArray.length - 1;
+      $scope.priceReachedData=priceReachedArray
+      $scope.priceNotReachedData=priceNotReachedArray.slice(0,6)
       $scope.loadMoreItems = function(){
-        var last = $scope.itemData.length - 1;
+        var last = $scope.priceNotReachedData.length - 1;
         if(numberofItems > last){
-          for (var i = 0; i <= 1; i++){
-            $scope.itemData.push(allItems[last + i]);
+          for (var i = 0; i <= 3; i++){
+            $scope.priceNotReachedData.push(priceNotReachedArray[last + i]);
           }
         }
       };
