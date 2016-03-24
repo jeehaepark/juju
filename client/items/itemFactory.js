@@ -193,7 +193,7 @@ angular.module('itemFactory', [])
   for(var i=0; i< itemData.length;i++){
     //make dateString
     date = new Date(itemData[i].checkdate);
-    dateStr = date.getMonth() + '/' + date.getDate();
+    dateStr = date.getMonth()+1 + '/' + date.getDate();
     datesArray.push(dateStr);
     
     //arrange price data
