@@ -60,7 +60,6 @@ angular.module('displayItemsController', [])
   $scope.onClick = function (points, evt) {
     console.log(points, evt);
   };
-
   $scope.open = function (nikename) {
     var modalInstance = $uibModal.open({
       animation: $scope.animationsEnabled,
@@ -71,9 +70,10 @@ angular.module('displayItemsController', [])
       windowTemplateUrl : '/scripts/angular-ui-bootstrap/template/modal/window.html',
     //  scope: $scope.item = size ,
       resolve: {
-        simpleObj : {value: nikename , itemHistory: $scope.itemHistoryData }
+        simpleObj : {value: nikename , itemHistory: $scope.itemHistoryData}
       }
     });
+
   };
 
 })
