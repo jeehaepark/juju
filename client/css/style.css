@@ -78,6 +78,10 @@ span.text-content {
     float: right!important;
 }
 
+.priceReached{
+  background-color: red;
+}
+
 .icons{
   padding:0;
 }
