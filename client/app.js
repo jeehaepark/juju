@@ -34,7 +34,6 @@ app.config(function ($stateProvider, $urlRouterProvider){
     url: '/yourItems/item',
     templateUrl : './item/view/itemGraphModal.html',
     authenticate:true
-    
   })
   .state('additems', {
     url: '/additems',
@@ -73,6 +72,17 @@ app.config(function ($stateProvider, $urlRouterProvider){
       }
     },
     authenticate: true
+  })
+  .state('about', {
+    url: '/about',
+    views: {
+      'header' : {
+        templateUrl: './layout/header.html'
+      },
+      'body' : {
+        templateUrl: './layout/about.html'
+      }
+    }
   });
 })
 .run(function($rootScope, $state, Auth){
