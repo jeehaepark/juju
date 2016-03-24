@@ -1,5 +1,10 @@
-/*div{
+/*#check{
   border: 1px solid red;
+}*/
+
+/*#check div{
+  border: 1px solid red;
+  overflow: hidden;
 }*/
 
 .square-box{
@@ -71,4 +76,8 @@ span.text-content {
 
 .pull-right {
     float: right!important;
+}
+
+.icons{
+  padding:0;
 }
