@@ -38,8 +38,7 @@
                   </div>
                   <div class="modal-footer">
                     <h6 class="modal-Buy-Rec">Purchase Recommendation: {{ itemHistoryData[itemid].priceGraph[0][2] }}</h6>
-                    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                    <button class="btn btn-primary" type="button" ng-click="ok()">Close</button>
                   </div>
                 </script>
                 <div class="caption" id="check">
@@ -53,7 +52,7 @@
                        <h3 class ="pull-right">{{item.currentprice }}</h3>
                       </div>
                       <div class="col-md-2">
-                        <a class="fa fa-trash btn-lg"  ng-click="deleteWatched(item.id)"></a>
+                        <a class="fa fa-trash btn-lg"  ng-click="deleteWatched(item, priceReachedData)"></a>
                       </div>
                     </div>
                     
@@ -156,7 +155,7 @@
                     <p>
                         <a href="{{item.itemurl}}" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
                         <!--<a class="btn btn-default" ng-click="deleteWatched(item.id)">Delete</a>-->
-                        <a class="fa fa-trash btn"  ng-click="deleteWatched(item.id)">Delete</a>
+                        <a class="fa fa-trash btn"  ng-click="deleteWatched(item, priceNotReachedData)">Delete</a>
                     </p>
                 </div>
             </div>

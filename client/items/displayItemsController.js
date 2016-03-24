@@ -15,8 +15,8 @@ angular.module('displayItemsController', [])
       var priceNotReachedArray=allItems[1];
       var numberofItemspriceReached=priceReachedArray.length-1;
       var numberofItems = priceNotReachedArray.length - 1;
-      $scope.priceReachedData=priceReachedArray
-      $scope.priceNotReachedData=priceNotReachedArray.slice(0,6)
+      $scope.priceReachedData=priceReachedArray;
+      $scope.priceNotReachedData=priceNotReachedArray.slice(0,6);
 
       $scope.loadMoreItems = function(){
         var last = $scope.priceNotReachedData.length - 1;
@@ -42,9 +42,10 @@ angular.module('displayItemsController', [])
     displayItemsFactory.updateData(itemId, itemObj);
   };
 
-  $scope.deleteWatched = function(itemId){
-
-    displayItemsFactory.deleteData(itemId);
+  $scope.deleteWatched = function(item, itemArray){
+    var index = itemArray.indexOf(item)
+    itemArray = itemArray.splice(index, 1)
+    displayItemsFactory.deleteData(item.id);
   };
 
   $scope.itemHistory = function () {
