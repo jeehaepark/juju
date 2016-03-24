@@ -38,7 +38,6 @@ remove username & password to your system settings.
 exports.connectionString = 'postgres://username:password@localhost/juju';
 ```
 
-============================================
 ## Test
 
 
@@ -67,7 +66,6 @@ run all tests
 run a specific test
     ``` jasmine spec/server/path/to/your/test.js ```
 
-=======================================
 ## API Keys
 - put them in the .env file
 
@@ -76,7 +74,6 @@ require('dotenv').config()
 - if you add an api key, add the name of the key variable (but not the key itself) to the dotEnvTemplate file so everyone can see which APIs we are playing with
 -add the api key/secret to the slack channel
 
-=======
 ## GULP
 
 Run jshint
@@ -94,6 +91,10 @@ For test, we used Karma for client side, and Jasemine for server side.
 
 ## Cron Jobs
 
+
+## Twilio API
+
+- We used Twilio API for text notification [Twilio API](https://www.twilio.com/api). 
 
 
 ## Features
