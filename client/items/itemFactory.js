@@ -157,13 +157,14 @@ angular.module('itemFactory', [])
   //group the itemData based on nickname 
   for(var entryId in itemHistory) {
     aHistory = itemHistory[entryId];
+    console.log('ahistory', aHistory)
     itemId = itemHistory[entryId].nickname;
     orgData[itemId] !==undefined ? orgData[itemId].push(aHistory) : orgData[itemId] = [aHistory]
   }
 
   //sort itemData by date for each time
   for(var item in orgData){
-    //console.log(typeof orgData)
+    console.log(typeof orgData)
     orgData[item].sort(function(a, b) {
     a = new Date(a.checkdate);
     b = new Date(b.checkdate);
@@ -213,7 +214,9 @@ angular.module('itemFactory', [])
   if(mostRecentPrice===undefined){
     buyNow='Sorry Not Enough Data';
   }
+  console.log('displayItemsFactoryFuncts buyNow', buyNow)
   graphData.push([datesArray, [pricesArray], buyNow]);
+  console.log(graphData)
   return graphData;
 }
 

@@ -49,7 +49,6 @@ module.exports = {
   getAllWatchedItems: function (req,res){
     var results = [];
 
-
     // Get a Postgres client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
       // Handle connection errors
@@ -86,20 +85,11 @@ module.exports = {
       deadline: req.body.deadline,
       idealPrice: req.body.idealprice,
       settlePrice:req.body.settleprice,
-      currentPrice: req.body.currentprice,
       priceReached:req.body.pricereached,
       contacted: req.body.contacted,
       itemID: req.body.itemid,
       category: req.body.category,
-      userID: req.body.userid
-    };
-      //console.log('data in req', data)
-
-      var curPrice=Number(data.currentPrice.slice(1))
-      var idePrice=Number(data.idealPrice.slice(1))
-      if(curPrice<=idePrice){
-        data.priceReached=true;
-      }
+      userID: req.body.userid};
       // Get a Postgres client from the connection pool
       pg.connect(connectionString, function(err, client, done) {
         // Handle connection errors
@@ -157,25 +147,16 @@ module.exports = {
 
   getUserWatchedItems: function (req, res){
     var results = [];
-    var priceReachedArray=[];
-    var priceNotReachedArray=[];
     var data = { userId: req.params.user_id } ;
     pg.connect(connectionString, function(err, client, done) {
       var query = client.query('SELECT * FROM items LEFT JOIN watcheditems ON items.id = watchedItems.itemID WHERE userid='+data.userId +'ORDER BY watcheditems.id ASC');
 
       query.on('row', function(row){
-        if (row.pricereached===true){
-          priceReachedArray.push(row)
-        } else {
-          priceNotReachedArray.push(row)
-        }
+        results.push(row);
       });
 
       query.on('end', function() {
         done();
-        results.push(priceReachedArray);
-        results.push(priceNotReachedArray)
-        console.log('results', results)
         return res.json(results);
       });
     });

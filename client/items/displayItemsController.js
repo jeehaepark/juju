@@ -11,13 +11,7 @@ angular.module('displayItemsController', [])
   .then(
     function successCallback(response) {
       var allItems = response.data;
-      var priceReachedArray=allItems[0];
-      var priceNotReachedArray=allItems[1];
-      allItems=priceReachedArray.concat(priceNotReachedArray);
-      var numberofItemspriceReached=priceReachedArray.length-1;
       var numberofItems = response.data.length - 1;
-      $scope.priceReachedData=priceReachedArray
-      $scope.priceNotReachedData=priceNotReachedArray
       $scope.itemData = allItems.slice(0,6);
 
       $scope.loadMoreItems = function(){
