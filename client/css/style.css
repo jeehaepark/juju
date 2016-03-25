@@ -112,3 +112,8 @@ span.text-content {
 .websites a:hover {
   color: #18bc9c;
 }
+
+#theme {
+  background-color: #18bc9c;
+  border-color: #18bc9c
+}
