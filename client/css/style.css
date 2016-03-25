@@ -2,10 +2,11 @@
   border: 1px solid red;
 }*/
 
-/*#check div{
-  border: 1px solid red;
-  overflow: hidden;
-}*/
+#check div{
+  /*border: 1px solid red;*/
+  /*overflow: hidden;*/
+  margin-bottom: 10px;
+}
 
 .square-box{
     position: relative;

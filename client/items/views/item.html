@@ -2,10 +2,22 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h2>Your List</h2>
-        <h2>Search<input type ='text' ng-model=search></h2>
+        <h2>Your List</h2> 
         <hr class="star-primary">
       </div>
+    </div>
+    <div class="row" id="check">
+      <div class="col-lg-7">
+      </div>
+      <div class="col-lg-2" >
+        <h3 class="pull-right">search</h3>
+        <!--<h2>Search<input type ='text' ng-model=search></h2>-->
+      </div>
+      <div class="col-lg-3">
+       <h3></h3> <input type ="text" class ="form-control" ng-model=search>
+      </div>
+      <!--<div class="col-lg-1">
+      </div>-->
     </div>
 
    
@@ -41,7 +53,7 @@
                     <button class="btn btn-primary" type="button" ng-click="ok()">Close</button>
                   </div>
                 </script>
-                <div class="caption" id="check">
+                <div class="caption">
                     
                     <div class ="row">
                       <div class="col-md-5"> 
@@ -54,7 +66,7 @@
                         <a class="fa fa-trash btn-lg"  ng-click="deleteWatched(item, priceReachedData)"></a>
                       </div>
                     </div>
-                    <div class ="row" id ="check">
+                    <div class ="row">
                       <div class="col-md-6"> 
                        <p>Ideal price: </p>
                       </div>
@@ -136,7 +148,7 @@
                     <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
                   </div>
                 </script>
-                <div class="caption" id="check">
+                <div class="caption">
                     
                     <div class ="row">
                       <div class="col-md-5"> 
@@ -149,7 +161,7 @@
                         <a class="fa fa-trash btn-lg"></a>
                       </div>
                     </div>
-                    <div class ="row" id ="check">
+                    <div class ="row">
                       <div class="col-md-6"> 
                        <p>Ideal price: </p>
                       </div>
