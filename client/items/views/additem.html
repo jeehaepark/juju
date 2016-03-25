@@ -9,38 +9,37 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2" ng-controller="itemsCtrl">
         <form name="addItemForm" ng-submit="addItem(addItemForm.$valid)" id="contactForm" novalidate>
+          <!--input box for a nick name-->
           <div class="row control-group">
-            <div class="form-group col-xs-12 floating-label-form-group controls" ng-class="{'has-error': addItemForm.itemNickname.$invalid}">
-              <label>Item to Watch: </label>
-              <input type="text" name="itemNickname" class="form-control" placeholder="Item Nickname" id="name" ng-model="item.nickName" required ng-minlength="3"/>
-              <span class="help-block" ng-show="addItemForm.itemNickname.$error.required">Required</span>
-              <span class="help-block" ng-show="addItemForm.itemNickname.$error.minlength">Must be atleast 3 characters</span>
+            <div class="form-group col-xs-12" ng-class="{'has-error': addItemForm.itemNickname.$invalid}">
+              
+              <div class="form-group has-success has-feedback">
+                <label > Item Name </label>
+                <input type="text" name="itemNickname" placeholder="Item Nickname" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status" ng-model="item.nickName" required ng-minlength="2"/>
+                <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                <span id="inputSuccess2Status" class="sr-only">(success)</span>
+                <span class="help-block" ng-show="addItemForm.itemNickname.$error.required">Required</span>
+              </div>
+
             </div>
           </div>
+          <!-- input box for url-->
           <div class="row control-group">
-            <div class="form-group col-xs-12 floating-label-form-group controls" ng-class="{'has-error': addItemForm.itemURL.$invalid}">
-              <label>Item URL:</label>
-              <input type="text" name="itemURL" class="form-control" placeholder="www.itemIWantToWatch.com" id="email" ng-model="item.URL"
-              required ng-pattern="/(ae|crateandbarrel|disneystore|costco|neimanmarcus|barnesandnoble|target|amazon|nordstrom).com/">
-              <span class="help-block" ng-show="addItemForm.itemURL.$error.required">Required</span>
-              <span class="help-block" ng-show="addItemForm.itemURL.$error.pattern">Not a valid URL</span>
+            <div class="form-group col-xs-12" ng-class="{'has-error': addItemForm.itemURL.$invalid}">
+              <div class="form-group has-success has-feedback">
+              
+                <label>Item URL:</label>
+                <input type="text" name="itemURL" class="form-control" placeholder="www.itemIWantToWatch.com" id="inputSuccess2" aria-describedby="inputSuccess2Status" ng-model="item.URL"
+                required ng-pattern="/(ae|crateandbarrel|disneystore|costco|neimanmarcus|barnesandnoble|target|amazon|nordstrom).com/">
+                
+                <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                  <span id="inputSuccess2Status" class="sr-only">(success)</span>                  
+                <span class="help-block" ng-show="addItemForm.itemURL.$error.required">Required</span>
+                <span class="help-block" ng-show="addItemForm.itemURL.$error.pattern">Not a valid URL</span>
+              </div>
             </div>
           </div>
           <!-- begin : a list of supported website-->
-          <!--<div class="accordion" id="accordion2">
-            <div class="accordion-group">
-            <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href=".collapseOne">
-            Supported websites
-            </a>
-            </div>
-            <div id="collapseOne" class="collapseOne accordion-body collapse in">
-            <div class="accordion-inner">
-            amazon, target, nordstrom, crateandbarrel, american eagle, disneystore, costco, neimanmarcus, barnesandnoble
-            </div>
-            </div>
-            </div>
-            </div>-->
             <div class="row control-group">
               <div class="form-group col-xs-12">
                 <div class="panel-group">
@@ -59,34 +58,31 @@
               </div>
             </div>
             <!-- end : a list of supported website-->
+            <!--input box for price-->
             <div class="row control-group">
-              <div class="form-group col-xs-12 floating-label-form-group controls">
-                <label>Ideal Price:</label>
-                <input type="number" name="idealPrice" class="form-control" placeholder="{{item.currentPrice}} Ideal Price" id="phone" ng-model="item.idealPrice" required>
-                <span class="help-block" ng-show="addItemForm.idealPrice.$error.required">Required</span>
-                <span class="help-block" ng-show="addItemForm.idealPrice.$error.number">Not a number!</span>
+              <div class="form-group col-xs-12" ng-class="{'has-error': addItemForm.idealPrice.$invalid}">
+                <div class="form-group has-success has-feedback">
+                  <label>Ideal Price:</label>
+                  <input type="number" name="idealPrice" class="form-control" placeholder="current price is : {{item.currentPrice}}" id="inputSuccess2" aria-describedby="inputSuccess2Status"  ng-model="item.idealPrice" required>
+                  
+                   <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                  <span id="inputSuccess2Status" class="sr-only">(success)</span>          
+                  
+                  <span class="help-block" ng-show="addItemForm.idealPrice.$error.required">Required</span>
+                  <span class="help-block" ng-show="addItemForm.idealPrice.$error.number">Not a number!</span>
+                </div>
               </div>
             </div>
-            <!--<div class="row control-group">-->
-              <!--<div class="form-group col-xs-12 floating-label-form-group controls ">
-                <select name="categories" id="categories" ng-model="item.categories.repeatSelect" ng-change="checkCategory()">
-                  <option ng-repeat="category in item.categories.categories" value="{{category}}">{{category}}</option>
-                </select>
-                <div ng-show="addNewCategory">
-                  <input class="textbox" placeholder="Add New Category" type="text" ng-model="label" /><br>
-                  <button ng-click="addCategory(label)">add</button>
+            <!--input box for img-->
+            <div class="row control-group">
+              <div class="form-group col-xs-12 floating-label-form-group controls">
+                <label>Preview image</label>
+                <div>
+                  <img ng-src="{{ item.imageUrl }}" rows="5">
                 </div>
                 <p class="help-block text-danger"></p>
-              </div>-->
-              <div class="row control-group">
-                <div class="form-group col-xs-12 floating-label-form-group controls">
-                  <label>Preview image</label>
-                  <div>
-                    <img ng-src="{{ item.imageUrl }}" rows="5">
-                  </div>
-                  <p class="help-block text-danger"></p>
-                </div>
               </div>
+           </div>
               <br>
               <div id="success"></div>
               <div class="row">
@@ -94,8 +90,8 @@
                   <button type="submit" class="btn btn-success btn-lg">Add Item!</button>
                 </div>
               </div>
-        </form>
-            </div>
+         </form>
+        </div>
       </div>
     </div>
 </section>
