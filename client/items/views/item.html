@@ -13,6 +13,101 @@
     <div class="row text-center">
       <!-- <div infinite-scroll="loadMoreItems()" infinite-scroll-distance='1'> -->
         <div class="col-md-4 col-sm-6 hero-feature priceReached" ng-repeat = "item in priceReachedData | filter: search track by $index" >
+            <div class="thumbnail" id="focusedInput" >
+                
+                <!--test-->
+                <li class="img-list">
+                <div class="square-box" style="background-image: url('{{ item.itemimageurl }}');" ng-click="open(item.nickname)" data-toggle="modal" data-target="#myModal">
+                  <span class="text-content">
+                    <span> {{item.producttitle}}  </span>
+                  </span>
+                </div>
+                </li>
+                
+                
+                <script type="text/ng-template" id="myModalContent.html">
+                  <div class="modal-header">
+                    <h3 class="modal-title">{{ itemid + " price over time" }}!</h3>
+                  </div>
+                  <div class="modal-body">
+                    <h1 ng-show="errMessage" class ="ng-hide"> Not Enough Data </h1>
+                    <canvas  id="line" class="chart chart-line" chart-data="itemHistoryData[itemid].priceGraph[0][1]"
+                    chart-labels="itemHistoryData[itemid].priceGraph[0][0]" chart-legend="true" chart-series="series"
+                    chart-click="onClick" >
+                    </canvas>
+                  </div>
+                  <div class="modal-footer">
+                    <h6 class="modal-Buy-Rec">Purchase Recommendation: {{ itemHistoryData[itemid].priceGraph[0][2] }}</h6>
+                    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                  </div>
+                </script>
+                <div class="caption" id="check">
+                    
+                    <div class ="row">
+                      <div class="col-md-5"> 
+                       <h3>{{item.nickname }} </h3>
+                      </div>
+                      <div class="col-md-5">
+                       <h3 class ="pull-right">{{item.currentprice }}</h3>
+                      </div>
+                      <div class="col-md-2">
+                        <a class="fa fa-trash btn-lg"  ng-click="deleteWatched(item.id)"></a>
+                      </div>
+                    </div>
+                    <div class ="row" id ="check">
+                      <div class="col-md-6"> 
+                       <p>Ideal price: </p>
+                      </div>
+                      <div class="col-md-4" >
+                       <p ng-show="!wantEdit"class ="pull-right">{{item.idealprice}}</p>
+                       <input ng-show="wantEdit" type = "text" ng-model= "item.idealprice" class ="form-control">
+                      </div>
+                      <div class="col-md-2 icons" >
+                        <a class="fa fa-pencil btn-lg" ng-show="!wantEdit" ng-click="wantEdit = !wantEdit" ></a>
+                        <a class="fa fa-floppy-o btn-lg" ng-show="wantEdit" ng-click="update(item.id, item); wantEdit = !wantEdit"></a>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-3">
+                      </div>
+                      <div class="col-md-3">
+                       <a href="{{item.itemurl}}" class="btn btn-primary">Buy Now!</a>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="btn btn-default" ng-click="open(item.nickname)" data-toggle="modal" data-target="#myModal">More Info</div>
+                      </div>
+                      <div class="col-md-3"> 
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      <!-- </div> -->
+    </div>
+
+    <div class="row text-center">
+      <div infinite-scroll="loadMoreItems()" infinite-scroll-distance='1'>
+         <div class="col-md-4 col-sm-6 hero-feature" >
+          <div class="thumbnail">
+                <!--test-->
+            <li class="img-list" ui-sref="additems" >
+                <div class="square-box" style="background-image: url('{{ item.itemimageurl }}');">
+                  <span class="text-content">
+                    <span> Add an item </span>
+                  </span>
+                </div>
+            </li>
+            <div class="caption">
+              <p>Add an item</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 hero-feature" ng-repeat = "item in priceNotReachedData | filter: search track by $index" >
             <div class="thumbnail">
                 
                 <!--test-->
@@ -45,22 +140,19 @@
                 <div class="caption" id="check">
                     
                     <div class ="row">
-                      <div class="col-md-5">
-                         
-                     <h3>{{item.nickname }} </h3>
+                      <div class="col-md-5"> 
+                       <h3>{{item.nickname }} </h3>
                       </div>
                       <div class="col-md-5">
                        <h3 class ="pull-right">{{item.currentprice }}</h3>
                       </div>
-                      <div class="col-md-2">
-                        <a class="fa fa-trash btn-lg"  ng-click="deleteWatched(item.id)"></a>
+                      <div class="col-md-2" ng-click="deleteWatched(item.id)">
+                        <a class="fa fa-trash btn-lg"></a>
                       </div>
                     </div>
-                    
-                     <div class ="row" id ="check">
-                      <div class="col-md-6">
-                         
-                     <p>Ideal price: </p>
+                    <div class ="row" id ="check">
+                      <div class="col-md-6"> 
+                       <p>Ideal price: </p>
                       </div>
                       <div class="col-md-4" >
                        <p ng-show="!wantEdit"class ="pull-right">{{item.idealprice}}</p>
@@ -71,7 +163,7 @@
                         <a class="fa fa-floppy-o btn-lg" ng-show="wantEdit" ng-click="update(item.id, item); wantEdit = !wantEdit"></a>
                       </div>
                     </div>
-                     <div class="row">
+                    <div class="row">
                       <div class="col-md-12">
                       </div>
                     </div>
@@ -88,80 +180,15 @@
                       </div>
                     </div>
                 </div>
+                
+                
             </div>
         </div>
-      <!-- </div> -->
-    </div>
-        <br>
-    <div class="row text-center">
-      <div infinite-scroll="loadMoreItems()" infinite-scroll-distance='1'>
-        <div class="col-md-4 col-sm-6 hero-feature" ng-repeat = "item in priceNotReachedData | filter: search track by $index" >
-            <div class="thumbnail">
-                
-                <!--test-->
-                <li class="img-list">
-                <div class="square-box" style="background-image: url('{{ item.itemimageurl }}');" ng-click="open(item.nickname)" data-toggle="modal" data-target="#myModal">
-                  <span class="text-content">
-                    <span> {{item.producttitle}}  </span>
-                  </span>
-                </div>
-                </li>
-                
-                
-                <script type="text/ng-template" id="myModalContent.html">
-                  <div class="modal-header">
-                    <h3 class="modal-title">{{ itemid + " price over time" }}!</h3>
-                  </div>
-                  <div class="modal-body">
-                    <h1 ng-show="errMessage" class ="ng-hide"> Not Enough Data </h1>
-                    <canvas  id="line" class="chart chart-line" chart-data="itemHistoryData[itemid].priceGraph[0][1]"
-                    chart-labels="itemHistoryData[itemid].priceGraph[0][0]" chart-legend="true" chart-series="series"
-                    chart-click="onClick" >
-                    </canvas>
-                  </div>
-                  <div class="modal-footer">
-                    <h6 class="modal-Buy-Rec">Purchase Recommendation: {{ itemHistoryData[itemid].priceGraph[0][2] }}</h6>
-                    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-                  </div>
-                </script>
-                <div class="caption">
-                    
-                    <div class ="row">
-                      <div class="col-md-5">
-                         
-                     <h3>{{item.nickname }} </h3>
-                      </div>
-                      <div class="col-md-5">
-                       <h3 class ="pull-right">{{item.currentprice }}</h3>
-                      </div>
-                      <div class="col-md-2">
-                      </div>
-                    </div>
-                    
-                     <div class ="row">
-                      <div class="col-md-5">
-                         
-                     <p>Ideal price: </p>
-                      </div>
-                      <div class="col-md-5">
-                       <p ng-show="!wantEdit"class ="pull-right">{{item.idealprice}}</p>
-                       <input ng-show="wantEdit" type = "text" ng-model= "item.idealprice">
-                      </div>
-                      <div class="col-md-2">
-                        <a  ng-show="!wantEdit" ng-click="wantEdit = !wantEdit">edit</a>
-                        <a   ng-show="wantEdit" ng-click="update(item.id, item); wantEdit = !wantEdit">save</a>
-                      </div>
-                    </div>
-                    <p>
-                        <a href="{{item.itemurl}}" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
-                        <!--<a class="btn btn-default" ng-click="deleteWatched(item.id)">Delete</a>-->
-                        <a class="fa fa-trash btn"  ng-click="deleteWatched(item.id)">Delete</a>
-                    </p>
-                </div>
-            </div>
-        </div>
+        
+        
       </div>
+      
+      
     </div>
 
 
@@ -169,24 +196,7 @@
 
 
         <!--dummy-->
-        <div class="col-md-4 col-sm-6 hero-feature" >
-            <div class="thumbnail">
-                
-                <!--test-->
-                <li class="img-list" ui-sref="additems" >
-                <div class="square-box" style="background-image: url('{{ item.itemimageurl }}');">
-                  <span class="text-content">
-                    <span> Add an item </span>
-                  </span>
-                </div>
-                </li>
-                <div class="caption">
-                  <p>
-                    Add an item
-                 </p>
-                </div>
-            </div>
-           </div>
+       
         
       </div>
     </div> 
