@@ -105,3 +105,10 @@ span.text-content {
 
   
 }
+
+.websites a {
+  color: black;
+}
+.websites a:hover {
+  color: #18bc9c;
+}
