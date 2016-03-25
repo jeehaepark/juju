@@ -15,7 +15,7 @@
               
               <div class="form-group has-success has-feedback">
                 <label > Item Name </label>
-                <input type="text" name="itemNickname" placeholder="Item Nickname" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status" ng-model="item.nickName" required ng-minlength="2"/>
+                <input type="text" name="itemNickname" placeholder="Enter the nick name for your item ie) My shoes" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status" ng-model="item.nickName" required ng-minlength="2"/>
                 <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
                 <span id="inputSuccess2Status" class="sr-only">(success)</span>
                 <span class="help-block" ng-show="addItemForm.itemNickname.$error.required">Required</span>
@@ -29,7 +29,7 @@
               <div class="form-group has-success has-feedback">
               
                 <label>Item URL:</label>
-                <input type="text" name="itemURL" class="form-control" placeholder="www.itemIWantToWatch.com" id="inputSuccess2" aria-describedby="inputSuccess2Status" ng-model="item.URL"
+                <input type="text" name="itemURL" class="form-control" placeholder="Enter the website address. ie) www.amazon.com" id="inputSuccess2" aria-describedby="inputSuccess2Status" ng-model="item.URL"
                 required ng-pattern="/(ae|crateandbarrel|disneystore|costco|neimanmarcus|barnesandnoble|target|amazon|nordstrom).com/">
                 
                 <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
@@ -38,10 +38,8 @@
                 <span class="help-block" ng-show="addItemForm.itemURL.$error.pattern">Not a valid URL</span>
               </div>
             </div>
-          </div>
-          <!-- begin : a list of supported website-->
-            <div class="row control-group">
-              <div class="form-group col-xs-12">
+            <!-- begin : a list of supported website-->
+            <div class="form-group col-xs-12">
                 <div class="panel-group">
                   <div class="panel panel-default">
                     <div class="panel-heading">
@@ -56,14 +54,13 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <!-- end : a list of supported website-->
+          </div>
             <!--input box for price-->
             <div class="row control-group">
               <div class="form-group col-xs-12" ng-class="{'has-error': addItemForm.idealPrice.$invalid}">
                 <div class="form-group has-success has-feedback">
                   <label>Ideal Price:</label>
-                  <input type="number" name="idealPrice" class="form-control" placeholder="current price is : {{item.currentPrice}}" id="inputSuccess2" aria-describedby="inputSuccess2Status"  ng-model="item.idealPrice" required>
+                  <input type="number" name="idealPrice" class="form-control" placeholder="Tell us your ideal price! The current price is : {{item.currentPrice}}" id="inputSuccess2" aria-describedby="inputSuccess2Status"  ng-model="item.idealPrice" required>
                   
                    <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
                   <span id="inputSuccess2Status" class="sr-only">(success)</span>          
@@ -87,7 +84,7 @@
               <div id="success"></div>
               <div class="row">
                 <div class="form-group col-xs-12">
-                  <button type="submit" class="btn btn-success btn-lg">Add Item!</button>
+                  <button type="submit" class="btn btn-success btn-lg" id="theme">Add Item!</button>
                 </div>
               </div>
          </form>
