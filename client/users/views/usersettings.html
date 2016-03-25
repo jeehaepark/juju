@@ -1,23 +1,4 @@
-<!--<div ng-controller="usersCtrl"> 
-  <h2>Update your profile</h2>
-  <form name="updateUserForm" ng-submit="updateUser()">
-    <h5>{{userData}}</h5>
-    Your name: {{userData.username}}
-    <input type="text" name="fbname" placeholder="userData.fbname" ng-model="userData.fbname"> 
-    <br>
-    Your preference: {{userData.preference}} 
-    <input type="text" name="preference" placeholder="text/email" ng-model="userData.contactpref">
-    Your email: {{userData.emil}} 
-    <input type="text" name="email" placeholder="@example.com" ng-model="userData.email">
-    <br>
-    Your phone number: {{userData.phonenumber}}
-    <input type="text" name="phonenumber" placeholder="415-111-0000" ng-model="userData.phonenumber">
-    <br>
-    <button type="submit" class="button" ng-click="updateUserInfo(userData.id,userData)">Update</button>
 
-  </form>
-  
-</div>-->
     <!-- User Profile Section -->
     <section id="contact">
         <div class="container" ng-controller="usersCtrl">
@@ -46,7 +27,6 @@
                                 <input type="text" name="fbname" class="form-control"  id="inputSuccess2" placeholder="userData.fbname" aria-describedby="inputSuccess2Status" ng-model="userData.fbname" required data-validation-required-message="Please enter your name.">
                                 <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
                 <span id="inputSuccess2Status" class="sr-only">(success)</span>
-                                <p class="help-block text-danger"></p>
                               </div>
                            </div>
                         </div>
@@ -55,15 +35,18 @@
                             <div class="form-group col-xs-12">
                                 <label>Preference</label>
                                 <div class="row">
-                                  <div class="col-lg-3">
-                                    {{userData.contactpref}}
+                                  
+                                  <div class="col-lg-5">
+                                    
+                                    <label class="radio-inline">
+                                      <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="text" ng-model="userData.contactpref" id="message" required data-validation-required-message="Please select your preference."> <span> text </span>
+                                    </label>
+                                    <label class="radio-inline">
+                                      <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="email" ng-model="userData.contactpref" id="message" required data-validation-required-message="Please select your preference."> <span>email</span>
+                                    </label>
                                   </div>
-                                  <div class="col-lg-3">
-                                    <input type="radio" name="preference" class="form-control" value="text" ng-model="userData.contactpref" id="message" required data-validation-required-message="Please select your preference.">text
-                                  </div>
-                                  <div class="col-lg-3">  
-                                    <input type="radio" name="preference" class="form-control" value="email" ng-model="userData.contactpref" id="message" required data-validation-required-message="Please select your preference.">email
-                                    <p class="help-block text-danger"></p>
+                                  <div class="col-lg-7">
+                                   <label> Your preference is </label> {{userData.contactpref}}
                                   </div>
                                 </div>                                
                             </div>
