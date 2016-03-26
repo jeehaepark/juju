@@ -110,9 +110,17 @@
           <div id="success"></div>
           <div class="row">
             <div class="form-group col-xs-12">
-              <button type="submit" class="btn btn-round btn-lg white-text light-blue-background">
-                <span class="fa fa-plus"> Track Item</span>
-              </button>
+              <div ng-hide="!item.imageUrl">
+                <button type="submit" class="btn btn-round btn-lg white-text light-blue-background">
+                  <span class="fa fa-plus"> Track Item</span>
+                </button>
+              </div>
+              <div ng-hide="item.imageUrl">
+                <button type="submit" id="load-message" class="btn btn-round btn-lg">
+                  Tracking Item
+                    <img id="load-spinner" src="../../assets/spinner.gif">
+                </button>
+              </div>
             </div>
           </div>
         </form>

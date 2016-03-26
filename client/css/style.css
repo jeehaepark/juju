@@ -145,3 +145,12 @@ background: rgba(60,118,61,.2);
 .white-text {
   color: white;
 }
+
+#load-message {
+  color: white;
+}
+
+#spinner {
+  width:30px;
+  height:30px;
+}
