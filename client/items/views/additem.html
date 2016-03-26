@@ -23,12 +23,12 @@
                   placeholder="example: my shoes"
                   aria-describedby="inputSuccess2Status" ng-model="item.nickName"
                   required ng-minlength="3" ng-maxlength="8"/>
-                <span class="glyphicon glyphicon-ok form-control-feedback"
+                <span class="icon-down glyphicon glyphicon-ok form-control-feedback"
                   ng-hide="addItemForm.itemNickname.$error.required ||
                   addItemForm.itemNickname.$error.minlength ||
                   addItemForm.itemNickname.$error.maxlength">
                 </span>
-                <span class="glyphicon glyphicon-remove form-control-feedback"
+                <span class="icon-down glyphicon glyphicon-remove form-control-feedback"
                   ng-show="addItemForm.itemNickname.$error.required ||
                   addItemForm.itemNickname.$error.minlength ||
                   addItemForm.itemNickname.$error.maxlength">
@@ -54,8 +54,8 @@
                    barnesandnoble|target|
                    amazon|nordstrom
                    ).com/">
-                 <span class="glyphicon glyphicon-ok form-control-feedback" ng-hide="addItemForm.itemURL.$error.required || addItemForm.itemURL.$error.pattern"></span>
-                <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="addItemForm.itemURL.$error.required || addItemForm.itemURL.$error.pattern"></span>
+                 <span class="icon-down glyphicon glyphicon-ok form-control-feedback" ng-hide="addItemForm.itemURL.$error.required || addItemForm.itemURL.$error.pattern"></span>
+                <span class="icon-down glyphicon glyphicon-remove form-control-feedback" ng-show="addItemForm.itemURL.$error.required || addItemForm.itemURL.$error.pattern"></span>
                 <span class="help-block" ng-show="addItemForm.itemURL.$error.required">Required</span>
                 <span class="help-block" ng-show="addItemForm.itemURL.$error.pattern">Not a valid URL</span>
               </div>
@@ -89,8 +89,8 @@
                 id="inputSuccess2" aria-describedby="inputSuccess2Status"  ng-model="item.idealPrice"
                 placeholder="example: 10"
                 required>
-                <span class="glyphicon glyphicon-ok form-control-feedback" ng-hide="addItemForm.idealPrice.$error.required || addItemForm.idealPrice.$error.number"></span>
-                <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="addItemForm.idealPrice.$error.required || addItemForm.idealPrice.$error.number"></span>
+                <span class="icon-down glyphicon glyphicon-ok form-control-feedback" ng-hide="addItemForm.idealPrice.$error.required || addItemForm.idealPrice.$error.number"></span>
+                <span class="icon-down glyphicon glyphicon-remove form-control-feedback" ng-show="addItemForm.idealPrice.$error.required || addItemForm.idealPrice.$error.number"></span>
                 <span class="help-block" ng-show="addItemForm.idealPrice.$error.required">Required</span>
                 <span class="help-block" ng-show="addItemForm.idealPrice.$error.number">Not a number!</span>
               </div>
@@ -110,9 +110,17 @@
           <div id="success"></div>
           <div class="row">
             <div class="form-group col-xs-12">
-              <button type="submit" class="btn btn-round btn-lg white-text light-blue-background">
-                <span class="fa fa-plus"> Track Item</span>
-              </button>
+              <div ng-hide="!item.imageUrl">
+                <button type="submit" class="btn btn-round btn-lg white-text light-blue-background">
+                  <span class="fa fa-plus"> Track Item</span>
+                </button>
+              </div>
+              <div ng-hide="item.imageUrl">
+                <button type="submit" id="load-message-btn" class="btn btn-round btn-lg">
+                  Tracking Item
+                    <img id="load-spinner" src="../../assets/spinner.gif">
+                </button>
+              </div>
             </div>
           </div>
         </form>

@@ -141,3 +141,20 @@ background: rgba(60,118,61,.2);
   color: grey;
   font-size: 15px;
 }
+.white-text {
+  color: white;
+}
+
+#load-message-btn {
+  color: white;
+  background: #808080;
+}
+
+.icon-down {
+  padding-top: 30px;
+}
+
+#spinner {
+  width:30px;
+  height:30px;
+}
