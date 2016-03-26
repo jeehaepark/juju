@@ -40,7 +40,7 @@
                   </label>
                 </div>
                 <div class="col-lg-7">
-                  <label> Your preference is </label> {{userData.contactpref}}
+                  <label> Your contact preference is </label> {{userData.contactpref}}
                 </div>
               </div>
             </div>
@@ -76,7 +76,7 @@
           <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
           <div class="row">
             <div class="form-group col-xs-12">
-              <button type="submit" class="btn btn-round btn-success btn-lg light-blue-background" ng-click="updateUserInfo(userData.id,userData)">
+              <button type="submit" class="btn btn-round btn-lg light-blue-background white-text" ng-click="updateUserInfo(userData.id,userData)">
                 <span class="fa fa-wrench"> Update</span>
               </button>
             </div>
