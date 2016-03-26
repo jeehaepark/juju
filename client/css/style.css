@@ -111,6 +111,7 @@ background: rgba(60,118,61,.2);
   padding:15px;
 }
 
+<<<<<<< HEAD
 .video{
   width:560px;
   height:315px;
@@ -140,4 +141,7 @@ background: rgba(60,118,61,.2);
 .form-instructions {
   color: grey;
   font-size: 15px;
+}
+.white-text {
+  color: white;
 }
