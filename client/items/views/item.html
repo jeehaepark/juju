@@ -10,7 +10,10 @@
       <div class="col-lg-7">
       </div>
       <div class="col-lg-2" >
-        <h3 class="pull-right">search</h3>
+        <h3 class="pull-right">
+          <span>search</span>
+          <span class="fa fa-1x fa-search"></span>
+        </h3>
       </div>
       <div class="col-lg-3">
         <h3></h3> <input type ="text" class ="form-control" ng-model=search>
@@ -52,7 +55,7 @@
                 <h3 class ="pull-right">{{item.currentprice }}</h3>
               </div>
               <div class="col-md-2">
-                <a class="fa fa-trash btn-lg"  ng-click="deleteWatched(item, priceReachedData)"></a>
+                <a class="trash-down fa fa-2x fa-trash"  ng-click="deleteWatched(item, priceReachedData)"></a>
               </div>
             </div>
             <div class ="row">
@@ -64,8 +67,8 @@
                 <input ng-show="wantEdit" type = "text" ng-model= "item.idealprice" class ="form-control">
               </div>
               <div class="col-md-2 icons" >
-                <a class="fa fa-pencil btn-lg" ng-show="!wantEdit" ng-click="wantEdit = !wantEdit" ></a>
-                <a class="fa fa-floppy-o btn-lg" ng-show="wantEdit" ng-click="update(item.id, item); wantEdit = !wantEdit"></a>
+                <a class="fa fa-2x fa-pencil" ng-show="!wantEdit" ng-click="wantEdit = !wantEdit" ></a>
+                <a class="fa fa-2x fa-floppy-o" ng-show="wantEdit" ng-click="update(item.id, item); wantEdit = !wantEdit"></a>
               </div>
             </div>
             <div class="row" >
@@ -135,7 +138,7 @@
               <h3 class ="pull-right">{{item.currentprice }}</h3>
             </div>
             <div class="col-md-2">
-              <a class="fa fa-trash btn-lg" ng-click="deleteWatched(item, priceNotReachedData)"></a>
+              <a class="trash-down fa fa-2x fa-trash" ng-click="deleteWatched(item, priceNotReachedData)"></a>
             </div>
           </div>
           <div class ="row">
@@ -147,8 +150,8 @@
               <input ng-show="wantEdit" type = "text" ng-model= "item.idealprice" class ="form-control">
             </div>
             <div class="col-md-2 icons" >
-              <a class="fa fa-pencil btn-lg" ng-show="!wantEdit" ng-click="wantEdit = !wantEdit" ></a>
-              <a class="fa fa-floppy-o btn-lg" ng-show="wantEdit" ng-click="update(item.id, item); wantEdit = !wantEdit"></a>
+              <a class="fa fa-2x fa-pencil" ng-show="!wantEdit" ng-click="wantEdit = !wantEdit" ></a>
+              <a class="fa fa-2x fa-floppy-o" ng-show="wantEdit" ng-click="update(item.id, item); wantEdit = !wantEdit"></a>
             </div>
           </div>
           <div class="row">
