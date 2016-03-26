@@ -111,7 +111,6 @@ background: rgba(60,118,61,.2);
   padding:15px;
 }
 
-<<<<<<< HEAD
 .video{
   width:560px;
   height:315px;
@@ -146,8 +145,13 @@ background: rgba(60,118,61,.2);
   color: white;
 }
 
-#load-message {
+#load-message-btn {
   color: white;
+  background: #808080;
+}
+
+.icon-down {
+  padding-top: 30px;
 }
 
 #spinner {
