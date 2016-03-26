@@ -6,7 +6,7 @@
         <hr class="star-primary">
       </div>
     </div>
-    <div class="row" id="check">
+    <div class="row">
       <div class="col-lg-7">
       </div>
       <div class="col-lg-2" >
@@ -79,11 +79,7 @@
                         <a class="fa fa-floppy-o btn-lg" ng-show="wantEdit" ng-click="update(item.id, item); wantEdit = !wantEdit"></a>
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-md-12">
-                      </div>
-                    </div>
-                    <div class="row">
+                    <div class="row" >
                       <div class="col-md-3">
                       </div>
                       <div class="col-md-3">
@@ -95,14 +91,14 @@
                       <div class="col-md-3"> 
                       </div>
                     </div>
-                </div>
+
             </div>
         </div>
       <!-- </div> -->
     </div>
 
-    <div class="row text-center">
-      <div infinite-scroll="loadMoreItems()" infinite-scroll-distance="1">
+    <!--<div class="row text-center">-->
+      <!--<div infinite-scroll="loadMoreItems()" infinite-scroll-distance="1">-->
         
         <div class="col-md-4 col-sm-6 hero-feature" ng-repeat = "item in priceNotReachedData | filter: search track by $index" >
             <div class="thumbnail">
@@ -143,8 +139,8 @@
                       <div class="col-md-5">
                        <h3 class ="pull-right">{{item.currentprice }}</h3>
                       </div>
-                      <div class="col-md-2" ng-click="deleteWatched(item, priceNotReachedData)">
-                        <a class="fa fa-trash btn-lg"></a>
+                      <div class="col-md-2">
+                        <a class="fa fa-trash btn-lg" ng-click="deleteWatched(item, priceNotReachedData)"></a>
                       </div>
                     </div>
                     <div class ="row">
@@ -161,10 +157,6 @@
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-12">
-                      </div>
-                    </div>
-                    <div class="row">
                       <div class="col-md-3">
                       </div>
                       <div class="col-md-3">
@@ -176,36 +168,66 @@
                       <div class="col-md-3"> 
                       </div>
                     </div>
-                </div>
+              </div>
+             
+              </div>
                 
                 
             </div>
-        </div>
+        <!--</div>-->
         
         <div class="col-md-4 col-sm-6 hero-feature" >
           <div class="thumbnail">
-                <!--test-->
+                <!--ADD AN ITEM-->
             <li class="img-list" ui-sref="additems" >
-                <div class="square-box" style="background-image: url('{{ item.itemimageurl }}');">
+                <div class="square-box" style="background-image: url('http://pics.ae.com/is/image/aeo/2433_9461_439_of');">
                   <span class="text-content">
                     <span> Add an item </span>
                   </span>
                 </div>
             </li>
             <div class="caption">
-              <p>Add an item</p>
+                 <div class ="row">
+                      <div class="col-md-5"> 
+                       <h3>Jeans</h3>
+                      </div>
+                      <div class="col-md-5">
+                       <h3 class ="pull-right">$49.99</h3>
+                      </div>
+                      <div class="col-md-2">
+                        <a class="fa fa-trash btn-lg"></a>
+                      </div>
+                    </div>
+                    <div class ="row">
+                      <div class="col-md-6"> 
+                       <p>Target price: </p>
+                      </div>
+                      <div class="col-md-4" >
+                       <p ng-show="!wantEdit"class ="pull-right">$20.00</p>
+                      </div>
+                      <div class="col-md-2 icons" >
+                        <a class="fa fa-pencil btn-lg" ng-show="!wantEdit" ></a>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-3">
+                      </div>
+                      <div class="col-md-3">
+                       <div class="btn btn-primary">Buy Now!</div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="btn btn-default" >More Info</div>
+                      </div>
+                      <div class="col-md-3"> 
+                      </div>
+                    </div>
             </div>
           </div>
       </div>
-      </div>
+      <!--</div>-->
       
       
     </div>
-
-     
-
-
-
         <!--dummy-->
        
         
