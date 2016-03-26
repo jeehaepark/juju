@@ -1,10 +1,5 @@
-/*#check{
-border: 1px solid red;
-}*/
-
 #check div{
   /*border: 1px solid red;*/
-  /*overflow: hidden;*/
   margin-bottom: 10px;
 }
 
@@ -120,4 +115,26 @@ background: rgba(60,118,61,.2);
 
 .retail-logo {
   padding:15px;
+}
+
+.video{
+  width:560px;
+  height:315px;
+  background-color:black;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.video > span.text-content {
+  background: rgba(0,0,0,0.5);
+  color: white;
+  cursor: pointer;
+  display: table;
+  padding-top: 25%;
+  padding-bottom: 25%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  opacity: 0;
 }
