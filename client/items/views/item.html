@@ -6,7 +6,7 @@
         <hr class="star-primary">
       </div>
     </div>
-    <div class="row">
+    <div class="row" id="check">
       <div class="col-lg-7">
       </div>
       <div class="col-lg-2" >
@@ -68,7 +68,7 @@
                     </div>
                     <div class ="row">
                       <div class="col-md-6"> 
-                       <p>Ideal price: </p>
+                       <p>Target price: </p>
                       </div>
                       <div class="col-md-4" >
                        <p ng-show="!wantEdit"class ="pull-right">{{item.idealprice}}</p>
@@ -145,7 +145,7 @@
                     </div>
                     <div class ="row">
                       <div class="col-md-6"> 
-                       <p>Ideal price: </p>
+                       <p>Target price: </p>
                       </div>
                       <div class="col-md-4" >
                        <p ng-show="!wantEdit"class ="pull-right">{{item.idealprice}}</p>
@@ -177,15 +177,15 @@
         <!--</div>-->
         
         <div class="col-md-4 col-sm-6 hero-feature" >
-          <div class="thumbnail">
+          <div class="thumbnail" >
                 <!--ADD AN ITEM-->
             <li class="img-list" ui-sref="additems" >
                 <div class="square-box" style="background-image: url('http://pics.ae.com/is/image/aeo/2433_9461_439_of');">
-                  <span class="text-content">
-                    <span> Add an item </span>
+                  <span class="text-content" style="opacity: 1">
+                    <span> Click Here <br>to Track <br>More Items<br><br><h1>+</h1></span>
                   </span>
                 </div>
-            </li>
+            
             <div class="caption">
                  <div class ="row">
                       <div class="col-md-5"> 
@@ -222,6 +222,7 @@
                       </div>
                     </div>
             </div>
+            </li>
           </div>
       </div>
       <!--</div>-->
