@@ -137,3 +137,7 @@ background: rgba(60,118,61,.2);
   color: white;
 }
 
+.form-instructions {
+  color: grey;
+  font-size: 15px;
+}
