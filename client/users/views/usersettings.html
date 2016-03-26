@@ -22,7 +22,7 @@
                 <input type="text" name="fbname" class="form-control"  id="inputSuccess2" placeholder="userData.fbname" aria-describedby="inputSuccess2Status" ng-model="userData.fbname" required data-validation-required-message="Please enter your name.">
                 <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
                 <span id="inputSuccess2Status" class="sr-only">(success)</span>
-                <span class="help-block" ng-show="updateUserForm.fbname.$error.required">Required</span>
+                <span class="help-block text-danger" ng-show="updateUserForm.fbname.$error.required">Required</span>
               </div>
             </div>
           </div>
@@ -48,26 +48,21 @@
           <!--input box for email-->
           <div class="row control-group">
             <div class="form-group col-xs-12">
-              <div class="form-group has-success has-feedback">
+              <div class="form-group">
                 <label>Email Address</label>
                 <input type="email" name="email" class="form-control" placeholder="Email Address" aria-describedby="inputSuccess2Status" ng-model="userData.email" id="inputSuccess2"  required data-validation-required-message="Please enter your email address.">
-                <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-                <span id="inputSuccess2Status" class="sr-only">(success)</span>
-                <p class="help-block text-danger"></p>
               </div>
             </div>
           </div>
           <!--input box for phonenumber-->
           <div class="row control-group">
             <div class="form-group col-xs-12">
-              <div class="form-group has-success has-feedback">
+              <div class="form-group">
                 <label>Phone Number</label>
                 <input type="tel" name="phonenumber" class="form-control"
                                                      id="inputSuccess2"
                                                      aria-describedby="inputSuccess2Status"
                                                      placeholder="Phone Number" ng-model="userData.phonenumber" id="phone" required data-validation-required-message="Please enter your phone number.">
-                <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-                <span id="inputSuccess2Status" class="sr-only">(success)</span>
               </div>
             </div>
           </div>
