@@ -16,10 +16,11 @@
             <div class="form-group col-xs-12"
               ng-class="{'has-error': addItemForm.itemNickname.$invalid}">
               <div class="form-group has-success has-feedback">
-                <label > Item Name </label>
+                <label >Item Name:</label>
+                <p class="form-instructions">Enter up to 8 characters to nickname your item</p>
                 <input type="text" name="itemNickname"
                   class="form-control" id="inputSuccess2"
-                  placeholder="Enter the nick name for your item ie) My shoes"
+                  placeholder="example: my shoes"
                   aria-describedby="inputSuccess2Status" ng-model="item.nickName"
                   required ng-minlength="3" ng-maxlength="8"/>
                 <span class="glyphicon glyphicon-ok form-control-feedback"
@@ -42,10 +43,17 @@
           <div class="row control-group">
             <div class="form-group col-xs-12" ng-class="{'has-error': addItemForm.itemURL.$invalid}">
               <div class="form-group has-success has-feedback">
-
                 <label>Item URL:</label>
-                <input type="text" name="itemURL" class="form-control" placeholder="Enter the website address. ie) www.amazon.com" id="inputSuccess2" aria-describedby="inputSuccess2Status" ng-model="item.URL"
-                                                                                                                                                                                             required ng-pattern="/(ae|crateandbarrel|disneystore|costco|neimanmarcus|barnesandnoble|target|amazon|nordstrom).com/">
+                <p class="form-instructions">Enter full item URL</p>
+                <input type="text" name="itemURL" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status" ng-model="item.URL"
+                 placeholder="example: https://www.amazon.com/path/to/your/item"
+                 required ng-pattern="/(
+                   ae|crateandbarrel|
+                   disneystore|costco|
+                   neimanmarcus|
+                   barnesandnoble|target|
+                   amazon|nordstrom
+                   ).com/">
                  <span class="glyphicon glyphicon-ok form-control-feedback" ng-hide="addItemForm.itemURL.$error.required || addItemForm.itemURL.$error.pattern"></span>
                 <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="addItemForm.itemURL.$error.required || addItemForm.itemURL.$error.pattern"></span>
                 <span class="help-block" ng-show="addItemForm.itemURL.$error.required">Required</span>
@@ -75,8 +83,12 @@
           <div class="row control-group">
             <div class="form-group col-xs-12" ng-class="{'has-error': addItemForm.idealPrice.$invalid}">
               <div class="form-group has-success has-feedback">
-                <label>Ideal Price:</label>
-                <input type="number" name="idealPrice" class="form-control" placeholder="Tell us your ideal price! The current price is : {{item.currentPrice}}" id="inputSuccess2" aria-describedby="inputSuccess2Status"  ng-model="item.idealPrice" required>
+                <label>Target Price:</label>
+                <p class="form-instructions">Set your target price! The current price is: {{item.currentPrice}}</p>
+                <input type="number" name="idealPrice" class="form-control" 
+                id="inputSuccess2" aria-describedby="inputSuccess2Status"  ng-model="item.idealPrice" 
+                placeholder="example: 10"
+                required>
                 <span class="glyphicon glyphicon-ok form-control-feedback" ng-hide="addItemForm.idealPrice.$error.required || addItemForm.idealPrice.$error.number"></span>
                 <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="addItemForm.idealPrice.$error.required || addItemForm.idealPrice.$error.number"></span>
                 <span class="help-block" ng-show="addItemForm.idealPrice.$error.required">Required</span>
