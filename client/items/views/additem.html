@@ -114,7 +114,7 @@
               <div ng-hide="item.imageUrl">
                 <button type="submit" id="load-message-btn" class="btn btn-round btn-lg">
                   Tracking Item
-                    <img id="load-spinner" src="../../assets/spinner.gif">
+                    <img id="load-spinner" ng-hide="addItemForm.itemURL.$error.required || addItemForm.itemURL.$error.pattern"src="../../assets/spinner.gif">
                 </button>
               </div>
             </div>
