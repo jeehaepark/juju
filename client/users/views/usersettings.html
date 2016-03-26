@@ -13,16 +13,28 @@
     </div>
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2">
-        <form name="updateUserForm" ng-submit="updateUser(updateUserForm.$valid)" id="contactForm" novalidate>
+        <form name="updateUserForm"
+          ng-submit="updateUser(updateUserForm.$valid)" id="contactForm"
+          novalidate>
           <!--input box for user name-->
           <div class="row control-group">
-            <div class="form-group col-xs-12" ng-class="{'has-error': updateUserForm.fbname.$invalid'}">
+            <div class="form-group col-xs-12"
+              ng-class="{'has-error': updateUserForm.fbname.$invalid}">
               <div class="form-group has-success has-feedback">
                 <label>Your name</label>
-                <input type="text" name="fbname" class="form-control"  id="inputSuccess2" placeholder="userData.fbname" aria-describedby="inputSuccess2Status" ng-model="userData.fbname" required data-validation-required-message="Please enter your name.">
-                <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-                <span id="inputSuccess2Status" class="sr-only">(success)</span>
-                <span class="help-block text-danger" ng-show="updateUserForm.fbname.$error.required">Required</span>
+                <input type="text" name="fbname"
+                  class="form-control" id="inputSuccess2"
+                  placeholder="user name"
+                  aria-describedby="inputSuccess2Status"
+                  ng-model="userData.fbname"
+                  required>
+                <span class="glyphicon glyphicon-ok form-control-feedback"
+                  ng-hide="updateUserForm.fbname.$error.required">
+                </span>
+                <span class="glyphicon glyphicon-remove form-control-feedback"
+                  ng-show="updateUserForm.fbname.$error.required">
+                </span>
+                <span class="help-block" ng-show="updateUserForm.fbname.$error.required">Required</span>
               </div>
             </div>
           </div>
