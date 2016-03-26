@@ -1,5 +1,5 @@
 angular.module('juju.user', [])
-.controller('usersCtrl', function($scope, User, Auth){
+.controller('usersCtrl', function($scope, User, Auth, $state){
   $scope.alerts = [];
   
    $scope.addAlert = function(msgobj) {
@@ -34,7 +34,8 @@ angular.module('juju.user', [])
       }
     User.updateOneInfo(userId,userObj).then(
       function success(res) {
-       $scope.addAlert( { type: 'success', msg: 'Your request was sent successfully' } );
+      $state.go('items')
+       //$scope.addAlert( { type: 'success', msg: 'Your request was sent successfully' } );
       },function error (err) {
         $scope.addAlert( { type: 'danger', msg: 'Sorry! The connection is not good. Try it again' } );
       });
