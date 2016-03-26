@@ -11,19 +11,16 @@
       </div>
       <div class="col-lg-2" >
         <h3 class="pull-right">search</h3>
-        <!--<h2>Search<input type ='text' ng-model=search></h2>-->
       </div>
       <div class="col-lg-3">
        <h3></h3> <input type ="text" class ="form-control" ng-model=search>
       </div>
-      <!--<div class="col-lg-1">
-      </div>-->
     </div>
 
    
     
     <div class="row text-center">
-      <!-- <div infinite-scroll="loadMoreItems()" infinite-scroll-distance='1'> -->
+
         <div class="col-md-4 col-sm-6 hero-feature priceReached" ng-repeat = "item in priceReachedData | filter:search track by $index" >
             <div class="thumbnail" id="focusedInput" >
                 
@@ -98,7 +95,6 @@
     </div>
 
     <!--<div class="row text-center">-->
-      <!--<div infinite-scroll="loadMoreItems()" infinite-scroll-distance="1">-->
         
         <div class="col-md-4 col-sm-6 hero-feature" ng-repeat = "item in priceNotReachedData | filter: search track by $index" >
             <div class="thumbnail">
@@ -173,8 +169,7 @@
               </div>
                 
                 
-            </div>
-        <!--</div>-->
+        </div>
         
         <div class="col-md-4 col-sm-6 hero-feature" >
           <div class="thumbnail" >
@@ -195,7 +190,6 @@
                        <h3 class ="pull-right"></h3>
                       </div>
                       <div class="col-md-2">
-                        <!--<a class="fa fa-trash btn-lg"></a>-->
                       </div>
                     </div>
                     <div class ="row">
@@ -206,21 +200,8 @@
                        <p ng-show="!wantEdit"class ="pull-right"></p>
                       </div>
                       <div class="col-md-2 icons" >
-                        <!--<a class="fa fa-pencil btn-lg" ng-show="!wantEdit" ></a>-->
                       </div>
                     </div>
-                    <!--<div class="row">
-                      <div class="col-md-3">
-                      </div>
-                      <div class="col-md-3">
-                       <div class="btn btn-primary">Buy Now!</div>
-                      </div>
-                      <div class="col-md-3">
-                        <div class="btn btn-default" >More Info</div>
-                      </div>
-                      <div class="col-md-3"> 
-                      </div>
-                    </div>-->
             </div>
             </li>
           </div>

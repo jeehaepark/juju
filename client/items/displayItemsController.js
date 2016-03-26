@@ -16,7 +16,7 @@ angular.module('displayItemsController', [])
       var numberofItemspriceReached=priceReachedArray.length-1;
       var numberofItems = priceNotReachedArray.length - 1;
       $scope.priceReachedData=priceReachedArray;
-      $scope.priceNotReachedData=priceNotReachedArray.slice(0,6);
+      $scope.priceNotReachedData=priceNotReachedArray;
 
       $scope.loadMoreItems = function(){
         var last = $scope.priceNotReachedData.length - 1;
