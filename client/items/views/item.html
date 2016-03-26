@@ -84,6 +84,21 @@
           </div>
         </div>
       </div>
+      <!--track new item-->
+      <div class="add-item-box col-md-4 col-sm-6 hero-feature" >
+        <div class="thumbnail" >
+          <li class="img-list" ui-sref="additems">
+            <div class="square-box">
+              <span class="text-content" style="opacity: 0.3">
+                <span id="add-item-button">Track New Item</span>
+              </span>
+            </div>
+          </li>
+          <div>
+            <span class="fa fa-5x fa-plus"></span>
+          </div>
+        </div>
+      </div><!--track new item-->
       <div class="col-md-4 col-sm-6 hero-feature" ng-repeat = "item in priceNotReachedData | filter: search track by $index" >
         <div class="thumbnail">
           <!--test-->
@@ -149,40 +164,6 @@
             </div>
           </div>
         </div>
-        </div>
-      </div>
-      <div class="col-md-4 col-sm-6 hero-feature" >
-        <div class="thumbnail" >
-          <!--ADD AN ITEM-->
-          <li class="img-list" ui-sref="additems" >
-            <div class="square-box" style="background-image: url('http://pics.ae.com/is/image/aeo/2433_9461_439_of');">
-              <span class="text-content" style="opacity: 1">
-                <span> Click Here <br>to Track <br>Another Item<br><br><h1>+</h1></span>
-              </span>
-            </div>
-            <div class="caption">
-              <div class ="row">
-                <div class="col-md-5">
-                  <h3></h3>
-                </div>
-                <div class="col-md-5">
-                  <h3 class ="pull-right"></h3>
-                </div>
-                <div class="col-md-2">
-                </div>
-              </div>
-              <div class ="row">
-                <div class="col-md-6">
-                  <p> </p>
-                </div>
-                <div class="col-md-4" >
-                  <p ng-show="!wantEdit"class ="pull-right"></p>
-                </div>
-                <div class="col-md-2 icons" >
-                </div>
-              </div>
-            </div>
-          </li>
         </div>
       </div>
     </div>
