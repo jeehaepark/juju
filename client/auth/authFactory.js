@@ -64,8 +64,7 @@ angular.module('authFactory', [])
         if (userData.contactpref === 'noContact'){
           console.log('user prefers not to be notified')
           $state.go('additems');
-        }
-        else if(userData.contactpref === 'email' && userData.email === null){
+        } else if(userData.contactpref === 'email' && userData.email === null){
           console.log('contact pref email, email =null');
           $state.go('usersettings');
           
