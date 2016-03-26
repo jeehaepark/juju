@@ -1,11 +1,9 @@
-
-<!-- User Profile Section -->
 <section id="contact">
   <div class="container" ng-controller="usersCtrl">
     <script type="text/ng-template" id="alert.html">
-<div class="alert" style="background-color:#fa39c3;color:white" role="alert">
-              <div ng-transclude></div>
-            </div>
+      <div class="alert" style="background-color:#fa39c3;color:white" role="alert">
+        <div ng-transclude></div>
+      </div>
     </script>
     <div class="row">
       <div class="col-lg-12 text-center">
@@ -15,18 +13,16 @@
     </div>
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2">
-        <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
-        <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-        <form name="updateUserForm" ng-submit="updateUser()" id="contactForm" novalidate>
-
+        <form name="updateUserForm" ng-submit="updateUser(updateUserForm.$valid)" id="contactForm" novalidate>
           <!--input box for user name-->
           <div class="row control-group">
-            <div class="form-group col-xs-12">
+            <div class="form-group col-xs-12" ng-class="{'has-error': updateUserForm.fbname.$invalid'}">
               <div class="form-group has-success has-feedback">
                 <label>Your name</label>
                 <input type="text" name="fbname" class="form-control"  id="inputSuccess2" placeholder="userData.fbname" aria-describedby="inputSuccess2Status" ng-model="userData.fbname" required data-validation-required-message="Please enter your name.">
                 <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
                 <span id="inputSuccess2Status" class="sr-only">(success)</span>
+                <span class="help-block" ng-show="updateUserForm.fbname.$error.required">Required</span>
               </div>
             </div>
           </div>
@@ -80,7 +76,9 @@
           <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
           <div class="row">
             <div class="form-group col-xs-12">
-              <button type="submit" class="btn btn-success btn-lg" ng-click="updateUserInfo(userData.id,userData)" >Update</button>
+              <button type="submit" class="btn btn-round btn-success btn-lg light-blue-background" ng-click="updateUserInfo(userData.id,userData)">
+                <span class="fa fa-wrench"> Update</span>
+              </button>
             </div>
           </div>
         </form>
