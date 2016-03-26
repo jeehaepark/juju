@@ -108,7 +108,7 @@ module.exports = {
       FBuID:req.body.fbuid,
       FBname:req.body.fbname
     };
-    console.log('updating',data);
+    console.log('updating', data);
     // Get a Postgres client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
       // Handle connection errors
@@ -122,16 +122,18 @@ module.exports = {
       client.query('UPDATE users SET email=($1), phoneNumber=($2), contactPref=($3), FBname=($4)  WHERE id=($5)', [data.email, data.phoneNumber, data.contactPref, data.FBname, id]);
 
       // SQL Query > Select Data
-      var query = client.query('SELECT * FROM users ORDER BY id ASC');
+      var query = client.query('SELECT * FROM watcheditems where userid=($1) LIMIT 1', [id]);
 
       // Stream results back one row at a time
       query.on('row', function(row) {
+        console.log('rows', row)
         results.push(row);
       });
 
       // After all data is returned, close connection and return results
       query.on('end', function() {
         done();
+        console.log('results', results)
         return res.json(results);
       });
     });

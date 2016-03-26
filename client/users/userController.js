@@ -34,7 +34,15 @@ angular.module('juju.user', [])
       }
     User.updateOneInfo(userId,userObj).then(
       function success(res) {
-      $state.go('items')
+        console.log('res', res)
+        if(res.data.length===1){
+            console.log('has items going to items')
+            $state.go('items')
+          }
+          else{
+            console.log('no items should go to additems')
+            $state.go('additems')
+          }
        //$scope.addAlert( { type: 'success', msg: 'Your request was sent successfully' } );
       },function error (err) {
         $scope.addAlert( { type: 'danger', msg: 'Sorry! The connection is not good. Try it again' } );
