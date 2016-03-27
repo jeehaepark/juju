@@ -11,6 +11,17 @@
         <form name="addItemForm"
           ng-submit="addItem(addItemForm.$valid)" id="contactForm"
           novalidate>
+          <!--input box for img-->
+          <div class="row control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+              <label>Preview image</label>
+              <div>
+                <img ng-src="{{ item.imageUrl }}" rows="5">
+              </div>
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <br>
           <div class="row control-group">
             <!--website list-->
             <div class="form-group col-xs-12">
@@ -90,17 +101,6 @@
               </div>
             </div>
           </div>
-          <!--input box for img-->
-          <div class="row control-group">
-            <div class="form-group col-xs-12 floating-label-form-group controls">
-              <label>Preview image</label>
-              <div>
-                <img ng-src="{{ item.imageUrl }}" rows="5">
-              </div>
-              <p class="help-block text-danger"></p>
-            </div>
-          </div>
-          <br>
           <!--submit button-->
           <div id="success"></div>
           <div class="row">
