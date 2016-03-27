@@ -35,7 +35,7 @@
               <h3 class="modal-title">{{ itemid + " price over time" }}!</h3>
             </div>
             <div class="modal-body">
-              <h1 ng-show="errMessage" class ="ng-hide"> Not Enough Data </h1>
+              <h1 ng-show="errMessage" class ="ng-hide"> Please wait 5 more days</h1>
               <canvas  id="line" class="chart chart-line" chart-data="itemHistoryData[itemid].priceGraph[0][1]"
               chart-labels="itemHistoryData[itemid].priceGraph[0][0]" chart-legend="true" chart-series="series"
               chart-click="onClick" >
@@ -114,10 +114,10 @@
         </li>
         <script type="text/ng-template" id="myModalContent.html">
 <div class="modal-header">
-            <h3 class="modal-title">{{ itemid + " price over time" }}!</h3>
+            <h3 class="modal-title">{{ itemid + " price history" }}</h3>
           </div>
           <div class="modal-body">
-            <h1 ng-show="errMessage" class ="ng-hide"> Not Enough Data </h1>
+            <h1 ng-show="errMessage" class ="ng-hide"> Item History Availabe on the 5th day </h1>
             <canvas  id="line" class="chart chart-line" chart-data="itemHistoryData[itemid].priceGraph[0][1]"
             chart-labels="itemHistoryData[itemid].priceGraph[0][0]" chart-legend="true" chart-series="series"
             chart-click="onClick" >
@@ -161,7 +161,7 @@
               <a href="{{item.itemurl}}" class="btn btn-primary">Buy Now!</a>
             </div>
             <div class="col-md-3">
-              <div class="btn btn-default" ng-click="open(item.nickname)" data-toggle="modal" data-target="#myModal">More Info</div>
+              <div class="btn btn-default" ng-click="open(item.nickname)" data-toggle="modal" data-target="#myModal">Price History</div>
             </div>
             <div class="col-md-3">
             </div>
