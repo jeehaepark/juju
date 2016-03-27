@@ -101,20 +101,20 @@
             </div>
           </div>
           <br>
+          <!--submit button-->
           <div id="success"></div>
           <div class="row">
             <div class="form-group col-xs-12">
               <div ng-hide="!item.imageUrl">
                 <button type="submit" class="btn btn-round btn-lg white-text light-blue-background">
                   <span class="fa fa-plus"> </span>
-                    <span>Track Item</span>
-                  
+                  <span>Track Item</span>
                 </button>
               </div>
               <div ng-hide="item.imageUrl">
                 <button type="submit" id="load-message-btn" class="btn btn-round btn-lg">
                   Tracking Item
-                    <img id="load-spinner" ng-hide="addItemForm.itemURL.$error.required || addItemForm.itemURL.$error.pattern"src="../../assets/spinner.gif">
+                  <img id="load-spinner" ng-hide="addItemForm.itemURL.$error.required || addItemForm.itemURL.$error.pattern"src="../../assets/spinner.gif">
                 </button>
               </div>
             </div>
