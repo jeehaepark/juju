@@ -171,3 +171,10 @@ background: rgba(60,118,61,.2);
 .trash-down {
   padding-top:20px;
 }
+
+.team a{
+  color: #333;
+}
+ .img-center {
+ 	margin: 0 auto;
+}
