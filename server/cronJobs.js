@@ -14,7 +14,6 @@ var scrapeTool = require('./scraping.js');
 
 module.exports = {
   itemHistory : function (){
-    console.log('in item history');
     var allItems;
        return request.getAsync('http://localhost:3000/api/items')
       .then(function(res){
@@ -62,14 +61,11 @@ module.exports = {
           })
           return responseArray;
         }).then(function(nothing){
-          console.log('updating db')
           db.task(function(t){
             return t.many("UPDATE watcheditems SET pricereached=true FROM items WHERE watcheditems.itemid=items.id AND items.currentprice <= watcheditems.idealprice;");
           })
           return;
-
         })
-
       })
       .catch(function(e){
         console.log('error', e);
@@ -78,7 +74,6 @@ module.exports = {
 
 
   sendNotifications : function() {
-    console.log('in sendnotification');
     request.getAsync('http://localhost:3000/api/notifications')
       .then(function(res){
         // res will be an object containing 2 arrays
@@ -102,7 +97,6 @@ module.exports = {
         Promise.each(toTextArr, function(toText){
           sendSMSController.sendTextMessage(toText);
         });
-        console.log('update watched in sendnotification', updateWatchedArr)
 
       return updateWatchedArr;
       })
@@ -112,18 +106,5 @@ module.exports = {
         });
 
       })
-    
   },
-
-
-  test : function () {
-    var seconds = 0;
-    new CronJob('00-60 * * * * *', function () {
-      seconds++;
-      console.log('It\'s been '+ seconds + ' seconds');
-    },
-    function(){
-      console.log('job stopped');
-    }, true, 'America/Los_Angeles');
-  }
 }

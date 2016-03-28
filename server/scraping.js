@@ -1,16 +1,11 @@
 var request = require('request');
 var cheerio = require('cheerio');
 
-//something for jessica
-
 //scrapes item data from target
 var scrape = function(req, response){
-  // console.log('req inside scrape: ', req.body.url);
   var url = req.body.url;
-  console.log('url is ' , url)
   var site = url.match(/([A-Z])*\.([a-z])*\./g);
   site = site[0].slice(1,-1);
-  console.log('site is', site)
   if(scrapeObj[site]){
     scrapeObj[site](req, response);
   } else {
@@ -104,7 +99,6 @@ var scrapeObj = {
         var productPrice = priceFilter($('.price-current').text());
       }
       var image = $('.gallery').children('link').attr('href');
-      console.log(image)
       var productObj = {
         productTitle : productTitle,
         price: productPrice,
@@ -178,7 +172,6 @@ crateandbarrel : function (req, response) {
   } ,
 
   //curl --data 'url=http://www.disneystore.com/bb-8-app-enabled-droid-by-sphero-star-wars-the-force-awakens/mp/1384851/1000265/'  http://127.0.0.1:3000/scrape
-
 
   disneystore : function (req, response) {
     var url = req.body.url;
@@ -303,7 +296,6 @@ crateandbarrel : function (req, response) {
     });
   }
 };
-
 
 var priceFilter = function (scrapedPrice) {
   var isRange = scrapedPrice.match(/\$?(\d+,?)+\.?\d+\S - \S\$?(\d+,?)+\.?\d+/g);

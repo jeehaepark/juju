@@ -37,7 +37,6 @@ angular.module('itemFactory', [])
       url : '/scrape',
       data : data
     }).then(function(response){
-      console.log(response)
     });
   },
 

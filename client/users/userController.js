@@ -1,8 +1,8 @@
 angular.module('juju.user', [])
 .controller('usersCtrl', function($scope, User, Auth, $state){
   $scope.alerts = [];
-  
-   $scope.addAlert = function(msgobj) {
+
+  $scope.addAlert = function(msgobj) {
     $scope.alerts.push(msgobj);
   };
 
@@ -10,8 +10,6 @@ angular.module('juju.user', [])
     $scope.alerts.splice(index, 1);
   };
 
-
-  console.log('userCtrl Auth.userId',Auth.userId);
   Auth.isloggedIn()
   .then( function successCallback (userId) {
     $scope.user = userId;
@@ -25,27 +23,22 @@ angular.module('juju.user', [])
     },function errorCallback(err){
       $scope.err = 'fail to load your data';
     });
-  $scope.updateUserInfo = function(userId,userObj){
-    console.log('clicked update + id',userId ,'obj :',userObj);
-    var name = userObj.fbname;
-    var firstName = name;
-    if (firstName.indexOf(' ') >= 0) {
-          firstName = name.split(' ').slice(0, -1).join(' ');
+    $scope.updateUserInfo = function(userId,userObj){
+      var name = userObj.fbname;
+      var firstName = name;
+      if (firstName.indexOf(' ') >= 0) {
+        firstName = name.split(' ').slice(0, -1).join(' ');
       }
-    User.updateOneInfo(userId,userObj).then(
-      function success(res) {
-        console.log('res', res)
-        if(res.data.length===1){
-            console.log('has items going to items')
+      User.updateOneInfo(userId,userObj).then(
+        function success(res) {
+          if(res.data.length===1){
             $state.go('items')
           }
           else{
-            console.log('no items should go to additems')
             $state.go('additems')
           }
-       //$scope.addAlert( { type: 'success', msg: 'Your request was sent successfully' } );
-      },function error (err) {
-        $scope.addAlert( { type: 'danger', msg: 'Sorry! The connection is not good. Try it again' } );
-      });
-  };
+        },function error (err) {
+          $scope.addAlert( { type: 'danger', msg: 'Sorry! The connection is not good. Try it again' } );
+        });
+    };
 });

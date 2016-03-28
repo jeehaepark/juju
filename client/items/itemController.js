@@ -25,7 +25,6 @@ angular.module('juju.item', [])
   $scope.checkCategory=function(){
     if($scope.item.categories.repeatSelect==='Add Category'){
       $scope.addNewCategory = true;
-      console.log(addNewCategory)
     } else {
       $scope.addNewCategory = false;
     }
@@ -35,7 +34,6 @@ angular.module('juju.item', [])
     $scope.item.categories.repeatSelect = value;
   }
   $scope.$watch('item.URL', _.debounce(function(newValue, oldValue){
-    console.log('scrap running')
     if(newValue){
       Item.scrapePicture(newValue).then(function successCallback(response) {
         if(response.data === 'not a site'){
