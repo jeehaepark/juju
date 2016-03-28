@@ -136,7 +136,6 @@ crateandbarrel : function (req, response) {
 
       //sends scraped data to sender
       response.send(productObj);
-
     });
   },
 
@@ -167,7 +166,6 @@ crateandbarrel : function (req, response) {
 
       //sends scraped data to sender
       response.send(productObj);
-
     });
   } ,
 
@@ -195,7 +193,6 @@ crateandbarrel : function (req, response) {
 
       //sends scraped data to sender
       response.send(productObj);
-
     });
   } ,
       //curl --data 'url=http://www.costco.com/Bose%C2%AE-SoundLink%C2%AE-Mini-Bluetooth-Speaker.product.100222146.html'  http://127.0.0.1:3000/scrape
@@ -224,7 +221,6 @@ crateandbarrel : function (req, response) {
 
       //sends scraped data to sender
       response.send(productObj);
-
     });
   },
 
@@ -259,7 +255,6 @@ crateandbarrel : function (req, response) {
 
       //sends scraped data to sender
       response.send(productObj);
-
     });
   },
     //curl --data 'url=http://www.barnesandnoble.com/w/harry-potter-and-the-cursed-child-parts-i-ii-j-k-rowling/1123463689?ean=9781338099133'  http://127.0.0.1:3000/scrape
@@ -292,7 +287,6 @@ crateandbarrel : function (req, response) {
 
       //sends scraped data to sender
       response.send(productObj);
-
     });
   }
 };
