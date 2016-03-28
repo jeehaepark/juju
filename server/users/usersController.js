@@ -70,7 +70,7 @@ module.exports = {
   userOneUserInfo : function(req, res){
     var results = [];
     var id = req.params.user_id;
-    
+
     if( isNaN(Number(id))) {
       return res.status(400).send("Error : Tried to send NaN to api/users/:user_id")
     }
@@ -114,7 +114,6 @@ module.exports = {
       FBuID:req.body.fbuid,
       FBname:req.body.fbname
     };
-    console.log('updating', data);
     // Get a Postgres client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
       // Handle connection errors
@@ -132,14 +131,12 @@ module.exports = {
 
       // Stream results back one row at a time
       query.on('row', function(row) {
-        console.log('rows', row)
         results.push(row);
       });
 
       // After all data is returned, close connection and return results
       query.on('end', function() {
         done();
-        console.log('results', results)
         return res.json(results);
       });
     });

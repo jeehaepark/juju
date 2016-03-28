@@ -15,7 +15,7 @@ angular.module('authFactory', [])
         FBuID : loggedIn.facebook.id,
         userName : loggedIn.facebook.displayName
       };
-      
+
       return $http({
         method: 'POST',
         url: 'api/users',
@@ -47,44 +47,32 @@ angular.module('authFactory', [])
       FBname : authData.facebook.displayName
     };
     //edge case, what if someone changes their display name?
-    console.log('sending post from client route'); 
     return $http({
       method: 'POST',
       url: 'api/users',
       data: data
     }).then(function successCallback(response) {
       authFuncs.userId= response.data.id;
-      // console.log(authFuncs.userId);
-      // console.log('data',data)
       return $http({
         method: 'GET',
         url : '/api/users/' + authFuncs.userId
       }).then(function successCallback(req, res) {
         var userData =req.data[0];
         if (userData.contactpref === 'noContact'){
-          console.log('user prefers not to be notified')
           $state.go('additems');
         } else if(userData.contactpref === 'email' && userData.email === null){
-          console.log('contact pref email, email =null');
           $state.go('usersettings');
-          
           alert('We need your email address to notify you when your items reach their target prices!');
         } else if (userData.contactpref === 'text' && userData.text === null){
-          console.log('contact pref text, phone number null');
           $state.go('usersettings');
-          
           alert('We need your phone number to notify you when your items reach their target prices!');
 
         } else if (userData.email === null && userData.text === null) {
-          console.log('contact info null')
            $state.go('usersettings');
-          
           alert('We need your phone number or email to notify you when your items reach their target prices!');
         } else {
-          console.log('go to add items')
           $state.go('additems');
-
-        } 
+        }
       })
     }, function errorCallback (response){
       alert('Sorry we are unable to get your information! \n Please try again');

@@ -103,8 +103,7 @@ module.exports = {
   },
 
   userItemHistoryGet : function (req, res){
-    var userId = req.params.userId; 
-    console.log(userId);
+    var userId = req.params.userId;
     if(isNaN(Number(userId))){
       return res.status(400).send("Error tried to send NaN to api/userItemHistoryGet/user/:userId");
     }
@@ -115,7 +114,7 @@ module.exports = {
         res.send(table)
       })
       .catch( function (err){
-        console.log('*********err', err);
+        console.log('err', err);
         res.send(err)
       })
   }

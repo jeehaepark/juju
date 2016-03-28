@@ -1,6 +1,5 @@
 angular.module('displayItemsController', [])
 .controller('displayItemsCtrl', function ($scope, displayItemsFactory, Auth, $uibModal){
-  //console.log('userId from displayItemsCtrl', Auth.userId);
   var user;
   Auth.isloggedIn()
   .then( function successCallback (userId) {
@@ -67,7 +66,6 @@ angular.module('displayItemsController', [])
   };
 
   $scope.onClick = function (points, evt) {
-    console.log(points, evt);
   };
   $scope.open = function (nikename) {
     var modalInstance = $uibModal.open({

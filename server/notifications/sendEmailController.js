@@ -12,7 +12,6 @@ var smtpTransport = nodemailer.createTransport("SMTP",{
 module.exports = {
   sendEmailMessage: function(req, res) {
     req=req.body || req;
-    //console.log('sendEmailMessage req: ', req);
     var itemNickname = req.nickname || 'oops';
     var currentPrice = req.currentprice || 'oops';
     var itemUrl = req.itemurl || 'oops';
@@ -25,16 +24,12 @@ module.exports = {
       subject: "Your item is at your ideal price!", // Subject line
       html: message // html body
     };
-    console.log(mailOptions);
-    //var client = require('twilio')('AC420b878efbf51bb91fb5260ecef6b3b1', '759b77f8c566b9efdf37f7cd786d3bdc');
     smtpTransport.sendMail(mailOptions, function(error, response) {
       if (error) {
-        console.log('**email err', error);
+        console.log('email err', error);
       } else {
-        console.log("**EmailMessage sent: " + response.message);
+        console.log("EmailMessage sent: " + response.message);
       }
     });
-
   }
-
 };
